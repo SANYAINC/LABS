@@ -17,7 +17,6 @@ int main() {
     max = 0;
     showArray(ar, n);
 
-
     removeArray(ar);
     return 0;
 }
