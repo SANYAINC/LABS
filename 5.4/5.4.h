@@ -9,8 +9,10 @@ int isInArray(int num, const int *array, int size) {
     }
     return -1;
 }
-
 int &refMaxFib(int *array, int size) {
+
+    ///Returns ref to max fib, or just max
+
     int max = array[0];
     int maxIndex = 0;
     for (int i = 0; i < size; ++i) {
