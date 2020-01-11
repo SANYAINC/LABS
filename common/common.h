@@ -38,6 +38,16 @@ void fillRandArr(T *array, int size) {
     }
 }
 
+template <class T>
+void fillArray(T *array, int size) {
+    T buff;
+    cout << "Please, enter " << size << " values: ";
+    for (int i = 0; i < size; ++i) {
+        cin >> buff;
+        array[i] = buff;
+    }
+    cout << endl;
+}
 
 
 #endif //LABSGIT_COMMON_H
