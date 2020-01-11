@@ -4,13 +4,20 @@
 using namespace std;
 
 int main() {
-    int *ar = createArray<int>(5);
-    ar[0] = -5;
-    ar[1] = 1;
-    ar[2] = 150;
-    ar[3] = 0;
-    ar[4] = 55;
-    cout << refMaxFib(ar, 5);
+    cout << "Please, enter array size: ";
+    int n;
+    cin >> n;
+    cout << endl;
 
+    int *ar = createArray<int>(n);
+    fillRandArr(ar, n);
+    //fillArray(ar, n);
+    showArray(ar, n);
+    int &max = refMaxFib(ar, n);
+    max = 0;
+    showArray(ar, n);
+
+
+    removeArray(ar);
     return 0;
 }
