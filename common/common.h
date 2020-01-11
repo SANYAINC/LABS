@@ -9,6 +9,9 @@ using namespace std;
 
 template <class T>
 T* createArray(int size) {
+
+    ///Creates pointer (array)
+
     T *array = new T[size];
     for (int i = 0; i < size; ++i) {
         array[i] = static_cast<T>(0);
@@ -18,12 +21,18 @@ T* createArray(int size) {
 
 template <class T>
 void removeArray(T *array) {
+
+    ///Frees memory
+
     delete [] array;
     cout << "\nMEMORY FREED\n";
 }
 
 template <class T>
 void showArray(T *array, int size) {
+
+    ///Shows array on the screen
+
     for (int i = 0; i < size; ++i) {
         cout << array[i] << ' ';
     }
@@ -32,6 +41,9 @@ void showArray(T *array, int size) {
 
 template <class T>
 void fillRandArr(T *array, int size) {
+
+    ///Fills array with random values
+
     srand(time(nullptr));
     for (int i = 0; i < size; ++i) {
         array[i] = static_cast<T>(rand()%30+30);
@@ -40,6 +52,9 @@ void fillRandArr(T *array, int size) {
 
 template <class T>
 void fillArray(T *array, int size) {
+
+    ///Fills array via keyboard
+
     T buff;
     cout << "Please, enter " << size << " values: ";
     for (int i = 0; i < size; ++i) {
