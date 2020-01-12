@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
-
+    double (*f1)(char, double) = &function1;
+    solveNewton(f1);
     return 0;
 }
