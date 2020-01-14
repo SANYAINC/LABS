@@ -59,11 +59,11 @@ double function(char type, double x, double param) {
 
 void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double x0 = 2, double epsilon = 1E-6) {
     if (!argsCorrect(inf, sup, x0)) {
-        cout << "INCORRECT ARGUMENTS";
+        cout << "INCORRECT ARGUMENTS\n";
         return;
     }
     if ((*funcPtr)('1', x0) < epsilon) {
-        cout << "INCORRECT X0";
+        cout << "INCORRECT X0\n";
         return;
     }
     double xi = x0;
@@ -73,47 +73,36 @@ void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4
         iterations++;
     }
     if (xi < inf or xi > sup) {
-        cout << "NO ROOTS DETECTED";
+        cout << "NO ROOTS DETECTED\n";
         return;
     }
     printSolution(funcPtr, xi, iterations);
 }
 void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double x0 = 0.2, double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
     if (!argsCorrect(inf, sup, x0)) {
-        cout << "INCORRECT ARGUMENTS";
+        cout << "INCORRECT ARGUMENTS\n";
         return;
     }
     printTableHeader();
     int n = ceil((paramSup - paramInf) / deltaParam);
     double xi = x0;
-    double xPrev;
-    double xCur;
-    bool isTrapped = false;
     bool outOfRange = false;
     int iterations = 0;
     for (int i = 0; i <= n; ++i) {
         double param = paramInf + deltaParam * i;
         while (abs((*funcPtr)('F', xi, param)) > epsilon) {
-            xPrev = xi;
             xi = xi - (*funcPtr)('F', xi, param) / (*funcPtr)('1', xi, param);
             iterations++;
-            xCur = xi;
-            if (abs((*funcPtr)('F', xCur, param)) > abs((*funcPtr)('F', xPrev, param))) {
-                cout << "CRITICAL POINT TRAP\n";
-                isTrapped = true;
-                break;
-            }
         }
         if (xi < inf or xi > sup) {
             cout << "NO ROOTS DETECTED IN THIS RANGE\n";
             outOfRange = true;
             break;
         }
-        if (!isTrapped and !outOfRange) {
+        if (!outOfRange) {
             printSolution(funcPtr, xi, param, iterations);
         }
         xi = x0;
-        isTrapped = false;
         outOfRange = false;
     }
 }
