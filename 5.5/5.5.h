@@ -76,6 +76,7 @@ double function(char type, double x, double param) {
 }
 
 //Решение методом Ньютона
+//Можно использовать вдали от критических точек
 void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double x0 = 2, double epsilon = 1E-6) {
 
     ///Solves equation with no param via Newton
@@ -129,6 +130,59 @@ void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double
         }
         xi = x0;
         outOfRange = false;
+    }
+}
+//Решение методом половинного деления
+//Можно использовать когда точно известно что на промежутке есть единственный корень
+void solveHalfDividing(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double epsilon = 1E-6) {
+
+    ///Solves equation with no param via Newton
+
+    if ((*funcPtr)('F', inf) * (*funcPtr)('F', sup) > 0) {
+        cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
+        return;
+    }
+    int iterations = 0;
+    double newPoint = (inf + sup)/2;
+    while (abs((*funcPtr)('F', newPoint)) > epsilon) {
+        if ((*funcPtr)('F', inf) * (*funcPtr)('F', newPoint) < 0){
+            newPoint = (inf + newPoint)/2;
+        } else {
+            newPoint = (sup + newPoint)/2;
+        }
+        iterations++;
+    }
+    printSolution(funcPtr, newPoint, iterations);
+}
+void solveHalfDividing(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5 ,double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
+
+    ///Solves equation with param via Newton
+
+    printTableHeader();
+    double sInf = inf;
+    double sSup = sup;
+    int iterations = 0;
+    double newPoint = (inf + sup)/2;
+    int n = ceil((paramSup - paramInf) / deltaParam);
+    for (int i = 0; i <= n; ++i) {
+        double param = paramInf + deltaParam * i;
+        if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', sup, param) > 0) {
+            cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
+            break;
+        }
+        while ((abs((*funcPtr)('F', newPoint, param))) > epsilon) {
+            if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', newPoint, param) > 0){
+                inf = newPoint;
+            } else {
+                sup = newPoint;
+            }
+            newPoint = (inf+sup)/2;
+            iterations++;
+        }
+        printSolution(funcPtr, newPoint, param, iterations);
+        inf = sInf;
+        sup = sSup;
+        newPoint = (inf + sup)/2;
     }
 }
 
