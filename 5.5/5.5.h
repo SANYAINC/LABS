@@ -3,28 +3,43 @@
 using namespace std;
 
 
-
+//Вывод найденных решений
 void printSolution(double (*funcPtr)(char, double), double xi, int iterations) {
+
+    ///Prints solution with no parameter
+
     cout << "\n";
     cout << setw(10) << "X" << setw(20) <<       "F(x)"          << setw(20) << "Iterations\n\n";
     cout << setw(10) <<  xi << setw(20) << (*funcPtr)('F', xi)   << setw(20) <<    iterations;
     cout << "\n";
 }
 void printSolution(double (*funcPtr)(char, double, double), double xi, double param, int iterations) {
+
+    ///Prints solution with parameter
+
     cout << setw(10) << param << setw(20) << xi << setw(20) << (*funcPtr)('F', xi, param) << setw(20) << iterations << endl;
 }
 void printTableHeader() {
+
+    ///Prints table header for solution with parameter
+
     cout << '\n';
     cout << setw(10) << "S" << setw(20) << "X" << setw(20) << "F(x)" << setw(20) << "Iterations\n\n";
     cout << '\n';
 }
 
-
+//Проверка правильности позиции аргументов
 bool argsCorrect(double &inf, double &sup, double &x0) {
+
+    ///Checks correctness of args position
+
     return inf <= sup and inf <= x0 and sup >= x0;
 }
-
+//Функции
 double function(char type, double x) {
+
+    ///Equation no parameter
+
     switch (type) {
         case 'F': {
             return (x - 1) * (x - 1) * (x - 1) - 8;
@@ -41,6 +56,9 @@ double function(char type, double x) {
     }
 }
 double function(char type, double x, double param) {
+
+    ///Equation with parameter
+
     switch (type) {
         case 'F': {
             return param * cos(M_PI * x) * cos(M_PI * x) - sqrt(x);
@@ -57,7 +75,11 @@ double function(char type, double x, double param) {
     }
 }
 
+//Решение методом Ньютона
 void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double x0 = 2, double epsilon = 1E-6) {
+
+    ///Solves equation with no param via Newton
+
     if (!argsCorrect(inf, sup, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
@@ -79,6 +101,9 @@ void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4
     printSolution(funcPtr, xi, iterations);
 }
 void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double x0 = 0.2, double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
+
+    ///Solves equation with param via Newton
+
     if (!argsCorrect(inf, sup, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
