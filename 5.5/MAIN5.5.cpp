@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
+    //Указатели на функции
     double (*f1)(char, double) = &function;
     double (*f2)(char, double, double) = &function;
 
