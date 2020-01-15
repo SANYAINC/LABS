@@ -6,7 +6,7 @@ using namespace std;
 //Вывод найденных решений
 void printSolution(double (*funcPtr)(char, double), double xi, int iterations);
 void printSolution(double (*funcPtr)(char, double, double), double xi, double param, int iterations);
-void printTableHeader();
+void printTableHeader(int type);
 
 //Проверка правильности позиции аргументов
 bool argsCorrect(double &inf, double &sup, double &x0);
@@ -22,5 +22,9 @@ void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double
 //Можно использовать когда точно известно что на промежутке есть единственный корень
 void solveHalfDividing(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double epsilon = 1E-6);
 void solveHalfDividing(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5 ,double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05);
+//Решение методом хорд
+//Можно использовать когда точно известно что на промежутке есть единственный корень
+void solveChords(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double epsilon = 1E-6);
+void solveChords(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05);
 
 
