@@ -1,7 +1,3 @@
-#include <cmath>
-#include <iomanip>
-using namespace std;
-
 
 //Вывод найденных решений
 void printSolution(double (*funcPtr)(char, double), double xi, int iterations);
