@@ -93,7 +93,6 @@ void solveNewton(double (*funcPtr)(char, double, double), double inf, double sup
     double xi = x0;
     int iterations = 0;
     for (int i = 0; i <= n; ++i) {
-        bool outOfRange = false;
         double param = paramInf + deltaParam * i;
         while (abs((*funcPtr)('F', xi, param)) > epsilon) {
             xi = xi - (*funcPtr)('F', xi, param) / (*funcPtr)('1', xi, param);
