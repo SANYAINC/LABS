@@ -12,18 +12,24 @@ int main() {
 
     printTableHeader(0);
 
+    cout << "Newton\n";
     solveNewton(f1);
-    solveHalfDividing(f1);
+    cout << "Half Division\n";
+    solveHalfDivision(f1);
+    cout << "Chords\n";
     solveChords(f1);
 
     cout << "\n----------------------------------------------------------------------\n";
 
     printTableHeader(1);
 
+    cout << "Newton\n";
     solveNewton(f2);
     cout << "\n";
-    solveHalfDividing(f2);
+    cout << "Half division\n";
+    solveHalfDivision(f2);
     cout << "\n";
+    cout << "Chords\n";
     solveChords(f2);
 
     cout << "\n----------------------------------------------------------------------\n";

@@ -61,7 +61,7 @@ double function(char type, double x, double param) {
     }
 }
 
-void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double x0 = 2, double epsilon = 1E-6) {
+void solveNewton(double (*funcPtr)(char, double), double inf, double sup, double x0, double epsilon) {
     if (!argsCorrect(inf, sup, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
@@ -83,8 +83,8 @@ void solveNewton(double (*funcPtr)(char, double), double inf = 1, double sup = 4
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double x0 = 0.2,
-                 double epsilon = 1E-6, double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
+void solveNewton(double (*funcPtr)(char, double, double), double inf, double sup, double x0,
+                 double epsilon, double paramInf, double paramSup, double deltaParam) {
     if (!argsCorrect(inf, sup, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
@@ -108,7 +108,7 @@ void solveNewton(double (*funcPtr)(char, double, double), double inf = 0, double
     }
 }
 
-void solveHalfDividing(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double epsilon = 1E-6) {
+void solveHalfDivision(double (*funcPtr)(char, double), double inf, double sup, double epsilon) {
     if ((*funcPtr)('F', inf) * (*funcPtr)('F', sup) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
         return;
@@ -126,8 +126,8 @@ void solveHalfDividing(double (*funcPtr)(char, double), double inf = 1, double s
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveHalfDividing(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double epsilon = 1E-6,
-                       double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
+void solveHalfDivision(double (*funcPtr)(char, double, double), double inf, double sup, double epsilon,
+                       double paramInf, double paramSup, double deltaParam) {
     double sInf = inf;
     double sSup = sup;
     int iterations = 0;
@@ -156,7 +156,7 @@ void solveHalfDividing(double (*funcPtr)(char, double, double), double inf = 0, 
     }
 }
 
-void solveChords(double (*funcPtr)(char, double), double inf = 1, double sup = 4, double epsilon = 1E-6) {
+void solveChords(double (*funcPtr)(char, double), double inf, double sup, double epsilon) {
     if ((*funcPtr)('F', inf) * (*funcPtr)('F', sup) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
         return;
@@ -174,8 +174,8 @@ void solveChords(double (*funcPtr)(char, double), double inf = 1, double sup = 4
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveChords(double (*funcPtr)(char, double, double), double inf = 0, double sup = 1.5, double epsilon = 1E-6,
-                 double paramInf = 0.95, double paramSup = 1.2, double deltaParam = 0.05) {
+void solveChords(double (*funcPtr)(char, double, double), double inf, double sup, double epsilon,
+                 double paramInf, double paramSup, double deltaParam) {
     int iterations = 0;
     double xi;
     int n = ceil((paramSup - paramInf) / deltaParam);
