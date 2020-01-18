@@ -1,7 +1,7 @@
+#pragma once
+
 #include <iostream>
 #include <ctime>
-
-#pragma once
 
 using namespace std;
 
@@ -17,7 +17,7 @@ T *createArray(int size) {
 template <class T> //Освобождение памяти
 void deleteArray(T *array) {
     delete [] array;
-    cout << "\nMEMORY FREED\n";
+    cout << "MEMORY FREED\n";
 }
 
 template <class T> //Вывести массив
@@ -29,20 +29,34 @@ void showArray(T *array, int size) {
 }
 
 template <class T> //Заполнить массив случайными числами
-void fillArrRand(T *array, int size) {
+void fillArrayRand(T *array, int size, int max = 30, int shift = 30) {
     srand(time(nullptr));
     for (int i = 0; i < size; ++i) {
-        array[i] = static_cast<T>(rand()%30+30);
+        array[i] = static_cast<T>(rand() % max + shift);
     }
 }
 
 template <class T> //Заполнить массив с клавиатуры
-void fillArrayKeyboard(T *array, int size) {
+void fillArrayKbrd(T *array, int size) {
     T buff;
     cout << "Please, enter " << size << " values: ";
     for (int i = 0; i < size; ++i) {
         cin >> buff;
-        array[i] = buff;
+        array[i] = static_cast<T>(buff);
     }
     cout << endl;
+}
+
+template <class T> //Заполнить по возрастанию
+void fillArrayAsc(T *array, int size) {
+    for (int i = 0; i < size; ++i) {
+        array[i] = static_cast<T>(i);
+    }
+}
+
+template <class T> //Заполнить по убыванию
+void fillArrayDsc(T *array, int size) {
+    for (int i = 0; i < size; ++i) {
+        array[i] = static_cast<T>(size - i - 1);
+    }
 }
