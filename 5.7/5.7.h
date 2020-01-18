@@ -55,3 +55,13 @@ void bubbleSort(T *array, int &couCom, int &couMov, int size) {
         seria = 0;
     }
 }
+
+template <class T>
+void insertionSort(T *array, int &couCom, int &couMov, int size) {
+    for (int i = 1; i < size; ++i) {
+        for (int j = i; ++couCom and j > 0 and array[j-1] > array[j]; j--) {
+            swap(array[j], array[j-1]);
+            couMov++;
+        }
+    }
+}
