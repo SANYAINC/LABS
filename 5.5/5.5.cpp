@@ -23,8 +23,8 @@ void printTableHeader(int type) {
     }
 }
 
-bool argsCorrect(double &inf, double &sup, double &x0) {
-    return inf <= sup and inf <= x0 and sup >= x0;
+bool argsCorrect(double &leftBorder, double &rightBorder, double &x0) {
+    return leftBorder <= rightBorder and leftBorder <= x0 and rightBorder >= x0;
 }
 
 double function(char type, double x) {
@@ -34,9 +34,6 @@ double function(char type, double x) {
         }
         case '1': {
             return 3 * x * x - 6 * x + 3;
-        }
-        case '2': {
-            return 6 * x - 6;
         }
         default: {
             return 0;
@@ -52,17 +49,14 @@ double function(char type, double x, double param) {
         case '1': {
             return -M_PI * param * sin(2 * M_PI * x) - 1 / (2 * sqrt(x));
         }
-        case '2': {
-            return -2 * M_PI * M_PI * param * cos(2 * M_PI * x) + 1 / (4 * x * sqrt(x));
-        }
         default: {
             return 0;
         }
     }
 }
 
-void solveNewton(double (*funcPtr)(char, double), double inf, double sup, double x0, double epsilon) {
-    if (!argsCorrect(inf, sup, x0)) {
+void solveNewton(double (*funcPtr)(char, double), double leftBorder, double rightBorder, double x0, double epsilon) {
+    if (!argsCorrect(leftBorder, rightBorder, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
     }
@@ -76,123 +70,126 @@ void solveNewton(double (*funcPtr)(char, double), double inf, double sup, double
         xi = xi - (*funcPtr)('F', xi) / (*funcPtr)('1', xi);
         iterations++;
     }
-    if (xi < inf or xi > sup) {
-        cout << "NO ROOTS DETECTED\n";
+    if (xi < leftBorder or xi > rightBorder) {
+        cout << "NO ROOTS DETECTED IN THIS RANGE\n";
         return;
     }
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveNewton(double (*funcPtr)(char, double, double), double inf, double sup, double x0,
-                 double epsilon, double paramInf, double paramSup, double deltaParam) {
-    if (!argsCorrect(inf, sup, x0)) {
+void solveNewton(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double x0,
+                 double epsilon, double paramMin, double paramMax, double deltaParam) {
+    if (!argsCorrect(leftBorder, rightBorder, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
     }
-    int n = ceil((paramSup - paramInf) / deltaParam);
+    int n = ceil((paramMax - paramMin) / deltaParam);
     double xi = x0;
     int iterations = 0;
     for (int i = 0; i <= n; ++i) {
-        double param = paramInf + deltaParam * i;
+        double param = paramMin + deltaParam * i;
         while (abs((*funcPtr)('F', xi, param)) > epsilon) {
             xi = xi - (*funcPtr)('F', xi, param) / (*funcPtr)('1', xi, param);
             iterations++;
         }
-        if (xi < inf or xi > sup) {
+        if (xi < leftBorder or xi > rightBorder) {
             cout << "NO ROOTS DETECTED IN THIS RANGE\n";
-            break;
+            continue;
         }
         printSolution(funcPtr, xi, param, iterations);
         xi = x0;
     }
 }
 
-void solveHalfDivision(double (*funcPtr)(char, double), double inf, double sup, double epsilon) {
-    if ((*funcPtr)('F', inf) * (*funcPtr)('F', sup) > 0) {
+void solveHalfDivision(double (*funcPtr)(char, double), double leftBorder, double rightBorder, double epsilon) {
+    if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', rightBorder) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
         return;
     }
     int iterations = 0;
-    double xi = (inf + sup) / 2;
+    double xi = (leftBorder + rightBorder) / 2;
     while (abs((*funcPtr)('F', xi)) > epsilon) {
-        if ((*funcPtr)('F', inf) * (*funcPtr)('F', xi) < 0) {
-            xi = (inf + xi) / 2;
+        if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', xi) < 0) {
+            xi = (leftBorder + xi) / 2;
         } else {
-            xi = (sup + xi) / 2;
+            xi = (rightBorder + xi) / 2;
         }
         iterations++;
     }
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveHalfDivision(double (*funcPtr)(char, double, double), double inf, double sup, double epsilon,
-                       double paramInf, double paramSup, double deltaParam) {
-    double sInf = inf;
-    double sSup = sup;
+void solveHalfDivision(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon,
+                       double paramMin, double paramMax, double deltaParam) {
+    double sLB = leftBorder;
+    double sRB = rightBorder;
     int iterations = 0;
-    double newPoint = (inf + sup) / 2;
-    int n = ceil((paramSup - paramInf) / deltaParam);
+    double xi = (leftBorder + rightBorder) / 2;
+    int n = ceil((paramMax - paramMin) / deltaParam);
     for (int i = 0; i <= n; ++i) {
-        double param = paramInf + deltaParam * i;
-        if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', sup, param) > 0) {
+        double param = paramMin + deltaParam * i;
+        if ((*funcPtr)('F', leftBorder, param) * (*funcPtr)('F', rightBorder, param) > 0) {
             cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
             break;
         }
-        while ((abs((*funcPtr)('F', newPoint, param))) > epsilon) {
-            if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', newPoint, param) > 0) {
-                inf = newPoint;
+        while ((abs((*funcPtr)('F', xi, param))) > epsilon) {
+            if ((*funcPtr)('F', leftBorder, param) * (*funcPtr)('F', xi, param) > 0) {
+                leftBorder = xi;
             } else {
-                sup = newPoint;
+                rightBorder = xi;
             }
-            newPoint = (inf + sup) / 2;
+            xi = (leftBorder + rightBorder) / 2;
             iterations++;
         }
-        printSolution(funcPtr, newPoint, param, iterations);
-        inf = sInf;
-        sup = sSup;
-        newPoint = (inf + sup) / 2;
+        printSolution(funcPtr, xi, param, iterations);
+        leftBorder = sLB;
+        rightBorder = sRB;
+        xi = (leftBorder + rightBorder) / 2;
         iterations = 0;
     }
 }
 
-void solveChords(double (*funcPtr)(char, double), double inf, double sup, double epsilon) {
-    if ((*funcPtr)('F', inf) * (*funcPtr)('F', sup) > 0) {
+void solveChords(double (*funcPtr)(char, double), double leftBorder, double rightBorder, double epsilon) {
+    if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', rightBorder) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
         return;
     }
     int iterations = 0;
-    double xi = inf - ((*funcPtr)('F', inf) * (inf - sup)) / ((*funcPtr)('F', inf) - (*funcPtr)('F', sup));
+    double xi = leftBorder - ((*funcPtr)('F', leftBorder) * (leftBorder - rightBorder)) /
+                             ((*funcPtr)('F', leftBorder) - (*funcPtr)('F', rightBorder));
     while (abs((*funcPtr)('F', xi)) > epsilon) {
-        if ((*funcPtr)('F', inf) * (*funcPtr)('F', xi) < 0) {
-            xi = inf - ((*funcPtr)('F', inf) * (inf - xi)) / ((*funcPtr)('F', inf) - (*funcPtr)('F', xi));
+        if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', xi) < 0) {
+            xi = leftBorder - ((*funcPtr)('F', leftBorder) * (leftBorder - xi)) /
+                              ((*funcPtr)('F', leftBorder) - (*funcPtr)('F', xi));
         } else {
-            xi = xi - ((*funcPtr)('F', xi) * (xi - sup)) / ((*funcPtr)('F', xi) - (*funcPtr)('F', sup));
+            xi = xi - ((*funcPtr)('F', xi) * (xi - rightBorder)) /
+                      ((*funcPtr)('F', xi) - (*funcPtr)('F', rightBorder));
         }
         iterations++;
     }
     printSolution(funcPtr, xi, iterations);
 }
 
-void solveChords(double (*funcPtr)(char, double, double), double inf, double sup, double epsilon,
-                 double paramInf, double paramSup, double deltaParam) {
+void solveChords(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon,
+                 double paramMin, double paramMax, double deltaParam) {
     int iterations = 0;
     double xi;
-    int n = ceil((paramSup - paramInf) / deltaParam);
+    int n = ceil((paramMax - paramMin) / deltaParam);
     for (int i = 0; i <= n; ++i) {
-        double param = paramInf + deltaParam * i;
-        if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', sup, param) > 0) {
+        double param = paramMin + deltaParam * i;
+        if ((*funcPtr)('F', leftBorder, param) * (*funcPtr)('F', rightBorder, param) > 0) {
             cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
             return;
         }
-        xi = inf -
-             ((*funcPtr)('F', inf, param) * (inf - sup)) / ((*funcPtr)('F', inf, param) - (*funcPtr)('F', sup, param));
+        xi = leftBorder - ((*funcPtr)('F', leftBorder, param) * (leftBorder - rightBorder)) /
+                          ((*funcPtr)('F', leftBorder, param) - (*funcPtr)('F', rightBorder, param));
         while (abs((*funcPtr)('F', xi, param)) > epsilon) {
-            if ((*funcPtr)('F', inf, param) * (*funcPtr)('F', xi, param) < 0) {
-                xi = inf - ((*funcPtr)('F', inf, param) * (inf - xi)) /
-                           ((*funcPtr)('F', inf, param) - (*funcPtr)('F', xi, param));
+            if ((*funcPtr)('F', leftBorder, param) * (*funcPtr)('F', xi, param) < 0) {
+                xi = leftBorder - ((*funcPtr)('F', leftBorder, param) * (leftBorder - xi)) /
+                                  ((*funcPtr)('F', leftBorder, param) - (*funcPtr)('F', xi, param));
             } else {
-                xi = xi - ((*funcPtr)('F', xi, param) * (xi - sup)) /
-                          ((*funcPtr)('F', xi, param) - (*funcPtr)('F', sup, param));
+                xi = xi - ((*funcPtr)('F', xi, param) * (xi - rightBorder)) /
+                          ((*funcPtr)('F', xi, param) - (*funcPtr)('F', rightBorder, param));
             }
             iterations++;
         }
