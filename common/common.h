@@ -1,6 +1,8 @@
 #include <iostream>
 #include <ctime>
 
+#pragma once
+
 using namespace std;
 
 template <class T> //Создание указателя на size элементовT
