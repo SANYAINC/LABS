@@ -10,7 +10,7 @@ int main() {
     cout << endl;
 
     int *ar = createArray<int>(n);
-    fillArrRand(ar, n);
+    fillArrayRand(ar, n);
     //fillArrayKeyboard(ar, n);
     showArray(ar, n);
     int &max = refMaxFib(ar, n);
