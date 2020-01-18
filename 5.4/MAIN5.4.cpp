@@ -10,13 +10,13 @@ int main() {
     cout << endl;
 
     int *ar = createArray<int>(n);
-    fillRandArr(ar, n);
-    //fillArray(ar, n);
+    fillArrRand(ar, n);
+    //fillArrayKeyboard(ar, n);
     showArray(ar, n);
     int &max = refMaxFib(ar, n);
     max = 0;
     showArray(ar, n);
 
-    removeArray(ar);
+    deleteArray(ar);
     return 0;
 }

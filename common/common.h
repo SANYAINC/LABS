@@ -1,17 +1,12 @@
+#pragma once
+
 #include <iostream>
 #include <ctime>
 
 using namespace std;
 
-#ifndef LABSGIT_COMMON_H
-#define LABSGIT_COMMON_H
-
-
-template <class T>
+template <class T> //Создания указателя на size элементов
 T* createArray(int size) {
-
-    ///Creates pointer (array)
-
     T *array = new T[size];
     for (int i = 0; i < size; ++i) {
         array[i] = static_cast<T>(0);
@@ -19,42 +14,30 @@ T* createArray(int size) {
     return array;
 }
 
-template <class T>
-void removeArray(T *array) {
-
-    ///Frees memory
-
+template <class T> //Освобождение памяти
+void deleteArray(T *array) {
     delete [] array;
     cout << "\nMEMORY FREED\n";
 }
 
-template <class T>
+template <class T> //Вывести массив
 void showArray(T *array, int size) {
-
-    ///Shows array on the screen
-
     for (int i = 0; i < size; ++i) {
         cout << array[i] << ' ';
     }
     cout << endl;
 }
 
-template <class T>
-void fillRandArr(T *array, int size) {
-
-    ///Fills array with random values
-
+template <class T> //Заполнить массив случайными числами
+void fillArrRand(T *array, int size) {
     srand(time(nullptr));
     for (int i = 0; i < size; ++i) {
         array[i] = static_cast<T>(rand()%30+30);
     }
 }
 
-template <class T>
-void fillArray(T *array, int size) {
-
-    ///Fills array via keyboard
-
+template <class T> //Заполнить массив с клавиатуры
+void fillArrayKeyboard(T *array, int size) {
     T buff;
     cout << "Please, enter " << size << " values: ";
     for (int i = 0; i < size; ++i) {
@@ -63,6 +46,3 @@ void fillArray(T *array, int size) {
     }
     cout << endl;
 }
-
-
-#endif //LABSGIT_COMMON_H

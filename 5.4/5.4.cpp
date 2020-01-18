@@ -1,3 +1,4 @@
+
 int isInArray(int num, const int *array, int size) {
     for (int i = 0; i < size; ++i) {
         if (array[i] == num) {
@@ -6,6 +7,7 @@ int isInArray(int num, const int *array, int size) {
     }
     return -1;
 }
+
 int &refMaxFib(int *array, int size) {
     //Поиск максимального значения массива и его индекса
     int max = array[0];
