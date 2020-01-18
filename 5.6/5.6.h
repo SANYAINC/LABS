@@ -1,7 +1,11 @@
+
+//Функция
 double function(double x, double paramS, double paramT);
 
-void solveIntegral(double (*func)(double, double, double), double inf = 1, double sup = 2, double epsilon = 1E-6,
-                   double parSInf = 0, double parSSup = 0.5, double parSDelta = 0.1,
-                   double parTInf = 0.5, double patTSup = 2.5, double parTDelta = 0.5, int N0 = 1);
+//Решить интеграл методом средних прямоугольников
+void solveIntegralMidRectangles(double (*func)(double, double, double), double min = 1, double max = 2, double epsilon = 1E-6,
+                                double parSMin = 0, double parSMax = 0.5, double parSDelta = 0.1,
+                                double parTMin = 0.5, double patTMax = 2.5, double parTDelta = 0.5);
 
-double calcIntegral(double (*func)(double, double, double), double inf, double sup, double s, double t, int N);
+//Посчитать интеграл с текущим количествои разбиений
+double calcIntegral(double (*func)(double, double, double), double leftBorder, double rightBorder, double paramS, double paramT, int N);
