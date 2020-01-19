@@ -87,19 +87,19 @@ int main() {
     //Цифра - номер массива,
     //R - заполнение случайными, A - по возрастанию, D - по убыванию
     int *ar1R = createArray<int>(n);
-    int *ar2R = createArray<int>(n);
-    int *ar3R = createArray<int>(n);
-    int *ar4R = createArray<int>(n);
+    float *ar2R = createArray<float>(n);
+    double *ar3R = createArray<double>(n);
+    char *ar4R = createArray<char>(n);
     int *ar5R = createArray<int>(n);
     int *ar1A = createArray<int>(n);
-    int *ar2A = createArray<int>(n);
-    int *ar3A = createArray<int>(n);
-    int *ar4A= createArray<int>(n);
+    float *ar2A = createArray<float>(n);
+    double *ar3A = createArray<double>(n);
+    char *ar4A= createArray<char>(n);
     int *ar5A = createArray<int>(n);
     int *ar1D = createArray<int>(n);
-    int *ar2D = createArray<int>(n);
-    int *ar3D = createArray<int>(n);
-    int *ar4D = createArray<int>(n);
+    float *ar2D = createArray<float>(n);
+    double *ar3D = createArray<double>(n);
+    char *ar4D = createArray<char>(n);
     int *ar5D = createArray<int>(n);
 
     //Заполнение 4х массивов 4мя вариантами
