@@ -171,3 +171,37 @@ void binInsertionSort(T *array, int size) {
             array[left] = temp;
         }
 }
+
+template <class T>
+void selectionSort(T *array, int &couCom, int &couMov, int size) {
+    int left = 0;
+    int right = size - 1;
+    int minIndex = 0;
+    while (left != right) {
+        for (int i = left; i <= right; ++i) {
+            if (++couCom and array[i] < array[minIndex]) {
+                minIndex = i;
+            }
+        }
+        swap(array[left], array[minIndex]);
+        couMov++;
+        left++;
+        minIndex = left;
+    }
+}
+template <class T>
+void selectionSort(T *array, int size) {
+    int left = 0;
+    int right = size - 1;
+    int minIndex = 0;
+    while (left != right) {
+        for (int i = left; i <= right; ++i) {
+            if (array[i] < array[minIndex]) {
+                minIndex = i;
+            }
+        }
+        swap(array[left], array[minIndex]);
+        left++;
+        minIndex = left;
+    }
+}
