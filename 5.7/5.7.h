@@ -83,21 +83,21 @@ void bubbleSort(T *array, int &couCom, int &couMov, int size) {
 template <class T>
 void bubbleSort(T *array, int size) {
     int index = 0;
-    int seria = 0;
+    int strike = 0;
     for (int i = 0; i < size - 1; ++i) {
         while (index + 1 < size) {
             if (array[index] > array[index+1]) {
                 swap(array[index], array[index+1]);
             } else {
-                seria++;
+                strike++;
             }
             index++;
         }
-        if (seria == size - 1) {
+        if (strike == size - 1) {
             break;
         }
         index = 0;
-        seria = 0;
+        strike = 0;
     }
 }
 

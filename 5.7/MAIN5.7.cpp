@@ -89,17 +89,19 @@ int main() {
     int *ar1R = createArray<int>(n);
     float *ar2R = createArray<float>(n);
     double *ar3R = createArray<double>(n);
-    char *ar4R = createArray<char>(n);
+    float *ar4R = createArray<float>(n);
     int *ar5R = createArray<int>(n);
+
     int *ar1A = createArray<int>(n);
     float *ar2A = createArray<float>(n);
     double *ar3A = createArray<double>(n);
-    char *ar4A= createArray<char>(n);
+    float *ar4A= createArray<float>(n);
     int *ar5A = createArray<int>(n);
+
     int *ar1D = createArray<int>(n);
     float *ar2D = createArray<float>(n);
     double *ar3D = createArray<double>(n);
-    char *ar4D = createArray<char>(n);
+    float *ar4D = createArray<float>(n);
     int *ar5D = createArray<int>(n);
 
     //Заполнение 4х массивов 4мя вариантами
@@ -108,11 +110,13 @@ int main() {
     fillArrayRand(ar3R, n);
     fillArrayRand(ar4R, n);
     fillArrayRand(ar5R, n);
+
     fillArrayAsc(ar1A, n);
     fillArrayAsc(ar2A, n);
     fillArrayAsc(ar3A, n);
     fillArrayAsc(ar4A, n);
     fillArrayAsc(ar5A, n);
+
     fillArrayDsc(ar1D, n);
     fillArrayDsc(ar2D, n);
     fillArrayDsc(ar3D, n);
