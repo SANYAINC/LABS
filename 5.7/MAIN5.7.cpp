@@ -11,7 +11,7 @@ void test(char sortType, T *array, int size) {
     cout << "-------------------------------------------------------------------------\n";
     if (sortType == 'Q') {
         cout << "QUICK SORT\n";
-        //showArray(array, size);
+        //show(array, size);
         quickSort(array, comps, movings, size - 1);
         cout << endl;
         showArray(array, size);
@@ -24,7 +24,7 @@ void test(char sortType, T *array, int size) {
     }
     if (sortType == 'B') {
         cout << "BUBBLE SORT\n";
-        //showArray(array, size);
+        //show(array, size);
         bubbleSort(array, comps, movings, size);
         cout << endl;
         showArray(array, size);
@@ -37,7 +37,7 @@ void test(char sortType, T *array, int size) {
     }
     if (sortType == 'I') {
         cout << "INSERTION SORT\n";
-        //showArray(array, size);
+        //show(array, size);
         insertionSort(array, comps, movings, size);
         cout << endl;
         showArray(array, size);
@@ -50,7 +50,7 @@ void test(char sortType, T *array, int size) {
     }
     if (sortType == '2') {
         cout << "BINARY INSERTION SORT\n";
-        //showArray(array, size);
+        //show(array, size);
         binInsertionSort(array, comps, movings, size);
         cout << endl;
         showArray(array, size);
@@ -63,7 +63,7 @@ void test(char sortType, T *array, int size) {
     }
     if (sortType == 'S') {
         cout << "SELECTION SORT\n";
-        //showArray(array, size);
+        //show(array, size);
         selectionSort(array, comps, movings, size);
         cout << endl;
         showArray(array, size);

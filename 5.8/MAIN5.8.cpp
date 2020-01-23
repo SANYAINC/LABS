@@ -10,11 +10,11 @@ int main() {
     cin >> n;
     cout << endl;
 
-    int *array = arrays::createArray<int>(n);
-    arrays::fillArrayRand(array, n);
+    int *array = arrays::create<int>(n);
+    arrays::fillRnd(array, n);
     mergeSort(array, n - 1);
-    arrays::showArray(array, n);
-    arrays::deleteArray(array);
+    arrays::show(array, n);
+    arrays::free(array);
 
     cout << "Please, enter number of words: ";
     int wordsAmount;
@@ -25,7 +25,7 @@ int main() {
     cin >> wordsLength;
     cout << endl;
 
-    char **words = matrix::createMatrix<char>(wordsAmount, wordsLength);
+    char **words = matrix::create<char>(wordsAmount, wordsLength);
     char buf[wordsLength];
     for (int i = 0; i < 3; ++i) {
         cout << "Please, enter a word: ";
@@ -41,7 +41,7 @@ int main() {
     cout << endl;
     mergeSort(words, wordsAmount);
     matrix::showWords(words, wordsAmount);
-    matrix::deleteMatrix(words, wordsAmount);
+    matrix::free(words, wordsAmount);
 
     return 0;
 }
