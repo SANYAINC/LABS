@@ -17,4 +17,6 @@ public:
     void show(char type = 'T');
     void setUnit(char type, int i, int j);
     void removeUnit(char type, int i, int j);
+
+    void clear();
 };

@@ -136,4 +136,11 @@ void board::removeUnit(char type, int i, int j) {
         }
     }
 }
-
+void board::clear() {
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            field[i][j].isEmpty = true;
+            field[i][j].underAttackTimes = 0;
+        }
+    }
+}
