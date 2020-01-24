@@ -1,11 +1,13 @@
 #include <iostream>
+#include "class.h"
 #include "5.9.h"
 
 using namespace std;
 
 int main() {
     board board;
-    board.show('C');
+    int counter = 0;
+    v3::solve(board, 3, counter);
 
     return 0;
 }

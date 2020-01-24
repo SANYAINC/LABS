@@ -1,21 +1,7 @@
 #pragma once
+#include "class.h"
 
-class square {
-public:
-    bool isEmpty;
-    int underAttackTimes;
-    char color;
-
-    square();
-};
-
-class board : square {
-public:
-    square field[8][8];
-
-    board();
-    void show(char type);
-
-private:
-    void colorize();
-};
+namespace v3 {
+    void transformNumber(int &n);
+    bool solve(board board, int arrangementsNumber, int &arrangementsCou, int level = 0);
+}
