@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     board board;
     int counter = 0;
-    v3::solve(board, 3, counter);
+    v3::solve(board, 150, counter);
 
     return 0;
 }

@@ -18,6 +18,4 @@ public:
     void show(char type);
     void setUnit(char type, int i, int j);
     void removeUnit(char type, int i, int j);
-private:
-    void colorize();
 };

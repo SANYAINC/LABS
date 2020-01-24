@@ -15,10 +15,6 @@ square::square() {
     color = 'W';
 }
 board::board() : square() {
-    colorize();
-}
-
-void board::colorize() {
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
             if ((i + j) % 2 != 0) {
@@ -27,6 +23,7 @@ void board::colorize() {
         }
     }
 }
+
 void board::show(char type) {
     switch (type) {
         case 'C': {
