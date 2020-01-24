@@ -12,10 +12,9 @@ public:
 class board : square {
 public:
     square field[8][8];
-
     board();
 
-    void show(char type);
+    void show(char type = 'T');
     void setUnit(char type, int i, int j);
     void removeUnit(char type, int i, int j);
 };

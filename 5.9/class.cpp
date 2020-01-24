@@ -88,6 +88,17 @@ void board::setUnit(char type, int i, int j) {
             }
             break;
         }
+        case 'R': {
+            field[i][j].isEmpty = false;
+            for (int m = 0; m < 8; ++m) {
+                if (m != i) {
+                    field[m][j].underAttackTimes++;
+                }
+                if (m != j) {
+                    field[i][m].underAttackTimes++;
+                }
+            }
+        }
     }
 }
 void board::removeUnit(char type, int i, int j) {
@@ -111,6 +122,17 @@ void board::removeUnit(char type, int i, int j) {
                 }
             }
             break;
+        }
+        case 'R': {
+            field[i][j].isEmpty = true;
+            for (int m = 0; m < 8; ++m) {
+                if (m != i) {
+                    field[m][j].underAttackTimes--;
+                }
+                if (m != j) {
+                    field[i][m].underAttackTimes--;
+                }
+            }
         }
     }
 }
