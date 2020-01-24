@@ -34,9 +34,9 @@ bool v3::solve(board board, int arrangementsNumber, int &arrangementsCou, int le
         if (arrangementsCou == arrangementsNumber) {
             return true;
         }
-        cout << arrangementsCou + 1 << endl;
+        //cout << arrangementsCou + 1 << endl;
         arrangementsCou++;
-        board.show();
+        //board.show();
         return true;
     }
     for (int j = 0; j < 8; ++j) {
