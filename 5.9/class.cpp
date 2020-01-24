@@ -15,8 +15,8 @@ square::square() {
     color = 'W';
 }
 board::board() : square() {
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 8; ++j) {
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
             if ((i + j) % 2 != 0) {
                 field[i][j].color = 'B';
             }
@@ -27,8 +27,8 @@ board::board() : square() {
 void board::show(char type) {
     switch (type) {
         case 'C': {
-            for (int i = 0; i < 8; ++i) {
-                for (int j = 0; j < 8; ++j) {
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N; ++j) {
                     if (!field[i][j].isEmpty) {
                         cout << unit << ' ';
                     } else if (field[i][j].color == 'W') {
@@ -45,8 +45,8 @@ void board::show(char type) {
             break;
         }
         case 'T': {
-            for (int i = 0; i < 8; ++i) {
-                for (int j = 0; j < 8; ++j) {
+            for (int i = 0; i < N; ++i) {
+                for (int j = 0; j < N; ++j) {
                     if (!field[i][j].isEmpty) {
                         cout << unit << ' ';
                     } else if (field[i][j].underAttackTimes > 0) {
@@ -70,14 +70,14 @@ void board::setUnit(char type, int i, int j) {
     switch (type) {
         case 'Q': {
             field[i][j].isEmpty = false;
-            for (int m = 0; m < 8; ++m) {
+            for (int m = 0; m < N; ++m) {
                 if (m != i) {
                     field[m][j].underAttackTimes++;
                 }
                 if (m != j) {
                     field[i][m].underAttackTimes++;
                 }
-                for (int k = 0; k < 8; ++k) {
+                for (int k = 0; k < N; ++k) {
                     if (m + k == i + j and m != i and k != j) {
                         field[m][k].underAttackTimes++;
                     }
@@ -90,7 +90,7 @@ void board::setUnit(char type, int i, int j) {
         }
         case 'R': {
             field[i][j].isEmpty = false;
-            for (int m = 0; m < 8; ++m) {
+            for (int m = 0; m < N; ++m) {
                 if (m != i) {
                     field[m][j].underAttackTimes++;
                 }
@@ -98,21 +98,36 @@ void board::setUnit(char type, int i, int j) {
                     field[i][m].underAttackTimes++;
                 }
             }
+            break;
         }
+        case 'B': {
+            field[i][j].isEmpty = false;
+            for (int m = 0; m < N; ++m) {
+                for (int k = 0; k < N; ++k) {
+                    if (m + k == i + j and m != i and k != j) {
+                        field[m][k].underAttackTimes++;
+                    }
+                    if (m - k == i - j and m != i and k != j) {
+                        field[m][k].underAttackTimes++;
+                    }
+                }
+            }
+        }
+        break;
     }
 }
 void board::removeUnit(char type, int i, int j) {
     switch (type) {
         case 'Q': {
             field[i][j].isEmpty = true;
-            for (int m = 0; m < 8; ++m) {
+            for (int m = 0; m < N; ++m) {
                 if (m != i) {
                     field[m][j].underAttackTimes--;
                 }
                 if (m != j) {
                     field[i][m].underAttackTimes--;
                 }
-                for (int k = 0; k < 8; ++k) {
+                for (int k = 0; k < N; ++k) {
                     if (m + k == i + j and m != i and k != j) {
                         field[m][k].underAttackTimes--;
                     }
@@ -125,7 +140,7 @@ void board::removeUnit(char type, int i, int j) {
         }
         case 'R': {
             field[i][j].isEmpty = true;
-            for (int m = 0; m < 8; ++m) {
+            for (int m = 0; m < N; ++m) {
                 if (m != i) {
                     field[m][j].underAttackTimes--;
                 }
@@ -133,12 +148,37 @@ void board::removeUnit(char type, int i, int j) {
                     field[i][m].underAttackTimes--;
                 }
             }
+            break;
+        }
+        case 'B': {
+            field[i][j].isEmpty = true;
+            for (int m = 0; m < N; ++m) {
+                for (int k = 0; k < N; ++k) {
+                    if (m + k == i + j and m != i and k != j) {
+                        field[m][k].underAttackTimes--;
+                    }
+                    if (m - k == i - j and m != i and k != j) {
+                        field[m][k].underAttackTimes--;
+                    }
+                }
+            }
+            break;
         }
     }
 }
+bool board::colorIsUnderAttack(char color) {
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            if (field[i][j].color == color and (field[i][j].isEmpty and field[i][j].underAttackTimes == 0)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 void board::clear() {
-    for (int i = 0; i < 8; ++i) {
-        for (int j = 0; j < 8; ++j) {
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
             field[i][j].isEmpty = true;
             field[i][j].underAttackTimes = 0;
         }

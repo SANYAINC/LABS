@@ -6,13 +6,12 @@ using namespace std;
 
 int main() {
     board board;
-    int cou1 = 0;
-    int cou2 = 0;
 
-    v1::solve(board, cou1);
+    cout << v1::solve(board) << endl;
     board.clear();
-    v3::solve(board, 0, cou2);
-
-    cout << cou1 << endl << cou2;
+    cout << v2::solve(board) << endl;
+    board.clear();
+    cout << v3::solve(board) << endl;
+    board.clear();
     return 0;
 }
