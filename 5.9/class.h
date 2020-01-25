@@ -1,6 +1,8 @@
 #pragma once
 #define N 8
-#define SHOW false
+#define SHOW1 false
+#define SHOW2 false
+#define SHOW3 false
 
 class square {
 public:

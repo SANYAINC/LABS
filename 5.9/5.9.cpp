@@ -9,7 +9,7 @@ int v1::solve(board board) {
 }
 bool v1::findSolution(board board, int &arrangementsCou, int level) {
     if (level == N) {
-        if (SHOW) {
+        if (SHOW1) {
             cout << arrangementsCou + 1 << endl;
             board.show();
         }
@@ -42,7 +42,7 @@ bool v2::findSolution(board board, int &arrangementsNumber, int &bishopsCou, cha
     }
     if (bishopsCou == N) {
         arrangementsNumber++;
-        if (SHOW) {
+        if (SHOW2) {
             board.show();
         }
         return true;
@@ -79,7 +79,7 @@ bool v3::findSolution(board board, int arrangementsNumber, int &arrangementsCou,
         if (arrangementsCou == arrangementsNumber) {
             return true;
         }
-        if (SHOW) {
+        if (SHOW3) {
             cout << arrangementsCou + 1 << endl;
             board.show();
         }
