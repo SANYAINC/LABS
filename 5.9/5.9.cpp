@@ -89,11 +89,40 @@ bool v3::findSolution(board board, int arrangementsNumber, int &arrangementsCou,
     for (int j = 0; j < N; ++j) {
         if (board.field[level][j].isEmpty and board.field[level][j].underAttackTimes == 0) {
             board.setUnit('Q', level, j);
-            if (findSolution(board, arrangementsNumber, arrangementsCou, level + 1)) {
-                board.removeUnit('Q', level, j);
-                continue;
-            } else {
-                board.removeUnit('Q', level, j);
+            findSolution(board, arrangementsNumber, arrangementsCou, level + 1);
+            board.removeUnit('Q', level, j);
+        }
+    }
+    return false;
+}
+
+int v4::solve(board board) {
+    int arrangementsNumber = 0;
+    int queensSet = 0;
+    findSolution(board, arrangementsNumber, queensSet);
+    return arrangementsNumber;
+}
+bool v4::findSolution(board board, int &arrangementsNumber, int &queensCou) {
+    if (queensCou == 5) {
+        arrangementsNumber++;
+        if (SHOW4) {
+            board.show();
+        }
+        return true;
+    }
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            if (board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+                board.setUnit('Q', m, k);
+                queensCou++;
+                if (queensCou == 5 and !board.fieldIsUnderAttack()) {
+                    board.removeUnit('Q', m, k);
+                    queensCou--;
+                    continue;
+                }
+                findSolution(board, arrangementsNumber, queensCou);
+                board.removeUnit('Q', m, k);
+                queensCou--;
             }
         }
     }

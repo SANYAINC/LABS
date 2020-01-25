@@ -176,6 +176,16 @@ bool board::colorIsUnderAttack(char color) {
     }
     return true;
 }
+bool board::fieldIsUnderAttack() {
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            if (field[i][j].isEmpty and field[i][j].underAttackTimes == 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 void board::clear() {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {

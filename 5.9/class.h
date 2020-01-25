@@ -3,6 +3,7 @@
 #define SHOW1 false
 #define SHOW2 false
 #define SHOW3 false
+#define SHOW4 false
 
 class square {
 public:
@@ -23,5 +24,6 @@ public:
     void setUnit(char type, int i, int j);
     void removeUnit(char type, int i, int j);
     bool colorIsUnderAttack(char color);
+    bool fieldIsUnderAttack();
     void clear();
 };

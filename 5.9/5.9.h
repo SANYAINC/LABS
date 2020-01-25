@@ -7,6 +7,8 @@ namespace v1 {
 }
 
 namespace v2 {
+    //Неоптимизирован, возможно не точное кол-во решений.
+    //Решение ~70 сек
     int solve(board board);
     bool findSolution(board board, int &arrangementsNumber, int &bishopsCou, char color = 'W');
 }
@@ -17,7 +19,7 @@ namespace v3 {
 }
 
 namespace v4 {
-    /*TODO
-     * Аналог 3 варианта, но теперь ферзей будет 5, и каждое свободное поле должно быть под ударом
-     */
+    //Не решено
+    int solve(board board);
+    bool findSolution(board board, int &arrangementsNumber, int &queensCou);
 }
