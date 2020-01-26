@@ -1,5 +1,6 @@
 #pragma once
-#define N 8
+#define N 6
+#define MAX_SOLUTIONS_STORED 70000
 #define SHOW1 false
 #define SHOW2 false
 #define SHOW3 false
@@ -25,5 +26,19 @@ public:
     void removeUnit(char type, int i, int j);
     bool colorIsUnderAttack(char color);
     bool fieldIsUnderAttack();
-    void clear();
+};
+
+class solutions : board {
+public:
+    board arrangements[MAX_SOLUTIONS_STORED];
+    int index;
+
+    solutions();
+
+    bool appendSolution(board board);
+};
+
+class solution {
+public:
+    int solutions[MAX_SOLUTIONS_STORED][N][2];
 };

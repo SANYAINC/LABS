@@ -23,6 +23,9 @@ board::board() : square() {
         }
     }
 }
+solutions::solutions() : board() {
+    index = 0;
+}
 
 void board::show(char type) {
     switch (type) {
@@ -186,11 +189,30 @@ bool board::fieldIsUnderAttack() {
     }
     return true;
 }
-void board::clear() {
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
-            field[i][j].isEmpty = true;
-            field[i][j].underAttackTimes = 0;
+
+bool solutions::appendSolution(board board) {
+    int cou = 0;
+    for (int k = 0; k < index; ++k) {
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < N; ++j) {
+                if (arrangements[k].field[i][j].underAttackTimes == board.field[i][j].underAttackTimes
+                    and arrangements[k].field[i][j].isEmpty == board.field[i][j].isEmpty) {
+                    cou++;
+                }
+            }
+        }
+        if (cou == N*N) {
+            return false;
+        }
+        cou = 0;
+    }
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            arrangements[index].field[m][k].underAttackTimes = board.field[m][k].underAttackTimes;
+            arrangements[index].field[m][k].isEmpty = board.field[m][k].isEmpty;
         }
     }
+    index++;
+    return true;
 }
+

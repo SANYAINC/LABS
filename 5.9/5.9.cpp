@@ -7,7 +7,7 @@ int v1::solve(board board) {
     findSolution(board, arrangementsCou);
     return arrangementsCou;
 }
-bool v1::findSolution(board board, int &arrangementsCou, int level) {
+bool v1::findSolution(board board,int &arrangementsCou, int level) {
     if (level == N) {
         if (SHOW1) {
             cout << arrangementsCou + 1 << endl;
@@ -33,33 +33,68 @@ bool v1::findSolution(board board, int &arrangementsCou, int level) {
 int v2::solve(board board) {
     int arrangementsCounter = 0;
     int bishopsCounter = 0;
-    findSolution(board, arrangementsCounter, bishopsCounter);
-    return arrangementsCounter;
+    solutions solutions;
+    solveForWhite(board, solutions, arrangementsCounter, bishopsCounter);
+    //arrangementsCounter - число всех расстоновок полученных бектрекингом, содержит копии решений
+    //solutions.index - число уникальных решений
+    return solutions.index;
 }
-bool v2::findSolution(board board, int &arrangementsNumber, int &bishopsCou, char color) {
-    if (bishopsCou >= N/2) {
-        color = 'B';
-    }
-    if (bishopsCou == N) {
+bool v2::solveForBlack(board board, solutions &sols, int &arrangementsNumber, int &bishopCou) {
+    if (N == 1) {
         arrangementsNumber++;
-        if (SHOW2) {
-            board.show();
-        }
         return true;
+    }
+    if (bishopCou == N) {
+        return board.colorIsUnderAttack('B');
     }
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
-            if (board.field[m][k].color == color and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+            if (board.field[m][k].color == 'B' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
                 board.setUnit('B', m, k);
-                bishopsCou++;
-                if ((bishopsCou == N or bishopsCou == N/2) and !board.colorIsUnderAttack(color)) {
+                bishopCou++;
+                if (solveForBlack(board, sols, arrangementsNumber, bishopCou)) {
+                    if (sols.appendSolution(board)) {
+                        if (SHOW2) {
+                            cout << sols.index << endl;
+                            board.show();
+                        }
+                    }
+                    arrangementsNumber++;
                     board.removeUnit('B', m, k);
-                    bishopsCou--;
-                    continue;
+                    bishopCou--;
+                } else {
+                    board.removeUnit('B', m, k);
+                    bishopCou--;
                 }
-                findSolution(board, arrangementsNumber, bishopsCou, color);
-                board.removeUnit('B', m, k);
-                bishopsCou--;
+            }
+        }
+    }
+    return false;
+}
+bool v2::solveForWhite(board board, solutions &sols, int &arrangementsNumber, int &bishopCou) {
+    if (N != 5) {
+        if (bishopCou == N / 2) {
+            return board.colorIsUnderAttack('W');
+        }
+    } else {
+        if (bishopCou == N / 2 + 1) {
+            return board.colorIsUnderAttack('W');
+        }
+    }
+
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            if (board.field[m][k].color == 'W' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+                board.setUnit('B', m, k);
+                bishopCou++;
+                if (solveForWhite(board, sols, arrangementsNumber, bishopCou)) {
+                    solveForBlack(board, sols, arrangementsNumber, bishopCou);
+                    board.removeUnit('B', m, k);
+                    bishopCou--;
+                } else {
+                    board.removeUnit('B', m, k);
+                    bishopCou--;
+                }
             }
         }
     }
