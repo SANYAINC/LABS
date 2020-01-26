@@ -30,12 +30,15 @@ bool v1::findSolution(board board,int &arrangementsCou, int level) {
     return false;
 }
 
-int v2::solve(board &board) {
+int v2::solve(board &board, bool areUnderAttack) {
     int bishopsCounter = 0;
-    solutions sol;
-    solveForWhite(board, sol, bishopsCounter);
-    //sol.index - число уникальных решений
-    return sol.index;
+    solutions sols;
+    if (areUnderAttack) {
+        solveExpanded(board, sols, bishopsCounter);
+    } else {
+        solveForWhite(board, sols, bishopsCounter);
+    }
+    return sols.index;
 }
 bool v2::solveForBlack(board &board, solutions &sols, int &bishopCou) {
     if (N == 1) {
@@ -97,6 +100,31 @@ bool v2::solveForWhite(board &board, solutions &sols, int &bishopCou) {
     }
     return false;
 }
+bool v2::solveExpanded(board &board, solutions &sols, int &bishopCou) {
+    if (bishopCou == N) {
+        return board.fieldIsUnderAttack();
+    }
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            if (board.field[m][k].isEmpty) {
+                board.setUnit('B', m, k);
+                bishopCou++;
+                if (solveExpanded(board, sols, bishopCou) and sols.appendSolution(board)) {
+                    if (SHOW2) {
+                        cout << sols.index << endl;
+                        board.show();
+                    }
+                    board.removeUnit('B', m, k);
+                    bishopCou--;
+                } else {
+                    board.removeUnit('B', m, k);
+                    bishopCou--;
+                }
+            }
+        }
+    }
+    return false;
+}
 
 int v3::solve(board &board, int n) {
     int arrangementsNumber = 0;
@@ -135,28 +163,11 @@ int v4::solve(board board) {
     return arrangementsNumber;
 }
 bool v4::findSolution(board board, int &arrangementsNumber, int &queensCou) {
-    if (queensCou == 5) {
-        arrangementsNumber++;
-        if (SHOW4) {
-            board.show();
-        }
-        return true;
-    }
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
             if (board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
                 board.setUnit('Q', m, k);
-                queensCou++;
-                if (queensCou == 5 and !board.fieldIsUnderAttack()) {
-                    board.removeUnit('Q', m, k);
-                    queensCou--;
-                    continue;
-                }
-                findSolution(board, arrangementsNumber, queensCou);
-                board.removeUnit('Q', m, k);
-                queensCou--;
             }
         }
     }
-    return false;
 }

@@ -1,6 +1,6 @@
 #pragma once
 #define N 6
-#define MAX_SOLUTIONS_STORED 100000
+#define MAX_SOLUTIONS_STORED 1000000
 #define SHOW_TYPE 'C'
 #define SHOW1 false
 #define SHOW2 false
