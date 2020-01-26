@@ -14,7 +14,7 @@ square::square() {
     underAttackTimes = 0;
     color = 'W';
 }
-board::board() : square() {
+board::board() {
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
             if ((i + j) % 2 != 0) {
@@ -23,8 +23,14 @@ board::board() : square() {
         }
     }
 }
-solutions::solutions() : board() {
+solutions::solutions() {
     index = 0;
+    for (int k = 0; k < MAX_SOLUTIONS_STORED; ++k) {
+        for (int i = 0; i < N; ++i) {
+            solutionsStorage[k][i][0] = 0;
+            solutionsStorage[k][i][1] = 0;
+        }
+    }
 }
 
 void board::show(char type) {
@@ -190,29 +196,42 @@ bool board::fieldIsUnderAttack() {
     return true;
 }
 
-bool solutions::appendSolution(board board) {
-    int cou = 0;
-    for (int k = 0; k < index; ++k) {
-        for (int i = 0; i < N; ++i) {
-            for (int j = 0; j < N; ++j) {
-                if (arrangements[k].field[i][j].underAttackTimes == board.field[i][j].underAttackTimes
-                    and arrangements[k].field[i][j].isEmpty == board.field[i][j].isEmpty) {
-                    cou++;
-                }
+bool solutions::appendSolution(board &board) {
+    int unitIndex = 0;
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            if (!board.field[i][j].isEmpty) {
+                solutionsBuffer[unitIndex][0] = i;
+                solutionsBuffer[unitIndex][1] = j;
+                unitIndex++;
             }
         }
-        if (cou == N*N) {
+    }
+    int similarityIndex = 0;
+    for (int k = 0; k < index; ++k) {
+        for (int i = 0; i < N; ++i) {
+            if (solutionsStorage[k][i][0] == solutionsBuffer[i][0]
+                and solutionsStorage[k][i][1] == solutionsBuffer[i][1]) {
+                similarityIndex++;
+            }
+        }
+        if (similarityIndex == N) {
             return false;
         }
-        cou = 0;
+        similarityIndex = 0;
     }
-    for (int m = 0; m < N; ++m) {
-        for (int k = 0; k < N; ++k) {
-            arrangements[index].field[m][k].underAttackTimes = board.field[m][k].underAttackTimes;
-            arrangements[index].field[m][k].isEmpty = board.field[m][k].isEmpty;
-        }
+    for (int i = 0; i < N; ++i) {
+        solutionsStorage[index][i][0] = solutionsBuffer[i][0];
+        solutionsStorage[index][i][1] = solutionsBuffer[i][1];
+    }
+
+    for (int i = 0; i < N; ++i) {
+        solutionsBuffer[i][0] = 0;
+        solutionsBuffer[i][1] = 0;
     }
     index++;
     return true;
+
+
 }
 

@@ -30,18 +30,16 @@ bool v1::findSolution(board board,int &arrangementsCou, int level) {
     return false;
 }
 
-int v2::solve(board board) {
-    int arrangementsCounter = 0;
+int v2::solve(board &board) {
     int bishopsCounter = 0;
-    solutions solutions;
-    solveForWhite(board, solutions, arrangementsCounter, bishopsCounter);
-    //arrangementsCounter - число всех расстоновок полученных бектрекингом, содержит копии решений
-    //solutions.index - число уникальных решений
-    return solutions.index;
+    solutions sol;
+    solveForWhite(board, sol, bishopsCounter);
+    //sol.index - число уникальных решений
+    return sol.index;
 }
-bool v2::solveForBlack(board board, solutions &sols, int &arrangementsNumber, int &bishopCou) {
+bool v2::solveForBlack(board &board, solutions &sols, int &bishopCou) {
     if (N == 1) {
-        arrangementsNumber++;
+        sols.index++;
         return true;
     }
     if (bishopCou == N) {
@@ -52,14 +50,13 @@ bool v2::solveForBlack(board board, solutions &sols, int &arrangementsNumber, in
             if (board.field[m][k].color == 'B' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
                 board.setUnit('B', m, k);
                 bishopCou++;
-                if (solveForBlack(board, sols, arrangementsNumber, bishopCou)) {
+                if (solveForBlack(board, sols, bishopCou)) {
                     if (sols.appendSolution(board)) {
                         if (SHOW2) {
                             cout << sols.index << endl;
                             board.show();
                         }
                     }
-                    arrangementsNumber++;
                     board.removeUnit('B', m, k);
                     bishopCou--;
                 } else {
@@ -71,7 +68,7 @@ bool v2::solveForBlack(board board, solutions &sols, int &arrangementsNumber, in
     }
     return false;
 }
-bool v2::solveForWhite(board board, solutions &sols, int &arrangementsNumber, int &bishopCou) {
+bool v2::solveForWhite(board &board, solutions &sols, int &bishopCou) {
     if (N != 5) {
         if (bishopCou == N / 2) {
             return board.colorIsUnderAttack('W');
@@ -87,8 +84,8 @@ bool v2::solveForWhite(board board, solutions &sols, int &arrangementsNumber, in
             if (board.field[m][k].color == 'W' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
                 board.setUnit('B', m, k);
                 bishopCou++;
-                if (solveForWhite(board, sols, arrangementsNumber, bishopCou)) {
-                    solveForBlack(board, sols, arrangementsNumber, bishopCou);
+                if (solveForWhite(board, sols, bishopCou)) {
+                    solveForBlack(board, sols, bishopCou);
                     board.removeUnit('B', m, k);
                     bishopCou--;
                 } else {
@@ -101,7 +98,7 @@ bool v2::solveForWhite(board board, solutions &sols, int &arrangementsNumber, in
     return false;
 }
 
-int v3::solve(board board, int n) {
+int v3::solve(board &board, int n) {
     int arrangementsNumber = 0;
     if (n > 92 or n < 1) {
         n = 92;
@@ -109,7 +106,7 @@ int v3::solve(board board, int n) {
     findSolution(board, n, arrangementsNumber);
     return arrangementsNumber;
 }
-bool v3::findSolution(board board, int arrangementsNumber, int &arrangementsCou, int level) {
+bool v3::findSolution(board &board, int arrangementsNumber, int &arrangementsCou, int level) {
     if (level == N) {
         if (arrangementsCou == arrangementsNumber) {
             return true;
