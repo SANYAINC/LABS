@@ -15,7 +15,7 @@ int main() {
     cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
 
     start = stop;
-    cout << "Solutions found for var 2: " << v2::solve(board, true) << endl;
+    cout << "Solutions found for var 2: " << v2::solve(board, false) << endl;
     stop = clock();
     cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
 
@@ -24,9 +24,10 @@ int main() {
     stop = clock();
     cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
 
-
-    //cout << v4::solve(board) << endl;
-
+    start = stop;
+    cout << "Solutions found for var 4: " << v4::solve(board) << endl;
+    stop = clock();
+    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
     cout << "\n\nTotal time: " << double((stop - START)) / CLOCKS_PER_SEC << endl << endl;
 
     return 0;

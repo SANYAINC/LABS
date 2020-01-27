@@ -156,18 +156,33 @@ bool v3::findSolution(board &board, int arrangementsNumber, int &arrangementsCou
     return false;
 }
 
-int v4::solve(board board) {
-    int arrangementsNumber = 0;
+int v4::solve(board &board) {
     int queensSet = 0;
-    findSolution(board, arrangementsNumber, queensSet);
-    return arrangementsNumber;
+    solutions sols;
+    findSolution(board, sols, queensSet);
+    return sols.index;
 }
-bool v4::findSolution(board board, int &arrangementsNumber, int &queensCou) {
+bool v4::findSolution(board &board, solutions &sols, int &queensCou) {
+    /*if (sols.index == 1) {
+        return false;
+    }*/
+    if (queensCou == Q_NUMBER4) {
+        return board.fieldIsUnderAttack();
+    }
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
-            if (board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+            if (board.field[m][k].isEmpty) {
                 board.setUnit('Q', m, k);
+                queensCou++;
+                if (findSolution(board, sols, queensCou) and sols.appendSolution(board)) {
+                    if (SHOW4) {
+                        board.show();
+                    }
+                }
+                board.removeUnit('Q', m, k);
+                queensCou--;
             }
         }
     }
+    return false;
 }

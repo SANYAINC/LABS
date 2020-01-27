@@ -1,11 +1,12 @@
 #pragma once
-#define N 6
+#define N 8
 #define MAX_SOLUTIONS_STORED 1000000
-#define SHOW_TYPE 'C'
+#define SHOW_TYPE 'T'
 #define SHOW1 false
 #define SHOW2 false
 #define SHOW3 false
 #define SHOW4 false
+#define Q_NUMBER4 5
 
 class square {
 public:

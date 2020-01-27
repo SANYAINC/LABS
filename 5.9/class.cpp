@@ -1,10 +1,10 @@
 #include <iostream>
 #include "class.h"
 
-#define track static_cast<char>(126)
-#define unit static_cast<char>(253)
+#define track static_cast<char>(250)
+#define unit static_cast<char>(206)
 #define black static_cast<char>(176)
-#define white static_cast<char>(178)
+#define white static_cast<char>(219)
 
 using namespace std;
 
@@ -29,6 +29,8 @@ solutions::solutions() {
         for (int i = 0; i < N; ++i) {
             solutionsStorage[k][i][0] = 0;
             solutionsStorage[k][i][1] = 0;
+            solutionsBuffer[i][0] = 0;
+            solutionsBuffer[i][1] = 0;
         }
     }
 }
@@ -63,7 +65,7 @@ void board::show(char type) {
                     } else if (field[i][j].color == 'W') {
                         cout << white << ' ';
                     } else if (field[i][j].color == 'B'){
-                        cout << black << ' ';
+                        cout << "\u25A1" << ' ';
                     } else {
                         cout << 'O' << ' ';
                     }
@@ -207,6 +209,10 @@ bool solutions::appendSolution(board &board) {
             }
         }
     }
+   /* cout << "Buffer ";
+    for (int sh = 0; sh < N; ++sh) {
+        cout << "[" << solutionsBuffer[sh][0] << ' ' << solutionsBuffer[sh][1] << "], ";
+    }*/
     int similarityIndex = 0;
     for (int k = 0; k < index; ++k) {
         for (int i = 0; i < N; ++i) {
