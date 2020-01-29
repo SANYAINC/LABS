@@ -12,7 +12,6 @@ namespace v2 {
     int solve(board &board);
     bool solveForWhite(board &board, solutions &sols, int &bishopCou);
     bool solveForBlack(board &board, solutions &sols, int &bishopCou);
-    //bool solveExpanded(board &board, solutions &sols, int &bishopCou);
 }
 
 namespace v3 {
@@ -31,5 +30,12 @@ namespace v5 {
     //Решено
     int solve(board board);
     bool findSolution(board &board, int &arrangementsNumber, int &step, int i0, int j0, int iPrev = 0, int jPrev = 0);
+}
 
+namespace v6 {
+    //Решено, для доски 8х8 время > 10 часов
+    //Доска 6х6 время 10 секунд
+    int solve(board board);
+    bool solveForWhite(board &board, solutions &sols, int knightCou);
+    bool solveForBlack(board &board, solutions &sols, int knightCou);
 }

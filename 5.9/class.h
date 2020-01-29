@@ -1,13 +1,15 @@
 #pragma once
-#define N 8
-#define Q_NUMBER4 5
-#define MAX_SOLUTIONS_STORED 1000000
+#define MAX_SOLUTIONS_STORED 100000
 #define SHOW_TYPE 'T'
+#define N 6 //6x6 время 10 секунд //8х8 время 5 минут кроме 6го варианта
+#define N_UNITS 10
 #define SHOW1 false
 #define SHOW2 true
 #define SHOW3 false
+#define Q_NUMBER4 5
 #define SHOW4 true
 #define SHOW5 true
+#define SHOW6 true
 
 class square {
 public:
@@ -42,8 +44,8 @@ public:
 
 class solutions {
 public:
-    int solutionsStorage[MAX_SOLUTIONS_STORED][N][2] = {0};
-    int solutionsBuffer[N][2] = {0};
+    int solutionsStorage[MAX_SOLUTIONS_STORED][N_UNITS][2] = {0};
+    int solutionsBuffer[N_UNITS][2] = {0};
     int index;
 
     solutions();

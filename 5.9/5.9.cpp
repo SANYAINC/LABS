@@ -33,12 +33,9 @@ int v2::solve(board &board) {
     return sols.index;
 }
 bool v2::solveForBlack(board &board, solutions &sols, int &bishopCou) {
-    if (N == 1) {
-        sols.index++;
-        return true;
-    }
     if (sols.index == 1) {
         return false;
+        //Находить только одно решение
     }
     if (bishopCou == N) {
         return board.colorIsUnderAttack('B');
@@ -79,42 +76,14 @@ bool v2::solveForWhite(board &board, solutions &sols, int &bishopCou) {
                 bishopCou++;
                 if (solveForWhite(board, sols, bishopCou)) {
                     solveForBlack(board, sols, bishopCou);
-                    board.removeUnit('B', m, k);
-                    bishopCou--;
-                } else {
-                    board.removeUnit('B', m, k);
-                    bishopCou--;
                 }
+                board.removeUnit('B', m, k);
+                bishopCou--;
             }
         }
     }
     return false;
 }
-/*bool v2::solveExpanded(board &board, solutions &sols, int &bishopCou) {
-    if (bishopCou == N) {
-        return board.fieldIsUnderAttack();
-    }
-    for (int m = 0; m < N; ++m) {
-        for (int k = 0; k < N; ++k) {
-            if (board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
-                board.setUnit('B', m, k);
-                bishopCou++;
-                if (solveExpanded(board, sols, bishopCou) and sols.appendSolution(board)) {
-                    if (SHOW2) {
-                        cout << sols.index << endl;
-                        board.show();
-                    }
-                    board.removeUnit('B', m, k);
-                    bishopCou--;
-                } else {
-                    board.removeUnit('B', m, k);
-                    bishopCou--;
-                }
-            }
-        }
-    }
-    return false;
-}*/
 
 int v3::solve(board &board, int n) {
     int arrangementsNumber = 0;
@@ -155,6 +124,7 @@ int v4::solve(board &board) {
 bool v4::findSolution(board &board, solutions &sols, int &queensCou) {
     if (sols.index == 1) {
         return false;
+        //Находить одно решение
     }
     if (queensCou == Q_NUMBER4) {
         return board.fieldIsUnderAttack();
@@ -231,6 +201,76 @@ bool v5::findSolution(board &board, int &arrangementsNumber, int &step, int i0, 
                 step--;
                 board.unmarkSpots(m, k);
                 board.markSpotsTR(iPrev, jPrev);
+            }
+        }
+    }
+    return false;
+}
+
+int v6::solve(board board) {
+    solutions sols;
+    int knightCou = 0;
+    solveForWhite(board, sols, knightCou);
+    return sols.index;
+}
+bool v6::solveForWhite(board &board, solutions &sols, int knightCou) {
+    switch (N) {
+        case 1: {
+            sols.index++;
+            return true;
+        }
+        case 5: {
+            if (knightCou == 1) {
+                return true;
+            }
+            break;
+        }
+        default: {
+            if (knightCou == N_UNITS / 2) {
+                return true;
+            }
+        }
+    }
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            if (board.field[m][k].color == 'W' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+                board.setUnit('K', m, k);
+                //board.show();
+                knightCou++;
+                if (solveForWhite(board, sols, knightCou)) {
+                    solveForBlack(board, sols, knightCou);
+                }
+                board.removeUnit('K', m, k);
+                //board.show();
+                knightCou--;
+            }
+        }
+    }
+    return false;
+}
+bool v6::solveForBlack(board &board, solutions &sols, int knightCou) {
+    if (sols.index == 1) {
+        return false;
+    }
+    if (knightCou == N_UNITS) {
+        return board.fieldIsUnderAttack();
+    }
+    for (int m = 0; m < N; ++m) {
+        for (int k = 0; k < N; ++k) {
+            if (board.field[m][k].color == 'B' and board.field[m][k].isEmpty and board.field[m][k].underAttackTimes == 0) {
+                board.setUnit('K', m, k);
+                //board.show();
+                knightCou++;
+                if (solveForBlack(board, sols, knightCou) and sols.appendSolution(board)) {
+                    if (SHOW6) {
+                        cout << sols.index << endl;
+                        board.show();
+                    }
+                    return true;
+                }
+                board.removeUnit('K', m, k);
+                //board.show();
+                knightCou--;
             }
         }
     }

@@ -10,7 +10,6 @@
 
 using namespace std;
 
-
 square::square() {
     isEmpty = true;
     underAttackTimes = 0;
@@ -124,6 +123,17 @@ void board::setUnit(char type, int i, int j) {
             }
             break;
         }
+        case 'K': {
+            field[i][j].isEmpty = false;
+            for (int m = 0; m < N; ++m) {
+                for (int k = 0; k < N; ++k) {
+                    if (abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
+                        field[m][k].underAttackTimes++;
+                    }
+                }
+            }
+            break;
+        }
         default: {
             cout << "DEFAULT" << endl;
         }
@@ -177,6 +187,17 @@ void board::removeUnit(char type, int i, int j) {
             }
             break;
         }
+        case 'K': {
+            field[i][j].isEmpty = true;
+            for (int m = 0; m < N; ++m) {
+                for (int k = 0; k < N; ++k) {
+                    if (abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
+                        field[m][k].underAttackTimes--;
+                    }
+                }
+            }
+            break;
+        }
         default: {
             cout << "DEFAULT" << endl;
         }
@@ -223,7 +244,7 @@ void board::showTR() {
 void board::markSpotsTR(int i, int j) {
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
-            if (std::abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
+            if (abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
                 field[m][k].underAttackTimes = 1;
             }
         }
@@ -233,7 +254,7 @@ void board::unmarkSpots(int i, int j) {
 
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
-            if (std::abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
+            if (abs(sqrt((m-i)*(m-i)+(k-j)*(k-j)) - 2.236) < 1E-3) {
                 field[m][k].underAttackTimes = 0;
             }
         }
@@ -282,10 +303,6 @@ bool solutions::appendSolution(board &board) {
             }
         }
     }
-   /* cout << "Buffer ";
-    for (int sh = 0; sh < N; ++sh) {
-        cout << "[" << solutionsBuffer[sh][0] << ' ' << solutionsBuffer[sh][1] << "], ";
-    }*/
     int similarityIndex = 0;
     for (int k = 0; k < index; ++k) {
         for (int i = 0; i < N; ++i) {

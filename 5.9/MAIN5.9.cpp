@@ -6,7 +6,9 @@
 using namespace std;
 
 int main() {
+
     board board;
+
     clock_t START = clock();
 
     clock_t start = START;
@@ -31,6 +33,11 @@ int main() {
 
     start = stop;
     cout << "Solutions found for var 5: " << v5::solve(board) << endl;
+    stop = clock();
+    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
+
+    start = stop;
+    cout << "Solutions found for var 6: " << v6::solve(board) << endl;
     stop = clock();
     cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
 
