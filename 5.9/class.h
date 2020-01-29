@@ -1,12 +1,12 @@
 #pragma once
 #define MAX_SOLUTIONS_STORED 100000
 #define SHOW_TYPE 'T'
-#define N 6 //6x6 время 10 секунд //8х8 время 5 минут кроме 6го варианта
-#define N_UNITS 10
+#define N 6 //6x6 время 10 секунд //8х8 время 5 минут кроме 6-го варианта
+#define N_UNITS 8
 #define SHOW1 false
 #define SHOW2 true
 #define SHOW3 false
-#define Q_NUMBER4 5
+#define Q_NUMBER4 4
 #define SHOW4 true
 #define SHOW5 true
 #define SHOW6 true
