@@ -11,68 +11,58 @@ void test(char sortType, T *array, int size) {
     cout << "-------------------------------------------------------------------------\n";
     if (sortType == 'Q') {
         cout << "QUICK SORT\n";
-        //show(array, size);
+        arrays::show(array, size);
         quickSort(array, comps, movings, size - 1);
         cout << endl;
-        showArray(array, size);
+        arrays::show(array, size);
         cout << endl;
         cout << "Comparisons number: " << comps << endl;
         cout << "Movings number: "<< movings << "\n";
         cout << "-------------------------------------------------------------------------\n";
-        comps = 0;
-        movings = 0;
     }
     if (sortType == 'B') {
         cout << "BUBBLE SORT\n";
-        //show(array, size);
+        arrays::show(array, size);
         bubbleSort(array, comps, movings, size);
         cout << endl;
-        showArray(array, size);
+        arrays::show(array, size);
         cout << endl;
         cout << "Comparisons number: " << comps << endl;
         cout << "Movings number: "<< movings << "\n";
         cout << "-------------------------------------------------------------------------\n";
-        comps = 0;
-        movings = 0;
     }
     if (sortType == 'I') {
         cout << "INSERTION SORT\n";
-        //show(array, size);
+        arrays::show(array, size);
         insertionSort(array, comps, movings, size);
         cout << endl;
-        showArray(array, size);
+        arrays::show(array, size);
         cout << endl;
         cout << "Comparisons number: " << comps << endl;
         cout << "Movings number: "<< movings << "\n";
         cout << "-------------------------------------------------------------------------\n";
-        comps = 0;
-        movings = 0;
     }
     if (sortType == '2') {
         cout << "BINARY INSERTION SORT\n";
-        //show(array, size);
+        arrays::show(array, size);
         binInsertionSort(array, comps, movings, size);
         cout << endl;
-        showArray(array, size);
+        arrays::show(array, size);
         cout << endl;
         cout << "Comparisons number: " << comps << endl;
         cout << "Movings number: "<< movings << "\n";
         cout << "-------------------------------------------------------------------------\n";
-        comps = 0;
-        movings = 0;
     }
     if (sortType == 'S') {
         cout << "SELECTION SORT\n";
-        //show(array, size);
+        arrays::show(array, size);
         selectionSort(array, comps, movings, size);
         cout << endl;
-        showArray(array, size);
+        arrays::show(array, size);
         cout << endl;
         cout << "Comparisons number: " << comps << endl;
         cout << "Movings number: "<< movings << "\n";
         cout << "-------------------------------------------------------------------------\n";
-        comps = 0;
-        movings = 0;
     }
 }
 
@@ -86,76 +76,36 @@ int main() {
     //Создание массивов для тестов
     //Цифра - номер массива,
     //R - заполнение случайными, A - по возрастанию, D - по убыванию
-    int *ar1R = createArray<int>(n);
-    float *ar2R = createArray<float>(n);
-    double *ar3R = createArray<double>(n);
-    float *ar4R = createArray<float>(n);
-    int *ar5R = createArray<int>(n);
+    auto *ar1R = arrays::create<int>(n);
+    auto *ar1A = arrays::create<int>(n);
+    auto *ar1D = arrays::create<int>(n);
 
-    int *ar1A = createArray<int>(n);
-    float *ar2A = createArray<float>(n);
-    double *ar3A = createArray<double>(n);
-    float *ar4A= createArray<float>(n);
-    int *ar5A = createArray<int>(n);
+    auto *ar2R = arrays::create<double>(n);
+    auto *ar2A = arrays::create<double>(n);
+    auto *ar2D = arrays::create<double>(n);
 
-    int *ar1D = createArray<int>(n);
-    float *ar2D = createArray<float>(n);
-    double *ar3D = createArray<double>(n);
-    float *ar4D = createArray<float>(n);
-    int *ar5D = createArray<int>(n);
+    arrays::fillRnd(ar1R, n);
+    arrays::fillAsc(ar1A, n);
+    arrays::fillDsc(ar1D, n);
 
-    //Заполнение 4х массивов 4мя вариантами
-    fillArrayRand(ar1R, n);
-    fillArrayRand(ar2R, n);
-    fillArrayRand(ar3R, n);
-    fillArrayRand(ar4R, n);
-    fillArrayRand(ar5R, n);
-
-    fillArrayAsc(ar1A, n);
-    fillArrayAsc(ar2A, n);
-    fillArrayAsc(ar3A, n);
-    fillArrayAsc(ar4A, n);
-    fillArrayAsc(ar5A, n);
-
-    fillArrayDsc(ar1D, n);
-    fillArrayDsc(ar2D, n);
-    fillArrayDsc(ar3D, n);
-    fillArrayDsc(ar4D, n);
-    fillArrayDsc(ar5D, n);
+    arrays::fillRnd(ar2R, n);
+    arrays::fillAsc(ar2A, n);
+    arrays::fillDsc(ar2D, n);
 
     //Q - быстрая, B - пузырьком, I - вставками, 2 - бинарными вставкавми, S - выбором
     test('Q', ar1R, n);
     test('B', ar2R, n);
-    test('I', ar3R, n);
-    test('2', ar4R, n);
-    test('S', ar5R, n);
-    cout << "\n\n\n";
     test('Q', ar1A, n);
     test('B', ar2A, n);
-    test('I', ar3A, n);
-    test('2', ar4A, n);
-    test('S', ar5A, n);
-    cout << "\n\n\n";
     test('Q', ar1D, n);
     test('B', ar2D, n);
-    test('I', ar3D, n);
-    test('2', ar4D, n);
-    test('S', ar5D, n);
 
-    deleteArray(ar1R);
-    deleteArray(ar2R);
-    deleteArray(ar3R);
-    deleteArray(ar4R);
-    deleteArray(ar5R);
-    deleteArray(ar1A);
-    deleteArray(ar2A);
-    deleteArray(ar3A);
-    deleteArray(ar4A);
-    deleteArray(ar5A);
-    deleteArray(ar1D);
-    deleteArray(ar2D);
-    deleteArray(ar3D);
-    deleteArray(ar4D);
-    deleteArray(ar5D);
+    //Очистка памяти
+    arrays::free(ar1R);
+    arrays::free(ar2R);
+    arrays::free(ar1A);
+    arrays::free(ar2A);
+    arrays::free(ar1D);
+    arrays::free(ar2D);
     return 0;
 }

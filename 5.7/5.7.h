@@ -2,17 +2,19 @@
 
 using namespace std;
 
-template <class T>
+template <class T> //Быстрая сортировка
 void quickSort(T *array, int &couCom, int &couMov, int right, int left = 0) {
-    int leftPtr = left;
-    int rightPtr = right;
-    int basis = array[(leftPtr + rightPtr) / 2];
+    int leftPtr = left;     //Левый указатель
+    int rightPtr = right;   //Правый указатель
+    int basis = array[(leftPtr + rightPtr) / 2]; //Опорный элемент
     while (leftPtr <= rightPtr) {
+        //Поиск элемента, большего опорного слева
         while (array[leftPtr] < basis) {
             leftPtr++;
             couCom++;
         }
         couCom++;
+        //Поиск элемента, меньшего опорного справа
         while (array[rightPtr] > basis) {
             rightPtr--;
             couCom++;
@@ -25,6 +27,7 @@ void quickSort(T *array, int &couCom, int &couMov, int right, int left = 0) {
             couMov++;
         }
     }
+    //Рекурсивная сортировка
     if (left < rightPtr) {
         quickSort(array, couCom, couMov, rightPtr, left);
     }
@@ -58,23 +61,25 @@ void quickSort(T *array, int right, int left = 0) {
     }
 }
 
-template <class T>
+template <class T> //Сортировка пузыркьом
 void bubbleSort(T *array, int &couCom, int &couMov, int size) {
     int index = 0;
     int seria = 0;
-    for (int i = 0; i < size - 1; ++i) {
+    for (int i = 0; i < size - 1; ++i) { //Перебираем худший случай
+        //Пока массив не закончился
         while (index + 1 < size) {
             if (array[index] > array[index+1]) {
                 swap(array[index], array[index+1]);
                 couMov++;
             } else {
+                //Если пара отсортирована накапливаем серию
                 seria++;
             }
             index++;
             couCom++;
         }
         if (seria == size - 1) {
-            break;
+            return;
         }
         index = 0;
         seria = 0;
@@ -101,7 +106,7 @@ void bubbleSort(T *array, int size) {
     }
 }
 
-template <class T>
+template <class T> //Сортировка вставками
 void insertionSort(T *array, int &couCom, int &couMov, int size) {
     for (int i = 1; i < size; ++i) {
         for (int j = i; ++couCom and j > 0 and array[j-1] > array[j]; j--) {
@@ -119,7 +124,7 @@ void insertionSort(T *array, int size) {
     }
 }
 
-template <class T>
+template <class T> //Сортировка бинарными вставками
 void binInsertionSort(T *array, int &couCom, int &couMov, int size) {
     T temp;
     int left;
@@ -172,7 +177,7 @@ void binInsertionSort(T *array, int size) {
         }
 }
 
-template <class T>
+template <class T> //Сортировка выбором
 void selectionSort(T *array, int &couCom, int &couMov, int size) {
     int left = 0;
     int right = size - 1;
