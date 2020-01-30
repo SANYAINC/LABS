@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include <ctime>
+
 using namespace std;
 
 namespace arrays {
-    template <class T> //Создание указателя на size элементовT
+    template <class T> //Создание массива
     T *create(int size) {
         T *array = new T[size];
         for (int i = 0; i < size; ++i) {
@@ -28,7 +29,7 @@ namespace arrays {
     }
 
     template <class T> //Заполнить массив случайными числами
-    void fillRnd(T *array, int size, int max = 30, int shift = 30) {
+    void fillRnd(T *array, int size, int max = 100, int shift = 50) {
         srand(time(nullptr));
         for (int i = 0; i < size; ++i) {
             array[i] = static_cast<T>(rand() % max + shift);

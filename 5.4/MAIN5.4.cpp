@@ -9,14 +9,17 @@ int main() {
     cin >> n;
     cout << endl;
 
-    int *ar = createArray<int>(n);
-    fillArrayRand(ar, n);
+    //Создание массива int на n элементов
+    int *ar = arrays::create<int>(n);
+    arrays::fillRnd(ar, n);
     //fillArrayKeyboard(ar, n);
-    showArray(ar, n);
+    arrays::show(ar, n);
+
     int &max = refMaxFib(ar, n);
     max = 0;
-    showArray(ar, n);
 
-    deleteArray(ar);
+    arrays::show(ar, n);
+
+    arrays::free(ar);
     return 0;
 }
