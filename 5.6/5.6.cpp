@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include "5.6.h"
 
 using namespace std;
 
@@ -76,17 +77,9 @@ void solveIntegralMR(double (*func)(double, double, double), double leftBorder, 
         for (int j = 0; j <= parTIter; ++j) {
             curParT = parTMin + parTDelta * j;
             do {
-                //Если интеграл считается не в первый раз, ложим в N предыдущее значение из 2N, а новое 2N пересчитываем с новым параметром
-                if (integral2N != 0) {
-                    integralN = integral2N;
-                    integral2N = calcIntegralMR(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations++;
-                    //Если интеграл считается в первый раз, считаем для N и для 2N
-                } else {
-                    integralN = calcIntegralMR(func, leftBorder, rightBorder, curParS, curParT, N);
-                    integral2N = calcIntegralMR(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations += 2;
-                }
+                integralN = integral2N;
+                integral2N = calcIntegralMR(func, leftBorder, rightBorder, curParS, curParT, N);
+                iterations++;
 
                 N *= 2;
 
@@ -125,17 +118,9 @@ void solveIntegralT(double (*func)(double, double, double), double leftBorder, d
         for (int j = 0; j <= parTIter; ++j) {
             curParT = parTMin + parTDelta * j;
             do {
-                //Если интеграл считается не в первый раз, ложим в N предыдущее значение из 2N, а новое 2N пересчитываем с новым параметром
-                if (integral2N != 0) {
-                    integralN = integral2N;
-                    integral2N = calcIntegralT(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations++;
-                    //Если интеграл считается в первый раз, считаем для N и для 2N
-                } else {
-                    integralN = calcIntegralT(func, leftBorder, rightBorder, curParS, curParT, N);
-                    integral2N = calcIntegralT(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations += 2;
-                }
+                integralN = integral2N;
+                integral2N = calcIntegralT(func, leftBorder, rightBorder, curParS, curParT, N);
+                iterations++;
 
                 N *= 2;
 
@@ -174,17 +159,9 @@ void solveIntegralS(double (*func)(double, double, double), double leftBorder, d
         for (int j = 0; j <= parTIter; ++j) {
             curParT = parTMin + parTDelta * j;
             do {
-                //Если интеграл считается не в первый раз, ложим в N предыдущее значение из 2N, а новое 2N пересчитываем с новым параметром
-                if (integral2N != 0) {
-                    integralN = integral2N;
-                    integral2N = calcIntegralS(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations++;
-                    //Если интеграл считается в первый раз, считаем для N и для 2N
-                } else {
-                    integralN = calcIntegralS(func, leftBorder, rightBorder, curParS, curParT, N);
-                    integral2N = calcIntegralS(func, leftBorder, rightBorder, curParS, curParT, 2 * N);
-                    iterations += 2;
-                }
+                integralN = integral2N;
+                integral2N = calcIntegralS(func, leftBorder, rightBorder, curParS, curParT, N);
+                iterations++;
 
                 N *= 2;
 
