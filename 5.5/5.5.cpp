@@ -1,19 +1,16 @@
 #include <cmath>
 #include <iomanip>
 #include <iostream>
+#include "5.5.h"
 
 using namespace std;
 
 void printSolution(double (*funcPtr)(char, double), double xi, int iterations) {
-    cout << setw(10) << xi << setw(20) << (*funcPtr)('F', xi) << setw(20) << iterations;
-    cout << "\n";
+    cout << setw(10) << xi << setw(20) << (*funcPtr)('F', xi) << setw(20) << iterations << endl;
 }
-
 void printSolution(double (*funcPtr)(char, double, double), double xi, double param, int iterations) {
-    cout << setw(10) << param << setw(20) << xi << setw(20) << (*funcPtr)('F', xi, param) << setw(20) << iterations
-         << endl;
+    cout << setw(10) << param << setw(20) << xi << setw(20) << (*funcPtr)('F', xi, param) << setw(20) << iterations << endl;
 }
-
 void printTableHeader(int type) {
     if (type == 0) {
         cout << setw(10) << "X" << setw(20) << "F(x)" << setw(20) << "Iterations\n\n";
@@ -40,7 +37,6 @@ double function(char type, double x) {
         }
     }
 }
-
 double function(char type, double x, double param) {
     switch (type) {
         case 'F': {
@@ -76,9 +72,7 @@ void solveNewton(double (*funcPtr)(char, double), double leftBorder, double righ
     }
     printSolution(funcPtr, xi, iterations);
 }
-
-void solveNewton(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double x0,
-                 double epsilon, double paramMin, double paramMax, double deltaParam) {
+void solveNewton(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double x0, double epsilon, double paramMin, double paramMax, double deltaParam) {
     if (!argsCorrect(leftBorder, rightBorder, x0)) {
         cout << "INCORRECT ARGUMENTS\n";
         return;
@@ -100,7 +94,6 @@ void solveNewton(double (*funcPtr)(char, double, double), double leftBorder, dou
         xi = x0;
     }
 }
-
 void solveHalfDivision(double (*funcPtr)(char, double), double leftBorder, double rightBorder, double epsilon) {
     if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', rightBorder) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
@@ -118,9 +111,7 @@ void solveHalfDivision(double (*funcPtr)(char, double), double leftBorder, doubl
     }
     printSolution(funcPtr, xi, iterations);
 }
-
-void solveHalfDivision(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon,
-                       double paramMin, double paramMax, double deltaParam) {
+void solveHalfDivision(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon, double paramMin, double paramMax, double deltaParam) {
     double sLB = leftBorder;
     double sRB = rightBorder;
     int iterations = 0;
@@ -148,7 +139,6 @@ void solveHalfDivision(double (*funcPtr)(char, double, double), double leftBorde
         iterations = 0;
     }
 }
-
 void solveChords(double (*funcPtr)(char, double), double leftBorder, double rightBorder, double epsilon) {
     if ((*funcPtr)('F', leftBorder) * (*funcPtr)('F', rightBorder) > 0) {
         cout << "PARAMS DO NOT MATCH REQUIREMENTS ( F(a)*F(b)>0 )";
@@ -169,9 +159,7 @@ void solveChords(double (*funcPtr)(char, double), double leftBorder, double righ
     }
     printSolution(funcPtr, xi, iterations);
 }
-
-void solveChords(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon,
-                 double paramMin, double paramMax, double deltaParam) {
+void solveChords(double (*funcPtr)(char, double, double), double leftBorder, double rightBorder, double epsilon, double paramMin, double paramMax, double deltaParam) {
     int iterations = 0;
     double xi;
     int n = ceil((paramMax - paramMin) / deltaParam);

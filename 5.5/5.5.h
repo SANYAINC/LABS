@@ -2,13 +2,13 @@
 //Вывод найденных решений
 void printSolution(double (*funcPtr)(char, double), double xi, int iterations);
 void printSolution(double (*funcPtr)(char, double, double), double xi, double param, int iterations);
-
 //Вывод шапки таблицы.
 // 0 - без параметра; 1 - с параметром
 void printTableHeader(int type);
 
 //Проверка правильности позиции аргументов
 bool argsCorrect(double &leftBorder, double &rightBorder, double &x0);
+
 //Функции
 double function(char type, double x);
 double function(char type, double x, double param);

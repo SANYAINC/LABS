@@ -1,6 +1,5 @@
 #include <iostream>
 #include "5.5.h"
-#include "../common/common.h"
 using namespace std;
 
 int main() {
@@ -11,7 +10,7 @@ int main() {
     //Тест с первой функцией
     cout << "----------------------------------------------------------------------\n";
 
-    printTableHeader(0);
+    printTableHeader(0); //Шапка без параметра
 
     cout << "Newton\n";
     solveNewton(f1);
@@ -23,7 +22,7 @@ int main() {
     //Тест со второй функцией
     cout << "\n----------------------------------------------------------------------\n";
 
-    printTableHeader(1);
+    printTableHeader(1); //Шапка с параметром
 
     cout << "Newton\n";
     solveNewton(f2);
