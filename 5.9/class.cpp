@@ -223,6 +223,37 @@ bool board::fieldIsUnderAttack() {
     }
     return true;
 }
+bool board::checkWhitePos() {
+    //Счетчики белопольных коней по четвертям
+    int F1 = 0;
+    int F2 = 0;
+    int F3 = 0;
+    int F4 = 0;
+    for (int i = 0; i < N / 2; ++i) {
+        for (int j = 0; j < N / 2; ++j) {
+            if (!field[i][j].isEmpty) {
+                F1++;
+            }
+            if (!field[i + N/2][j + N/2].isEmpty) {
+                F2++;
+            }
+            if (!field[i][j + N/2].isEmpty) {
+                F3++;
+            }
+            if (!field[i + N/2][j].isEmpty) {
+                F4++;
+            }
+        }
+    }
+    //На главной диагонали должно стоять 2/4 (8х8/6x6) коня
+    int cou5 = 0;
+    for (int m = 0; m < N; ++m) {
+        if (!field[m][m].isEmpty) {
+            cou5++;
+        }
+    }
+    return (F1 == 1 and F2 == 1 and F3 == 2 and F4 == 2 and cou5 == 2);
+}
 
 void board::showTR() {
     for (int i = 0; i < N; ++i) {
@@ -250,7 +281,7 @@ void board::markSpotsTR(int i, int j) {
         }
     }
 }
-void board::unmarkSpots(int i, int j) {
+void board::hideSpotsTR(int i, int j) {
 
     for (int m = 0; m < N; ++m) {
         for (int k = 0; k < N; ++k) {
@@ -293,6 +324,7 @@ void board::clear(){
 //-----
 
 bool solutions::appendSolution(board &board) {
+    //Перевод фигур в координаты
     int unitIndex = 0;
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < N; ++j) {
@@ -303,6 +335,8 @@ bool solutions::appendSolution(board &board) {
             }
         }
     }
+
+    //Проверка сохраненный значений и поиск сходств
     int similarityIndex = 0;
     for (int k = 0; k < index; ++k) {
         for (int i = 0; i < N; ++i) {
@@ -316,18 +350,14 @@ bool solutions::appendSolution(board &board) {
         }
         similarityIndex = 0;
     }
+    //Запись в хранилище и очистка буфера
     for (int i = 0; i < N; ++i) {
         solutionsStorage[index][i][0] = solutionsBuffer[i][0];
         solutionsStorage[index][i][1] = solutionsBuffer[i][1];
-    }
-
-    for (int i = 0; i < N; ++i) {
         solutionsBuffer[i][0] = 0;
         solutionsBuffer[i][1] = 0;
     }
     index++;
     return true;
-
-
 }
 

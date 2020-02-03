@@ -29,13 +29,12 @@ namespace v4 {
 namespace v5 {
     //Решено
     int solve(board board);
-    bool findSolution(board &board, int &arrangementsNumber, int &step, int i0, int j0, int iPrev = 0, int jPrev = 0);
+    bool findSolution(board &board, int &arrangementsNumber, int &step, int i0 = 0, int j0 =0, int iPrev = 0, int jPrev = 0);
 }
 
 namespace v6 {
-    //Решено, для доски 8х8 время > 10 часов
-    //Доска 6х6 время 10 секунд
+    //Решено
     int solve(board board);
-    bool solveForWhite(board &board, solutions &sols, int knightCou);
-    bool solveForBlack(board &board, solutions &sols, int knightCou);
+    bool solveForWhite(board &board, solutions &sols, int &knightCou);
+    bool solveForBlack(board &board, solutions &sols, int &knightCou);
 }

@@ -9,42 +9,7 @@ int main() {
 
     board board;
 
-    clock_t START = clock();
-
-    clock_t start = START;
-    cout << "Solutions found for var 1: " << v1::solve(board) << endl;
-    clock_t stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-    start = stop;
-    cout << "Solutions found for var 2: " << v2::solve(board) << endl;
-    stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-    start = stop;
     cout << "Solutions found for var 3: " << v3::solve(board) << endl;
-    stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-    start = stop;
-    cout << "Solutions found for var 4: " << v4::solve(board) << endl;
-    stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-    start = stop;
-    cout << "Solutions found for var 5: " << v5::solve(board) << endl;
-    stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-    start = stop;
-    cout << "Solutions found for var 6: " << v6::solve(board) << endl;
-    stop = clock();
-    cout << "Time: " << double ((stop - start)) / CLOCKS_PER_SEC << endl << endl;
-
-
-    cout << "\n\nTotal time: " << double((stop - START)) / CLOCKS_PER_SEC << endl << endl;
-
-
 
     return 0;
 }
