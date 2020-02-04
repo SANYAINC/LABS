@@ -1,5 +1,4 @@
 #include <iostream>
-#include <ctime>
 #include "class.h"
 #include "5.9.h"
 
