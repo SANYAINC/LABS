@@ -57,6 +57,16 @@ namespace arrays {
             array[i] = static_cast<T>(size - i - 1);
         }
     }
+
+    template <class T>
+    int find(T *array, T element, int size) {
+        for (int i = 0; i < size; ++i) {
+            if (array[i] == element) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
 namespace matrix {
@@ -87,6 +97,7 @@ namespace matrix {
             cout << endl;
         }
     }
+
     void showWords(char **words, int wordsAmount) {
         for (int i = 0; i < wordsAmount; ++i) {
             cout << words[i] << endl;
