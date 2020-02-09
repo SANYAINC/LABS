@@ -1,6 +1,9 @@
 #include "6.2.h"
 
 bool createFileWithIntegers(string &name, int amount) {
+    if (amount%4 != 0) {
+        return false;
+    }
     ofstream f;
     srand(time(nullptr));
     f.open("../6.2/" + name);
@@ -48,6 +51,62 @@ void rewriteTwoByTwo(string &rd, string &wt) {
             } else {
                 if (ngtCou < 2) {
                     g << bufNgt << endl;
+                    ngtCou++;
+                }
+                if (ngtCou == 2) {
+                    ngtCou = 0;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+bool createBinFileWithIntegers(string &name, int amount) {
+    if (amount%4 != 0) {
+        return false;
+    }
+    ofstream f;
+    srand(time(nullptr));
+    f.open("../6.2/" + name, ios::binary);
+    int a;
+    for (int i = 0; i < amount; ++i) {
+        a = (i%2 == 0 ? rand()%100 : rand()%100 - 100);
+        f.write(reinterpret_cast<char*>(&a), sizeof(int));
+    }
+    f.close();
+    return true;
+}
+void rewriteTwoByTwoBin(string &rd, string &wt) {
+    ifstream fPos("../6.2/" + rd, ios::binary);
+    ifstream fNgt("../6.2/" + rd, ios::binary);
+    ofstream g("../6.2/" + wt, ios::binary);
+    int buffer;
+    int pstCou = 0;
+    int ngtCou = 0;
+    while (!(fPos.eof() and fNgt.eof())) {
+        //Потск положительных чисел
+        while (fPos.read(reinterpret_cast<char*>(&buffer), sizeof(int))) {
+            if (buffer < 0) {
+                continue;
+            } else {
+                if (pstCou < 2) {
+                    g.write(reinterpret_cast<char*>(&buffer), sizeof(int));
+                    pstCou++;
+                }
+                if (pstCou == 2) {
+                    pstCou = 0;
+                    break;
+                }
+            }
+        }
+        //Поиск отрицательных чисел
+        while (fNgt.read(reinterpret_cast<char*>(&buffer), sizeof(int))) {
+            if (buffer >= 0) {
+                continue;
+            } else {
+                if (ngtCou < 2) {
+                    g.write(reinterpret_cast<char*>(&buffer), sizeof(int));
                     ngtCou++;
                 }
                 if (ngtCou == 2) {
