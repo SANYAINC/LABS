@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Сдано
 int main() {
     string fileName1 = "f.txt"; //Имя с целыми числами
     string fileName2 = "g.txt"; //Имя файла с отсортированными 2 по 2
