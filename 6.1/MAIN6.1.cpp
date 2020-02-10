@@ -1,5 +1,6 @@
 #include "6.1.h"
 
+//Сдано
 int main() {
     cout << endl << endl;
 
