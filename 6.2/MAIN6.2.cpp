@@ -9,7 +9,7 @@ int main() {
     string fileNameBin1 = "binaryF.bin"; //Имя двоичного файла с числами
     string fileNameBin2 = "binaryG.bin"; //Имя двоичного файла с отсортированными 2 по 2
 
-    createFileWithIntegers(fileName1, 100000); //Сгенерировать файл с целыми числами
+    //createFileWithIntegers(fileName1, 100000); //Сгенерировать файл с целыми числами
     rewriteTwoByTwo(fileName1, fileName2); //Получить отсортированный файл
     createBinFileWithIntegers(fileNameBin1, 100000); //Сгенерировать двоичный файл с целыми числами
     rewriteTwoByTwoBin(fileNameBin1, fileNameBin2); //Получить отсортированный двоичных файл

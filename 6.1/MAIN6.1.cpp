@@ -17,7 +17,7 @@ int main() {
 
     //Выделение слов с максимальным количеством согласных
     string str3 = "... We continue expanding our operations, increasing our team size, and improving JetBrains facilities. bbbbbbb .";
-    cout << maxConsonantsWord(str3) << endl << endl;
+    cout << maxConsonantsWord(str3) << endl << endl << str3;
 
     return 0;
 }

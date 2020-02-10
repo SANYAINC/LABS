@@ -17,7 +17,7 @@ namespace arrays {
     template <class T> //Освобождение памяти
     void free(T *array) {
         delete [] array;
-        cout << "MEMORY FREED\n";
+        cout << "\nMEMORY FREED\n\n";
     }
 
     template <class T> //Вывести массив
@@ -85,7 +85,7 @@ namespace matrix {
             delete [] matrix[i];
         }
         delete [] matrix;
-        cout << "MEMORY FREED\n";
+        cout << "\nMEMORY FREED\n\n";
     }
 
     template <class T>

@@ -8,7 +8,7 @@ int main() {
 
     board board;
 
-    cout << "Solutions found for var 3: " << v3::solve(board) << endl;
+    cout << "Solutions found for var 6: " << v6::solve(board) << endl;
 
     return 0;
 }
