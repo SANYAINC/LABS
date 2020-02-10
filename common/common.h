@@ -104,6 +104,3 @@ namespace matrix {
         }
     }
 }
-
-
-
