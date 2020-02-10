@@ -3,7 +3,8 @@
 #include "5.8.h"
 
 using namespace std;
-//Не сдано
+
+
 int main() {
     cout << "Please enter N: ";
     int n;
