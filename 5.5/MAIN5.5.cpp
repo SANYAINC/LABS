@@ -2,6 +2,7 @@
 #include "5.5.h"
 using namespace std;
 
+//Сдано
 int main() {
     //Указатели на функции
     double (*f1)(char, double) = &function;
