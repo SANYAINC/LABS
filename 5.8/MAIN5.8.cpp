@@ -1,6 +1,6 @@
-#include "5.8.h"
+#include <iostream>
 #include "../common/common.h"
-#define WORD_LEN 1000
+#include "5.8.h"
 
 using namespace std;
 
@@ -34,7 +34,7 @@ int main() {
         cout << endl;
     }
 
-    mergeSort(words, wordsAmount);
+    mergeSort(words, wordsAmount - 1);
 
     matrix::showWords(words, wordsAmount);
     matrix::free(words, wordsAmount);

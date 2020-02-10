@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Сдано
 int main() {
     //Указатель на функцию
     double (*f1)(double, double, double) = &function;
