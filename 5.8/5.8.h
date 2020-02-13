@@ -54,7 +54,8 @@ void mergeSort(char **words, int right, int left = 0) {
     }
 }
 
-template<class T>void merge(T *array, int left, int split, int right) {
+template<class T>
+void merge(T *array, int left, int split, int right) {
     int indexFirst = left;          //Индекс для первой части
     int indexSecond = split + 1;    //Индекс для второй части
 
@@ -86,7 +87,9 @@ template<class T>void merge(T *array, int left, int split, int right) {
 
     delete [] buf;
 }
-template<class T>void mergeSort(T *array, int right, int left = 0) {
+
+template<class T>
+void mergeSort(T *array, int right, int left = 0) {
     int split;
     if (left < right) {
         split = (left + right) / 2; //Разделитель
