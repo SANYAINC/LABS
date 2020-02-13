@@ -3,14 +3,23 @@
 
 using namespace std;
 
+int student::lastID = 0;
+
 int main() {
-    char name1[NAME_MAX_LEN] = "Alexander";
-    char name2[NAME_MAX_LEN] = "Sibirtsev";
-    char name3[NAME_MAX_LEN] = "Vyacheslavovich";
-    student alex(name1, name2, name3, 18, 'M', 1, 6.67);
+    string database = "db.txt";
+    string database2 = "db2.txt";
+    string databaseBin = "db.bin";
+    string database2Bin = "db2.bin";
 
+    /*student students[20];
+    for (int i = 0; i < 20; ++i) {
+        students[i].mAvgGP = rand()%6+5;
+        students[i].appendDB(database);
+        students[i].appendDBBin(databaseBin);
+    }*/
 
-
+    student::selectGoodFromAll(database, database2);
+    student::selectGoodFromAllBIN(databaseBin, database2Bin);
 
     return 0;
 }
