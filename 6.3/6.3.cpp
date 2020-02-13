@@ -30,7 +30,6 @@ void student::print() {
            mID, mName, mLastName, mPatronymic, mAge, mSex, mCourse, mAvgGP);
 }
 
-//TODO Убрать разыменование и взяитие адреса
 bool student::appendDB(string &databaseName) {
     if (databaseName[databaseName.length() - 3] != 't') {
         return false;
@@ -50,6 +49,7 @@ bool student::appendDB(string &databaseName) {
         f << "SEX: " << mSex << endl;
         f << "COURSE: " << mCourse << endl;
         f << "AVERAGE GRADE POINT: " << mAvgGP << endl << endl;
+        f.close();
     }
     return isDone;
 }
@@ -64,7 +64,8 @@ bool student::appendDBBin(string &databaseName) {
     if (!f.is_open()) {
         isDone = false;
     } else {
-        f.write(reinterpret_cast<char*>(&*this), sizeof(student));
+        f.write(reinterpret_cast<char*>(this), sizeof(student));
+        f.close();
     }
     return isDone;
 }
@@ -83,13 +84,13 @@ bool student::selectGoodFromAllBIN(string &databaseName, string &newDBName) {
     if (!f.is_open()) {
         isDone = false;
     } else {
-        while(f.read(reinterpret_cast<char*>(&*studentTMP), sizeof(student))) {
+        while (f.read(reinterpret_cast<char *>(studentTMP), sizeof(student))) {
             if (studentTMP->mAvgGP > 7) {
                 studentTMP->appendDBBin(newDBName);
             }
         }
+        f.close();
     }
-
     return isDone;
 }
 bool student::selectGoodFromAll(string &databaseName, string &newDBName) {
@@ -194,6 +195,7 @@ bool student::selectGoodFromAll(string &databaseName, string &newDBName) {
                 eos = false;
             }
         }
+        f.close();
     }
     delete studentTMP;
     return isDone;
