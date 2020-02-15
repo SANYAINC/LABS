@@ -5,6 +5,7 @@ using namespace std;
 
 int student::lastID = 0;
 
+//Сдано
 int main() {
     string database = "db.txt";
     string database2 = "db2.txt";
