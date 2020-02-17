@@ -91,6 +91,7 @@ bool student::selectGoodFromAllBIN(string &databaseName, string &newDBName) {
         }
         f.close();
     }
+    delete studentTMP;
     return isDone;
 }
 bool student::selectGoodFromAll(string &databaseName, string &newDBName) {

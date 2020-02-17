@@ -7,8 +7,6 @@
 
 using namespace std;
 
-//TODO Переделать в стринг?
-
 class student {
     static int lastID;
     int mID;
