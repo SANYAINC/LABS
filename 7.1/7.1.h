@@ -1,8 +1,16 @@
-#ifndef LABSGIT_7_1_H
-#define LABSGIT_7_1_H
+#pragma once
 
+#include <iostream>
+#include <fstream>
+#include <ctime>
 
+#define RANGE 100
+#define AMOUNT 100
 
+using namespace std;
 
+bool createFileWithIntegers(string &name, int amount);
 
-#endif //LABSGIT_7_1_H
+int* createFileWithRepeats(string &name);
+
+void expandMemory(int *&array, int oldSize, int newSize);
