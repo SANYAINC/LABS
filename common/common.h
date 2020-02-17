@@ -27,6 +27,13 @@ namespace arrays {
         }
         cout << endl;
     }
+    template <class T>
+    void show(T *array, int size, int start) {
+        for (int i = start; i < size; ++i) {
+            cout << array[i] << ' ';
+        }
+        cout << endl;
+    }
 
     template <class T> //Заполнить массив случайными числами
     void fillRnd(T *array, int size, int max = 100, int shift = 50) {
@@ -67,6 +74,15 @@ namespace arrays {
         }
         return -1;
     }
+    template <class T>
+    int find(T *array, T element, int size, int start) {
+        for (int i = start; i < size; ++i) {
+            if (array[i] == element) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
 
 namespace matrix {
@@ -97,10 +113,40 @@ namespace matrix {
             cout << endl;
         }
     }
+}
 
+namespace words {
     void showWords(char **words, int wordsAmount) {
         for (int i = 0; i < wordsAmount; ++i) {
             cout << words[i] << endl;
+        }
+    }
+}
+
+namespace sorts {
+    template <class T>
+    void quickSort(T *array, int right, int left = 0) {
+        int leftPtr = left;
+        int rightPtr = right;
+        int basis = array[(leftPtr + rightPtr) / 2];
+        while (leftPtr <= rightPtr) {
+            while (array[leftPtr] < basis) {
+                leftPtr++;
+            }
+            while (array[rightPtr] > basis) {
+                rightPtr--;
+            }
+            if (leftPtr <= rightPtr) {
+                swap(array[leftPtr], array[rightPtr]);
+                leftPtr++;
+                rightPtr--;
+            }
+        }
+        if (left < rightPtr) {
+            quickSort(array, rightPtr, left);
+        }
+        if (right > leftPtr) {
+            quickSort(array, right, leftPtr);
         }
     }
 }
