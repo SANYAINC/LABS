@@ -6,14 +6,15 @@ using namespace std;
 
 class plateNumber {
     union number {
+        unsigned int code;
         struct {
+            unsigned int city:5;
+            unsigned int letter2:5;
+            unsigned int letter1:5;
             unsigned int thousand:4;
             unsigned int hundred:4;
             unsigned int dozen:4;
             unsigned int unit:4;
-            unsigned int letter1:5;
-            unsigned int letter2:5;
-            unsigned int city:5;
         };
     } mRegNum;
     static bool validate(char *sign);

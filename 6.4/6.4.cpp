@@ -30,40 +30,13 @@ plateNumber::plateNumber() {
 }
 
 bool plateNumber::compare(plateNumber &n1, plateNumber &n2) {
-    if (n1.mRegNum.unit != n2.mRegNum.unit) {
-        return n1.mRegNum.unit < n2.mRegNum.unit;
-    } else {
-        if (n1.mRegNum.dozen != n2.mRegNum.dozen) {
-            return n1.mRegNum.dozen < n2.mRegNum.dozen;
-        } else {
-            if (n1.mRegNum.hundred != n2.mRegNum.hundred) {
-                return n1.mRegNum.hundred < n2.mRegNum.hundred;
-            } else {
-                if (n1.mRegNum.thousand != n2.mRegNum.thousand) {
-                    return n1.mRegNum.thousand < n2.mRegNum.thousand;
-                } else {
-                    if (n1.mRegNum.letter1 != n2.mRegNum.letter1) {
-                        return n1.mRegNum.letter1 < n2.mRegNum.letter1;
-                    } else {
-                        if (n1.mRegNum.letter2 != n2.mRegNum.letter2) {
-                            return n1.mRegNum.letter2 < n2.mRegNum.letter2;
-                        } else {
-                            if (n1.mRegNum.city != n2.mRegNum.city) {
-                                return n1.mRegNum.city < n2.mRegNum.city;
-                            } else {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    return n1.mRegNum.code < n2.mRegNum.code;
 }
 void plateNumber::printList(plateNumber *list, int n) {
     for (int i = 0; i < n; ++i) {
         list[i].print();
     }
+    cout << endl;
 }
 
 plateNumber& plateNumber::operator = (plateNumber number) {
@@ -77,10 +50,7 @@ plateNumber& plateNumber::operator = (plateNumber number) {
     return *this;
 }
 bool plateNumber::operator == (plateNumber number) {
-    return mRegNum.unit == number.mRegNum.unit and mRegNum.dozen == number.mRegNum.dozen and
-           mRegNum.hundred == number.mRegNum.hundred and mRegNum.thousand == number.mRegNum.thousand and
-           mRegNum.letter1 == number.mRegNum.letter1 and mRegNum.letter2 == number.mRegNum.letter2 and
-           mRegNum.city == number.mRegNum.city;
+    return mRegNum.code == number.mRegNum.code;
 }
 
 
