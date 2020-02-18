@@ -85,7 +85,7 @@ namespace arrays {
     }
 }
 
-namespace matrix {
+namespace arrays2D {
     template <class T>
     T **create(int row, int col) {
         T **matrix = new T*[row];
