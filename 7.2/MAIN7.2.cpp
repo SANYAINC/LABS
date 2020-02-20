@@ -11,6 +11,7 @@ int main() {
     A.show();
     A.raise(10);
     A.show();
+
     squareMatrix2D A2(2);
     A2.fillRandom();
     A2.show();
