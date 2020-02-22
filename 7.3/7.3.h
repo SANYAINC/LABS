@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <windows.h>
 #define MAX_CHARACTERS 25
 #define CURRENT_YEAR 2020
 
@@ -39,7 +40,6 @@ public:
 };
 
 class student {
-    //TODO Перегрузить для строк
     char mName[MAX_CHARACTERS];
     char mLastName[MAX_CHARACTERS];
     char mPatronymic[MAX_CHARACTERS];
@@ -47,7 +47,6 @@ class student {
     int mCourse;
     double mAvgGP;
 public:
-    //TODO Валидатор
     student();
     student(const char *name, const char *lastName, const char *patronymic, date birthDate, int course, double avgGP);
 
@@ -55,5 +54,34 @@ public:
 
     void updateInfo(const char *name, const char *lastName, const char *patronymic, date birthDate, int course, double avgGP);
 
+    char *getLastName();
+    double getAvg();
+
     void print();
+};
+
+class list {
+    class unit {
+    public:
+        student mData;
+        unit *mNextPtr;
+        unit(student data, unit *nextPtr = nullptr);
+    };
+
+    unit *mHead;
+    int mSize;
+
+    void error(int type);
+public:
+    list();
+    void pushBack(student person);
+    void pushAt(student person, int index);
+    void pushAlphabetically(student person);
+    void moveGoodToAnotherList(list &list2);
+    void removeAt(int index);
+    int getSize();
+
+    void clear();
+
+    student& operator [] (int index);
 };
