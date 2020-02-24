@@ -223,7 +223,7 @@ void list::removeAt(int index) {
     if (index == 0) {
         //Если нужно удалить элемент с начала
         mHead = mHead->mNextPtr; //Голову перемещаем на следующий элемент
-        delete current; //Удаляем то, прошлую шолову
+        delete current; //Удаляем прошлую шолову
         mSize--;
         return;
     }
@@ -246,7 +246,7 @@ void list::removeAt(int index) {
 int list::getSize() {
     return mSize;
 }
-void list::moveGoodToAnotherList(list &list2) {
+void list::selectGoodFromAll(list &list2) {
     int counter = 0;
     unit *current = mHead;
     while (current != nullptr) {
@@ -258,9 +258,3 @@ void list::moveGoodToAnotherList(list &list2) {
     }
 }
 
-void list::clear() {
-    int size = getSize();
-    for (int i = 0; i < size; ++i) {
-        removeAt(0);
-    }
-}

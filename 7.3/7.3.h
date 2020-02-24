@@ -65,6 +65,7 @@ class list {
     public:
         student mData;
         unit *mNextPtr;
+
         unit(student data, unit *nextPtr = nullptr);
     };
 
@@ -74,14 +75,13 @@ class list {
     void error(int type);
 public:
     list();
+    student& operator [] (int index);
     void pushBack(student person);
     void pushAt(student person, int index);
     void pushAlphabetically(student person);
-    void moveGoodToAnotherList(list &list2);
     void removeAt(int index);
+
+    void selectGoodFromAll(list &list2);
     int getSize();
 
-    void clear();
-
-    student& operator [] (int index);
 };

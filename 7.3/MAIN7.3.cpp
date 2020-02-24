@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 
-
+    //Инциализация данных
     date b1(14, 9, 2001);
     date b2(13, 11, 2001);
     date b3(19, 5, 2002);
@@ -16,9 +16,9 @@ int main() {
     student u1("U", "Z", "U", b1, 1, 0);
 
     list students;
-    students.pushBack(u);
-    students.pushBack(u);
-    students.pushAlphabetically(u1);
+    students.pushAlphabetically(u);
+    students.pushAlphabetically(u);
+    students.pushAlphabetically(u1);        //Добавление элементов в список
     students.pushAlphabetically(sanya);
     students.pushAlphabetically(vanya);
     students.pushAlphabetically(denis);
@@ -30,7 +30,7 @@ int main() {
     cout << "------------------------------------\n";
 
     list goodStudents;
-    students.moveGoodToAnotherList(goodStudents);
+    students.selectGoodFromAll(goodStudents);
 
     for (int i = 0; i < goodStudents.getSize(); ++i) {
         goodStudents[i].print();
