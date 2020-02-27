@@ -18,6 +18,5 @@ public:
     char& operator [](int index);
 
     bool find(char character);
-
-    static void selectRepeatsFrom(list &list1, list &list2, list &list3);
+    void pushRepeatsFrom(list list1, list list2);
 };

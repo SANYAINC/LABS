@@ -21,7 +21,7 @@ int main() {
 
 
     list l3;
-    list::selectRepeatsFrom(l1, l2, l3);
+    l3.pushRepeatsFrom(l1, l2);
     for (int j = 0; j < l3.getSize(); ++j) {
         cout << l3[j];
     }

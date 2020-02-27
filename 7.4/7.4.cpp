@@ -44,19 +44,6 @@ char &list::operator [](const int index) {
     }
 }
 
-void list::selectRepeatsFrom(list &list1, list &list2, list &list3) {
-    int size1 = list1.getSize();
-    int size2 = list2.getSize();
-    for (int i = 0; i < size1; ++i) {
-        for (int j = 0; j < size2; ++j) {
-            if (list1[i] == list2[j] and !list3.find(list1[i])) {
-                list3.pushBack(list1[i]);
-            }
-        }
-    }
-
-}
-
 bool list::find(char character) {
     int size = getSize();
     if (size == 0) {
@@ -68,6 +55,18 @@ bool list::find(char character) {
         }
     }
     return false;
+}
+
+void list::pushRepeatsFrom(list list1, list list2) {
+    int size1 = list1.getSize();
+    int size2 = list2.getSize();
+    for (int i = 0; i < size1; ++i) {
+        for (int j = 0; j < size2; ++j) {
+            if (list1[i] == list2[j] and !this->find(list1[i])) {
+                this->pushBack(list1[i]);
+            }
+        }
+    }
 }
 
 
