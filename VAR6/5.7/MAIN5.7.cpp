@@ -66,7 +66,6 @@ void test(char sortType, T *array, int size) {
     }
 }
 
-//Сдано
 int main() {
 
     cout << "Please, enter N: ";
