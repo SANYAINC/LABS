@@ -11,7 +11,9 @@ int main() {
     l1.pushBack('t');
     l1.pushBack('r');
     l1.pushBack('a');
+
     list l2(10);
+
     l2.pushBack('k');
     l2.pushBack('a');
     l2.pushBack('g');
