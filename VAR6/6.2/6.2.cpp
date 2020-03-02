@@ -6,7 +6,7 @@ bool createFileWithIntegers(string &name, int amount) {
     }
     ofstream f;
     srand(time(nullptr));
-    f.open("../6.2/" + name);
+    f.open("../VAR6/6.2/" + name);
     if (!f.is_open()) {
         return false;
     }
@@ -17,9 +17,9 @@ bool createFileWithIntegers(string &name, int amount) {
     return true;
 }
 void rewriteTwoByTwo(string &rd, string &wt) {
-    ifstream fPst("../6.2/" + rd); //Чтение положительных чисел
-    ifstream fNgt("../6.2/" + rd); //Чтение отрицательных чисел
-    ofstream g("../6.2/" + wt); //Запись в новый файл
+    ifstream fPst("../VAR6/6.2/" + rd); //Чтение положительных чисел
+    ifstream fNgt("../VAR6/6.2/" + rd); //Чтение отрицательных чисел
+    ofstream g("../VAR6/6.2/" + wt); //Запись в новый файл
     if (!fPst.is_open() or !g.is_open()) {
         return;
     }
@@ -68,7 +68,7 @@ bool createBinFileWithIntegers(string &name, int amount) {
     }
     ofstream f;
     srand(time(nullptr));
-    f.open("../6.2/" + name, ios::binary);
+    f.open("../VAR6/6.2/" + name, ios::binary);
     int a;
     for (int i = 0; i < amount; ++i) {
         a = (i%2 == 0 ? rand()%100 : rand()%100 - 100);
@@ -78,9 +78,9 @@ bool createBinFileWithIntegers(string &name, int amount) {
     return true;
 }
 void rewriteTwoByTwoBin(string &rd, string &wt) {
-    ifstream fPos("../6.2/" + rd, ios::binary);
-    ifstream fNgt("../6.2/" + rd, ios::binary);
-    ofstream g("../6.2/" + wt, ios::binary);
+    ifstream fPos("../VAR6/6.2/" + rd, ios::binary);
+    ifstream fNgt("../VAR6/6.2/" + rd, ios::binary);
+    ofstream g("../VAR6/6.2/" + wt, ios::binary);
     int buffer;
     int pstCou = 0;
     int ngtCou = 0;
