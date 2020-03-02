@@ -9,6 +9,7 @@ int main() {
     date b1(14, 9, 2001);
     date b2(13, 11, 2001);
     date b3(19, 5, 2002);
+
     student sanya("Alexander", "BBBBBBBBBBBBBB", "Vyacheslavovich", b1, 1, 10);
     student vanya("Ivan", "CCCCCCCCCCCCCCC", "Vladimirovich", b2, 1, 8.2);
     student denis("Denis", "AAAAAAAAAAAAAAAAAA", "Alexandrovich", b3, 1, 9);
