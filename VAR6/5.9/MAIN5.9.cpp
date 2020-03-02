@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//Сдано 6 вариант
+//Сделаны все варианты
 int main() {
 
     board board;
