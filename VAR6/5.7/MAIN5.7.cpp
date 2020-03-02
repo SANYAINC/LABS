@@ -1,6 +1,6 @@
 #include <iostream>
 #include "5.7.h"
-#include "../common/common.h"
+#include "../../common/common.h"
 
 using namespace std;
 

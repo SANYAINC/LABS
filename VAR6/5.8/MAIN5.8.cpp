@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../common/common.h"
+#include "../../common/common.h"
 #include "5.8.h"
 
 using namespace std;

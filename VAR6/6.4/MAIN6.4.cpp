@@ -1,6 +1,6 @@
 #include <iostream>
 #include <algorithm>
-#include "../common/common.h"
+#include "../../common/common.h"
 #include "6.4.h"
 using namespace std;
 

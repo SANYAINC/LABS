@@ -1,5 +1,5 @@
 #include "6.1.h"
-#include "../common/common.h"
+#include "../../common/common.h"
 
 void deleteRepeats(string &str) {
     int cou = 1; //Счетчик вхождений символа

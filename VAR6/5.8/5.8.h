@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstring>
-#include "../common/common.h"
+#include "../../common/common.h"
 
 #define WORD_LEN 1000
 

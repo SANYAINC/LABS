@@ -1,5 +1,5 @@
 #include "7.1.h"
-#include "../common/common.h"
+#include "../../common/common.h"
 
 bool createFileWithIntegers(string &name, int amount) {
     ofstream f;
