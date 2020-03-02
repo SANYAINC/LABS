@@ -25,7 +25,7 @@ int main() {
     cin >> wordsAmount;
     cout << endl;
 
-    char **words = matrix::create<char>(wordsAmount, WORD_LEN); //Создание массива слов
+    char **words = arrays2D::create<char>(wordsAmount, WORD_LEN); //Создание массива слов
 
     //Ввод слов с клавиатуры
     cin.get(); //Забираем из буфера \n
@@ -37,7 +37,7 @@ int main() {
 
     mergeSort(words, wordsAmount - 1);
 
-    matrix::showWords(words, wordsAmount);
-    matrix::free(words, wordsAmount);
+    words::showWords(words, wordsAmount);
+    arrays2D::free(words, wordsAmount);
     return 0;
 }
