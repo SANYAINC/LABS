@@ -3,7 +3,6 @@
 #include "5.4.h"
 using namespace std;
 
-//Сдано
 int main() {
     cout << "Please, enter array size: ";
     int n;
