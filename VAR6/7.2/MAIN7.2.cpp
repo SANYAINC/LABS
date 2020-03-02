@@ -1,11 +1,11 @@
 #include <iostream>
 #include "7.2.h"
-#include "../../common/common.h"
 
 using namespace std;
 
 
 int main() {
+
     squareMatrix2D A(5);
     A.fillAsIdentity();
     A.show();
