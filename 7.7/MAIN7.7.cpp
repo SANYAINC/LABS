@@ -9,12 +9,13 @@ int main() {
     binTree1.push(5);
     binTree1.push(3);
     binTree1.push(6);
+    binTree1.push(4);
     binTree1.push(1);
     binTree1.push(8);
     binTree1.push(0);
 
     binTree1.show();
+    binTree1.showLeaves();
 
-    cout << binTree1.find(3);
     return 0;
 }

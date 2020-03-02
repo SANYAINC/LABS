@@ -2,8 +2,6 @@
 #include <iostream>
 using namespace std;
 
-//TODO Перегркзить квадратные скобки
-
 template <class T>
 class tree{
     class branch {
@@ -17,11 +15,13 @@ class tree{
     branch *mRoot;
     int mSize;
     void showInit(branch *current);
+    void showLeavesInit(branch *current);
     int findInit(branch *current, T data);
 public:
     tree();
     void push(T data);
     void show();
+    void showLeaves();
     int find(T data);
 };
 
@@ -54,13 +54,13 @@ void tree<T>::push(T data) {
     } else {
         branch *current = mRoot;
         while (true) {
-            if (current->mData > data) {
+            if (current->mData > data) { //если нужно внести в левое ответвление
                 if (current->mLeftPtr == nullptr) {
                     current->mLeftPtr = new branch(data);
                     return;
                 }
                 current = current->mLeftPtr;
-            } else {
+            } else { //если нужно внести в правое ответвление
                 if (current->mRightPtr == nullptr) {
                     current->mRightPtr = new branch(data);
                     return;
@@ -91,24 +91,42 @@ void tree<T>::showInit(tree::branch *current) {
 template<class T>
 int tree<T>::find(T data) {
     branch *current = mRoot;
-    int counter = 0;
     return findInit(current, data);
 }
 
 template<class T>
 int tree<T>::findInit(tree::branch *current, T data) {
-    static int cou = 0;
-    static int counter = -1;
+    static int cou = 0; //Счетчик рекурсии
+    static int counter = -1; //Значение счетчика, которое нужно вывести
     if (current) {
         findInit(current->mLeftPtr, data);
         if (current->mData == data) {
             counter = cou;
+            return counter;
         } else {
             cou++;
         }
         findInit(current->mRightPtr, data);
     }
     return counter >= 0 ? counter : -1;
+}
+
+template<class T>
+void tree<T>::showLeaves() {
+    branch *current = mRoot;
+    showLeavesInit(current);
+    cout << endl;
+}
+
+template<class T>
+void tree<T>::showLeavesInit(tree::branch *current) {
+    if (current) {
+        showLeavesInit(current->mLeftPtr);
+        if (!current->mLeftPtr and !current->mRightPtr) {
+            cout << current->mData << ' ';
+        }
+        showLeavesInit(current->mRightPtr);
+    }
 }
 
 
