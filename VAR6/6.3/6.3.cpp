@@ -37,7 +37,7 @@ bool student::appendDB(string &databaseName) {
 
     ofstream f;
     bool isDone = true;
-    f.open("../6.3/" + databaseName, ios::app);
+    f.open("../VAR6/6.3/" + databaseName, ios::app);
     if (!f.is_open()) {
         isDone = false;
     } else {
@@ -60,7 +60,7 @@ bool student::appendDBBin(string &databaseName) {
 
     ofstream f;
     bool isDone = true;
-    f.open("../6.3/" + databaseName, ios::app | ios::binary);
+    f.open("../VAR6/6.3/" + databaseName, ios::app | ios::binary);
     if (!f.is_open()) {
         isDone = false;
     } else {
@@ -80,7 +80,7 @@ bool student::selectGoodFromAllBIN(string &databaseName, string &newDBName) {
     student::lastID--;
     bool isDone = true;
 
-    f.open("../6.3/"+ databaseName);
+    f.open("../VAR6/6.3/"+ databaseName);
     if (!f.is_open()) {
         isDone = false;
     } else {
@@ -109,7 +109,7 @@ bool student::selectGoodFromAll(string &databaseName, string &newDBName) {
     int bufIndex = 0;
     bool eos = false;
 
-    f.open("../6.3/" + databaseName);
+    f.open("../VAR6/6.3/" + databaseName);
     if (!f.is_open()) {
         isDone = false;
     } else {
