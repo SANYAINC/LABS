@@ -4,7 +4,7 @@
 bool createFileWithIntegers(string &name, int amount) {
     ofstream f;
     srand(time(nullptr));
-    f.open("../7.1/" + name);
+    f.open("../VAR6/7.1/" + name);
     if (!f.is_open()) {
         return false;
     }
@@ -17,7 +17,7 @@ bool createFileWithIntegers(string &name, int amount) {
 
 int* createFileWithRepeats(string &rd) {
     ifstream fRead;
-    fRead.open("../7.1/" + rd);
+    fRead.open("../VAR6/7.1/" + rd);
     if (!fRead.is_open()) {
         return nullptr;
     }
