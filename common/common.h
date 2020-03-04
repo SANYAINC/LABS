@@ -115,14 +115,6 @@ namespace arrays2D {
     }
 }
 
-namespace words {
-    void showWords(char **words, int wordsAmount) {
-        for (int i = 0; i < wordsAmount; ++i) {
-            cout << words[i] << endl;
-        }
-    }
-}
-
 namespace sorts {
     template <class T>
     void quickSort(T *array, int right, int left = 0) {
@@ -149,4 +141,107 @@ namespace sorts {
             quickSort(array, right, leftPtr);
         }
     }
+}
+
+namespace containers {
+
+    template <class T>
+    class listSingleDir {
+        /*TODO Добавление в произвольное место
+               Удаление с произвольного места*/
+        class node {
+        public:
+            T mData;
+            node *mNextPtr;
+
+            node(T data, node *nextPtr = nullptr) {
+                mData = data;
+                mNextPtr = nextPtr;
+            }
+        };
+        int mSize;
+        node *mHead;
+    public:
+        listSingleDir() {
+            mSize = 0;
+            mHead = nullptr;
+        };
+
+        int& operator [] (const int index) {
+            if (index >= mSize or index < 0) {
+                exit(700);
+            }
+
+            int counter = 0;
+            node *current = mHead;
+
+            while (current != nullptr) {
+                if (counter == index) {
+                    return current->mData;
+                } else {
+                    current = current->mNextPtr;
+                }
+                counter++;
+            }
+        }
+
+        void pushBack(T data) {
+            if (mHead == nullptr) {
+                mHead = new node(data);
+            } else {
+                node *current = mHead;
+                while (current->mNextPtr != nullptr) {
+                    current = current->mNextPtr;
+                }
+                current->mNextPtr = new node(data);
+            }
+            mSize++;
+        }
+
+        void removeLast() {
+            if (mSize == 0) {
+                return;
+            } else if (mSize == 1) {
+                delete mHead;
+                mHead = nullptr;
+                mSize--;
+            } else {
+                node *current = mHead;
+                while (current->mNextPtr->mNextPtr != nullptr ) {
+                    current = current->mNextPtr;
+                }
+                delete current->mNextPtr;
+                current->mNextPtr = nullptr;
+                mSize--;
+            }
+        }
+
+        int getSize() {
+            return mSize;
+        }
+
+        void clear() {
+            int size = mSize;
+            for (int i = 0; i < size; ++i) {
+                (*this).removeLast();
+            }
+        }
+
+        void show() {
+            for (int i = 0; i < mSize; ++i) {
+                cout << (*this)[i] << " ";
+            }
+            cout << endl;
+        }
+
+        bool find(T data) {
+            for (int i = 0; i < mSize; ++i) {
+                if ((*this)[i] == data) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+    };
 }
