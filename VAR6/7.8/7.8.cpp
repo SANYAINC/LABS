@@ -309,3 +309,7 @@ void graphAdjList::pushVertex() {
     }
     cout << "PUSHED" << endl << endl;
 }
+
+graphAdjList::graphAdjList() {
+    mVertexAmount = 0;
+}

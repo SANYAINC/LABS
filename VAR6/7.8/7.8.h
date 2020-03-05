@@ -31,6 +31,9 @@ class graphAdjList {
     void dfs(int *solution, containers::listSingleDir <int> &visitedVertex, int &maxEdges, int currentVertex = 0);
 
 public:
+
+    graphAdjList();
+
     graphAdjList(int n);
 
     void show();
