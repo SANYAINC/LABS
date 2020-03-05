@@ -167,7 +167,7 @@ namespace containers {
             mHead = nullptr;
         };
 
-        int& operator [] (const int index) {
+        T& operator [] (const int index) {
             if (index >= mSize or index < 0) {
                 exit(700);
             }
@@ -241,6 +241,10 @@ namespace containers {
                 }
             }
             return false;
+        }
+
+        ~listSingleDir() {
+            (*this).clear();
         }
 
     };
