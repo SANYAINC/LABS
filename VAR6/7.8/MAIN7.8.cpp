@@ -4,9 +4,15 @@
 using namespace std;
 
 int main() {
-    graphAdjMx g1(7);
+
+    /*graphAdjMx g1(7);
     g1.pushVertex();
 
+    g1.show();
+    g1.showLongestPath();*/
+
+    graphAdjList g1(4);
+    g1.pushVertex();
     g1.show();
     g1.showLongestPath();
 
