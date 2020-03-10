@@ -162,6 +162,7 @@ namespace containers {
         int mSize;
         node *mHead;
     public:
+
         listSingleDir() {
             mSize = 0;
             mHead = nullptr;
@@ -221,9 +222,10 @@ namespace containers {
         }
 
         void clear() {
-            int size = mSize;
-            for (int i = 0; i < size; ++i) {
-                (*this).removeLast();
+            while (mHead) {
+                node* current = mHead;
+                mHead = current->mNextPtr;
+                delete current;
             }
         }
 
