@@ -28,17 +28,14 @@ class graphAdjList {
     listSingleDir < listSingleDir<int> > mAdjacencyList;
     int mVertexAmount;
 
-    void dfs(int *solution, containers::listSingleDir <int> &visitedVertex, int &maxEdges, int currentVertex = 0);
+    void dfs(int *solution, int &maxEdges, int currentVertex = 0);
 
 public:
 
     graphAdjList();
-
     graphAdjList(int n);
 
     void show();
-
     void showLongestPath();
-
     void pushVertex();
 };

@@ -22,9 +22,8 @@ public:
     void fillRandom(int range = 100, int shift = 0) const;
     void pushBack(int element);
     void removeAt(int index);
-    int find(int element);
-
-    //TODO insert
+    int find(int element) const;
+    void insert(int element, int index);
 
     ~vector();
 };

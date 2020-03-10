@@ -81,12 +81,11 @@ vector::vector(const vector &secondVector) {
 
 }
 vector::~vector() {
-    mSize = 0;
     delete [] (mVector);
 }
 
 
-int vector::getSize() const{
+int vector::getSize() const {
     return mSize;
 }
 void vector::resize(const int newSize, const int filler) {
@@ -148,6 +147,12 @@ void vector::removeAt(const int index) {
         cerr << "INDEX " << invalidIndex <<" IS OUT OF RANGE (" << "0-"  << mSize - 1 << ")" << endl;
         exit(404);
     }
+    if (mSize == 1) {
+        mSize--;
+        delete [] mVector;
+        mVector = nullptr;
+        return;
+    }
 
     int *newVector = new int[mSize - 1];
     int newIndex = 0;
@@ -163,11 +168,33 @@ void vector::removeAt(const int index) {
     mVector = newVector;
     mSize--;
 }
-int vector::find(const int element) {
+int vector::find(const int element) const{
     for (int i = 0; i < mSize; ++i) {
         if (mVector[i] == element) {
             return i;
         }
     }
     return -1;
+}
+void vector::insert(const int element, const int index) {
+    try {
+        if (index < 0 or index > mSize - 1) {
+            throw index;
+        }
+    } catch (int invalidIndex) {
+        cerr << "INDEX " << invalidIndex <<" IS OUT OF RANGE (" << "0-"  << mSize - 1 << ")" << endl;
+        exit(404);
+    }
+    int *newVector = new int[mSize + 1];
+    for (int i = 0; i < index; ++i) {
+        newVector[i] = mVector[i];
+    }
+    newVector[index] = element;
+    for (int i = index + 1; i < mSize + 1; ++i) {
+        newVector[i] = mVector[i-1];
+    }
+    delete [] mVector;
+    mSize++;
+    mVector = newVector;
+
 }

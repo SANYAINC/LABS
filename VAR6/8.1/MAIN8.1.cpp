@@ -1,4 +1,5 @@
 #include <iostream>
+#include "class.h"
 #include "8.1.h"
 
 using namespace std;

@@ -17,8 +17,11 @@ vector getRepeats(char *fileName) {
     vector range(RANGE);
     vector result;
     ifstream file(fileName);
+    if (!file.is_open()) {
+        cerr << "FILE IS NOT OPENED" << endl;
+        return result;
+    }
     int buffer;
-    int bufferIndexInRange;
     while (!file.eof()) {
         file >> buffer;
         if (range[buffer - 1] == 1) {

@@ -2,7 +2,7 @@
 
 graphAdjMx::graphAdjMx(const int n) {
     if (n < 1) {
-        exit(700);
+        exit(404);
     }
     mSize = n;
 
@@ -184,10 +184,8 @@ void graphAdjMx::pushVertex() {
 
 graphAdjList::graphAdjList(const int n) {
     mVertexAmount = n;
-    listSingleDir <int> *temp = nullptr;
     for (int i = 0; i < mVertexAmount; ++i) {
-        temp = new listSingleDir <int>;
-        mAdjacencyList.pushBack(*temp); //Заполнение списка вершин
+        mAdjacencyList.pushBack(*(new listSingleDir <int>));  //Заполнение списка вершин
     }
     int pointsToAmount; //На сколько вершин указывает текущая
     int pointsToCurrent;    //На какую вершину указывает текущая
@@ -208,7 +206,7 @@ void graphAdjList::show() {
         for (int j = 0; j < mAdjacencyList[i].getSize(); ++j) {
             cout << mAdjacencyList[i][j] << ", ";
         }
-        cout << "\b\b ";
+        cout << "\b\b  ";
         cout << endl;
     }
     cout << endl;
@@ -217,17 +215,14 @@ void graphAdjList::show() {
 void graphAdjList::showLongestPath() {
     int currentSolution[mVertexAmount + 1]; //Массив для хранения текущего пути
     int finalSolution[mVertexAmount + 1];   //Массив для хранения самого длинного пути
-    for (int i = 0; i < mVertexAmount + 1; ++i) {
-        currentSolution[i] = -1;
-        finalSolution[i] = -1;
-    }
-    listSingleDir <int> visitedVertex; //Список для хранения посещенных вершин
+    currentSolution[0] = 0;
+    finalSolution[0] = 0;
     int maxVisitedEdges = 0;    //Максимальное кол-во пройденных ребер
 
     //Перебор вершин чтобы начать путь
     for (int i = 0; i < mVertexAmount; ++i) {
 
-        dfs(currentSolution, visitedVertex, maxVisitedEdges, i);
+        dfs(currentSolution, maxVisitedEdges, i);
         //Если текущий путь длиннее максимального, записать его в максимальный
         if (currentSolution[0] > finalSolution[0]) {
             for (int j = 0; j < mVertexAmount + 1; ++j) {
@@ -245,7 +240,8 @@ void graphAdjList::showLongestPath() {
     cout << endl;
 }
 
-void graphAdjList::dfs(int *solution, listSingleDir <int> &visitedVertex, int &maxEdges, int currentVertex) {
+void graphAdjList::dfs(int *solution, int &maxEdges, int currentVertex) {
+    static listSingleDir <int> visitedVertex;  //Список для хранения посещенных вершин
     static int visitedEdges = 0;    //Переменная для хранения кол-ва пройденных ребер
 
     //Если эта вершина посещена, возвращаемся назад
@@ -260,7 +256,7 @@ void graphAdjList::dfs(int *solution, listSingleDir <int> &visitedVertex, int &m
             visitedVertex.pushBack(currentVertex);
         }
         visitedEdges++;
-        dfs(solution, visitedVertex, maxEdges, mAdjacencyList[currentVertex][j]);
+        dfs(solution, maxEdges, mAdjacencyList[currentVertex][j]);
     }
     if (!visitedVertex.find(currentVertex)) {
         visitedVertex.pushBack(currentVertex);
@@ -282,10 +278,9 @@ void graphAdjList::dfs(int *solution, listSingleDir <int> &visitedVertex, int &m
 }
 
 void graphAdjList::pushVertex() {
-    auto *newVertex = new listSingleDir <int>;
     int currentVertex;  //Текущая вершина
     int vertexAmount;   //Кол-во вершин
-    mAdjacencyList.pushBack(*newVertex); //Добавление новой
+    mAdjacencyList.pushBack(*(new listSingleDir <int>)); //Добавление новой
     mVertexAmount++;
 
     //Связи от новой вершины
