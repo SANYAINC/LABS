@@ -5,17 +5,13 @@ using namespace std;
 
 
 int main() {
-    uInt d1(16);
+    uInt v1(1);
+    uInt v2(1);
 
-    cout << d1;
+    v1 = (v1 << 249) - (v1 << 6) + 7;
+    v2 = (v2 << 108) - 1;
 
-    cout << (d1 << 3);
-    cout << (d1 >> 3);
-
-    cout << ((d1 >> 3) << 3);
-
-
-
+    cout << v1.gcd(v2);
 
     return 0;
 }
