@@ -11,6 +11,8 @@ int main() {
     v1 = (v1 << 249) - (v1 << 6) + 7;
     v2 = (v2 << 108) - 1;
 
+    cout << v1 << endl << v2 << endl;
+
     cout << v1.gcd(v2);
 
     return 0;
