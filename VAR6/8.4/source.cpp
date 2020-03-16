@@ -6,6 +6,7 @@ using namespace std;
 
 int main() {
     srand(time(nullptr));
+
     int size = 25;
     //cin >> size;
     list <char> L1(size, '0');
