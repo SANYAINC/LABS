@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template <class T>
 class tree {
     class branch {
@@ -16,8 +18,13 @@ class tree {
 
     void NLR(branch* curBranch, void(tree::*visit)(branch*));
     void LRN(branch* curBranch, void(tree::*visit)(branch*));
+    void LNR(branch* curBranch, void(tree::*visit)(branch*));
     void pushDataFrom(branch* curBranch);
     void removeNode(branch* curBranch);
+    bool isLeaf(branch* curBranch);
+    void printBranch(branch* curBranch);
+    void printLeaf(branch* curBranch);
+    void printAsTree(branch* curBranch, int level);
 public:
 
     static T invalidData;
@@ -30,7 +37,7 @@ public:
     void push(T data);
     void removeLeaf(T data);
     T find(T data);
-    void show();
+    void show(char type = 'L');
     void showLeaves();
     void clear();
 
@@ -148,6 +155,112 @@ T tree <T>::find(T data) {
             }
             current = current->mRightPtr;
         }
+    }
+}
+
+template <class T>
+void tree <T>::removeLeaf(T data) {
+    if (mRoot->mData == data) {
+        std::cerr << "NOT A LEAF";
+        exit(404);
+    }
+    branch* current = mRoot;
+    while (true) {
+        if (current->mLeftPtr and current->mLeftPtr->mData == data) {
+            break;
+        }
+        if (current->mRightPtr and current->mRightPtr->mData == data) {
+            break;
+        }
+        if (data < current->mData) {
+            if (!current->mLeftPtr) {
+                std::cerr << "NOT FOUND";
+                exit(404);
+            }
+            current = current->mLeftPtr;
+        } else {
+            if (!current->mRightPtr) {
+                std::cerr << "NOT FOUND";
+                exit(404);
+            }
+            current = current->mRightPtr;
+        }
+    }
+    if (current->mLeftPtr->mData == data) {
+        if (!isLeaf(current->mLeftPtr)) {
+            std::cerr << "NOT A LEAF";
+            exit(404);
+        }
+        delete current->mLeftPtr;
+        current->mLeftPtr = nullptr;
+    } else {
+        if (!isLeaf(current->mRightPtr)) {
+            std::cerr << "NOT A LEAF";
+            exit(404);
+        }
+        delete current->mRightPtr;
+        current->mRightPtr = nullptr;
+    }
+}
+
+template <class T>
+bool tree <T>::isLeaf(tree::branch* curBranch) {
+    return !(curBranch->mLeftPtr or curBranch->mRightPtr);
+}
+
+template <class T>
+void tree <T>::show(char type) {
+    if (type == 'T') {
+        std::cout << "-----------------------------------------------------------------------------------" << std::endl;
+        printAsTree(mRoot, 0);
+        std::cout << "-----------------------------------------------------------------------------------" << std::endl;
+    }
+    if (type == 'L') {
+        void(tree::*showBranch)(branch*) = &printBranch;
+        std::cout << "[";
+        LNR(mRoot, showBranch);
+        std::cout << "\b\b]";
+    }
+}
+
+template <class T>
+void tree <T>::printBranch(tree::branch* curBranch) {
+    std::cout << curBranch->mData << ", ";
+}
+
+template <class T>
+void tree <T>::LNR(tree::branch* curBranch, void (tree::*visit)(branch*)) {
+    if (curBranch) {
+        LNR(curBranch->mLeftPtr, visit);
+        (this->*visit)(curBranch);
+        LNR(curBranch->mRightPtr, visit);
+    }
+}
+
+template <class T>
+void tree <T>::printAsTree(tree::branch* curBranch, int level) {
+    if (curBranch) {
+        printAsTree(curBranch->mLeftPtr, level + 1);
+        for (int i = 0; i < level; i++) {
+            std::cout << "     ";
+        }
+        std::cout << curBranch->mData << std::endl;
+        printAsTree(curBranch->mRightPtr, level + 1);
+    }
+}
+
+template <class T>
+void tree <T>::showLeaves() {
+    std::cout << "[";
+    void(tree::*showLeaf)(branch*) = &printLeaf;
+    LNR(mRoot, showLeaf);
+    std::cout << "\b\b]";
+}
+
+template <class T>
+void tree <T>::printLeaf(tree::branch* curBranch) {
+    if (isLeaf(curBranch)) {
+        std::cout << curBranch->mData << ", ";
     }
 }
 
