@@ -20,6 +20,8 @@ class tree {
     void removeNode(branch* curBranch);
 public:
 
+    static T invalidData;
+
     tree();
     tree(T data);
     tree(const tree& anotherTree);
@@ -27,12 +29,15 @@ public:
 
     void push(T data);
     void removeLeaf(T data);
-    void find(T data);
+    T find(T data);
     void show();
     void showLeaves();
     void clear();
 
 };
+
+template <class T>
+T tree<T>::invalidData = static_cast<T>(false);
 
 template <class T>
 tree <T>::branch::branch(T data, branch* leftPtr, branch* rightPtr) {
@@ -124,3 +129,25 @@ void tree <T>::LRN(tree::branch* curBranch, void (tree::*visit)(branch*)) {
         (this->*visit)(curBranch);
     }
 }
+
+template <class T>
+T tree <T>::find(T data) {
+    branch* current = mRoot;
+    while (true) {
+        if (current->mData == data) {
+            return current->mData;
+        }
+        if (data < current->mData) {
+            if (!current->mLeftPtr) {
+                return invalidData;
+            }
+            current = current->mLeftPtr;
+        } else {
+            if (!current->mRightPtr) {
+                return invalidData;
+            }
+            current = current->mRightPtr;
+        }
+    }
+}
+
