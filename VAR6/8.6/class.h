@@ -4,11 +4,11 @@ template <class T>
 class tree {
     class branch {
     public:
-        T data;
+        T mData;
         branch* mLeftPtr;
         branch* mRightPtr;
 
-        branch();
+        branch(T data = 0, branch* leftPtr = nullptr, branch* rightPtr = nullptr);
     };
 
     branch* root;
@@ -29,3 +29,10 @@ public:
     void clear();
 
 };
+
+template <class T>
+tree <T>::branch::branch(T data, branch* leftPtr, branch* rightPtr) {
+    mData = static_cast<T>(data);
+    mLeftPtr = leftPtr;
+    mRightPtr = rightPtr;
+}
