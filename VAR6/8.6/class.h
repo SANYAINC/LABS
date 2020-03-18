@@ -192,6 +192,7 @@ void tree <T>::removeLeaf(T data) {
             exit(404);
         }
         delete current->mLeftPtr;
+        mSize--;
         current->mLeftPtr = nullptr;
     } else {
         if (!isLeaf(current->mRightPtr)) {
@@ -199,6 +200,7 @@ void tree <T>::removeLeaf(T data) {
             exit(404);
         }
         delete current->mRightPtr;
+        mSize--;
         current->mRightPtr = nullptr;
     }
 }
@@ -263,4 +265,12 @@ void tree <T>::printLeaf(tree::branch* curBranch) {
         std::cout << curBranch->mData << ", ";
     }
 }
+
+template <class T>
+void tree <T>::clear() {
+    void(tree::*destroyer)(branch*) = &removeNode;
+    LRN(mRoot, destroyer);
+    mRoot = nullptr;
+}
+
 
