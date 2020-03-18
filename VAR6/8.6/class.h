@@ -122,6 +122,5 @@ void tree <T>::LRN(tree::branch* curBranch, void (tree::*visit)(branch*)) {
         LRN(curBranch->mLeftPtr, visit);
         LRN(curBranch->mRightPtr, visit);
         (this->*visit)(curBranch);
-
     }
 }
