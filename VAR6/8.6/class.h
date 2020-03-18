@@ -15,8 +15,9 @@ class tree {
     int mSize;
 
     void NLR(branch* curBranch, void(tree::*visit)(branch*));
+    void LRN(branch* curBranch, void(tree::*visit)(branch*));
     void pushDataFrom(branch* curBranch);
-
+    void removeNode(branch* curBranch);
 public:
 
     tree();
@@ -100,5 +101,27 @@ void tree <T>::push(T data) {
 
             current = current->mLeftPtr;
         }
+    }
+}
+
+template <class T>
+tree <T>::~tree() {
+    void(tree::*destroyer)(branch*) = &removeNode;
+    LRN(mRoot, destroyer);
+}
+
+template <class T>
+void tree <T>::removeNode(tree::branch* curBranch) {
+    delete curBranch;
+    mSize--;
+}
+
+template <class T>
+void tree <T>::LRN(tree::branch* curBranch, void (tree::*visit)(branch*)) {
+    if (curBranch) {
+        LRN(curBranch->mLeftPtr, visit);
+        LRN(curBranch->mRightPtr, visit);
+        (this->*visit)(curBranch);
+
     }
 }
