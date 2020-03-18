@@ -11,7 +11,7 @@ class tree {
         branch(T data = 0, branch* leftPtr = nullptr, branch* rightPtr = nullptr);
     };
 
-    branch* root;
+    branch* mRoot;
     int mSize;
 
 public:
@@ -35,4 +35,10 @@ tree <T>::branch::branch(T data, branch* leftPtr, branch* rightPtr) {
     mData = static_cast<T>(data);
     mLeftPtr = leftPtr;
     mRightPtr = rightPtr;
+}
+
+template <class T>
+tree <T>::tree() {
+    mRoot = nullptr;
+    mSize = 0;
 }
