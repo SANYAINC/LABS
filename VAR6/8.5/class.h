@@ -1,7 +1,5 @@
 #pragma once
 
-int number = 1;
-
 template <class T>
 class list {
     class node {
@@ -20,9 +18,17 @@ public:
     list();
     list(int size);
     list(const list& anotherList);
+    ~list();
 
     T& operator[](int index) const;
 
+    int getProd();
+    void pushBack(T data);
+    void pushAt(int index, T data);
+    void deleteAt(int index);
+    int find(T data);
+    void clear();
+    void print();
     int getSize() const;
 };
 
@@ -48,14 +54,12 @@ template <class T>
 list <T>::list(int size) {
     mSize = size;
 
+    //Инициализация первого элемента списка
     mHead = new node;
     mTail = mHead;
     size--;
 
     node* current = mHead;
-    while (current->mNextPtr) {
-        current = current->mNextPtr;
-    }
     for (int i = 0; i < size; ++i) {
         current->mNextPtr = new node(0, nullptr, current);
         current = current->mNextPtr;
@@ -66,24 +70,21 @@ list <T>::list(int size) {
 
 template <class T>
 list <T>::list(const list& anotherList) {
-    int newSize = anotherList.getSize();
-    mSize = newSize;
-    if (mSize == 0) {
-        mHead = nullptr;
-        mTail = nullptr;
-    }
-    int counter = 0;
-    mHead = new node(anotherList[counter++]);
+    int size = anotherList.getSize();
+    mSize = size;
+
+    //Инициализация первого элемента списка
+    node* currentSecond = anotherList.mHead;
+    mHead = new node(currentSecond->mData);
     mTail = mHead;
-    newSize--;
+    size--;
+    currentSecond = currentSecond->mNextPtr;
 
     node* current = mHead;
-    while (current->mNextPtr) {
+    for (int i = 0; i < size; ++i) {
+        current->mNextPtr = new node(currentSecond->mData, nullptr, current);
         current = current->mNextPtr;
-    }
-    for (int i = 0; i < newSize; ++i) {
-        current->mNextPtr = new node(anotherList[counter++], nullptr, current);
-        current = current->mNextPtr;
+        currentSecond = currentSecond->mNextPtr;
         mTail = current;
     }
 
@@ -95,28 +96,212 @@ T& list <T>::operator[](int index) const {
         std::cerr << "INDEX OUT OF RANGE" << std::endl;
     }
     node* current;
-    int counter = 0;
-    if (index < getSize() / 2) {
+    int counter;
+    if (index < mSize / 2) {
+        counter = 0;
         current = mHead;
         while (counter != index) {
             current = current->mNextPtr;
             counter++;
         }
-        return current->mData;
     } else {
+        counter = getSize() - 1;
         current = mTail;
         while (counter != index) {
             current = current->mPrevPtr;
-            counter++;
+            counter--;
         }
-        return current->mData;
     }
-
+    return current->mData;
 }
 
 template <class T>
 int list <T>::getSize() const {
     return mSize;
+}
+
+template <class T>
+void list <T>::pushBack(T data) {
+    if (mSize == 0) {
+        mHead = new node(data);
+        mTail = mHead;
+        mSize++;
+        return;
+    }
+    //Добавление в конец
+    node* current = mTail;
+    current->mNextPtr = new node(data, nullptr, current);
+    mTail = current->mNextPtr;
+}
+
+template <class T>
+void list <T>::pushAt(int index, T data) {
+    if (index < 0 or index > mSize) {
+        std::cerr << "INDEX " << index << " IS OUT OF RANGE (0 - " << mSize << ")";
+        exit(404);
+    }
+
+    if (index == mSize) {
+        pushBack(data);
+        return;
+    }
+
+    mSize++;
+    node* current;
+    if (index == 0) {
+        current = mHead;
+        mHead = new node(data, current);
+        current->mPrevPtr = mHead;
+        return;
+    }
+
+    //Поиск места вставки
+    int counter;
+    node* buffer;
+    mSize++;
+    if (index < mSize / 2) {
+        counter = 0;
+        current = mHead;
+        while (counter != index - 1) {
+            current = current->mNextPtr;
+            counter++;
+        }
+    } else {
+        counter = mSize - 1;
+        current = mTail;
+        while (counter != index - 1) {
+            current = current->mPrevPtr;
+            counter--;
+        }
+    }
+
+    //Вставка
+    buffer = current->mNextPtr;
+    current->mNextPtr = new node(data, buffer, current);
+    buffer->mPrevPtr = current->mNextPtr;
+}
+
+template <class T>
+void list <T>::deleteAt(int index) {
+    if (index < 0 or index >= mSize) {
+        std::cerr << "INDEX " << index << " IS OUT OF RANGE (0 - " << mSize << ")";
+        exit(404);
+    }
+
+
+    //Удаление первого элемента
+    node* current;
+    if (index == 0) {
+        if (mSize == 1) {
+            delete mHead;
+            mHead = nullptr;
+            mTail = nullptr;
+        } else {
+            current = mHead->mNextPtr;
+            delete mHead;
+            mHead = current;
+            mHead->mPrevPtr = nullptr;
+        }
+        mSize--;
+        return;
+    }
+
+    //Удаление последнего элемента
+    if (index == mSize - 1) {
+        current = mTail->mPrevPtr;
+        delete mTail;
+        mTail = current;
+        current->mNextPtr = nullptr;
+        mSize--;
+        return;
+    }
+
+    //Удаление из середины списка
+    int counter;
+    if (index < mSize / 2) {
+        counter = 0;
+        current = mHead;
+        while (counter != index) {
+            current = current->mNextPtr;
+            counter++;
+        }
+    } else {
+        counter = mSize - 1;
+        current = mTail;
+        while (counter != index) {
+            current = current->mPrevPtr;
+            counter--;
+        }
+    }
+    current->mPrevPtr->mNextPtr = current->mNextPtr;
+    current->mNextPtr->mPrevPtr = current->mPrevPtr;
+    mSize--;
+    delete current;
+}
+
+template <class T>
+void list <T>::clear() {
+    node* current;
+    while (mHead) {
+        current = mHead;
+        mHead = current->mNextPtr;
+        delete current;
+    }
+    mSize = 0;
+}
+
+template <class T>
+list <T>::~list() {
+    clear();
+}
+
+template <class T>
+void list <T>::print() {
+    std::cout << "[";
+    if (mSize == 0) {
+        std::cout << " ]";
+        return;
+    }
+    for (int i = 0; i < mSize; ++i) {
+        std::cout << (*this)[i];
+        if (i == mSize - 1) {
+            std::cout << "]";
+        } else {
+            std::cout << ", ";
+        }
+    }
+}
+
+template <class T>
+int list <T>::find(T data) {
+    if (!mSize) {
+        return -1;
+    }
+    int counterHead = 0;
+    int counterTail = mSize - 1;
+    while (counterHead <= counterTail) {
+        if ((*this)[counterHead] == data) {
+            return counterHead;
+        }
+        if ((*this)[counterTail] == data) {
+            return counterTail;
+        }
+        counterHead++;
+        counterTail--;
+    }
+    return -1;
+}
+
+template <class T>
+int list <T>::getProd() {
+    int max = mSize;
+    int sum = 1;
+    int cou1 = 0; //счетчик от нуля до половины
+    int cou2 = max - 1; //Счетчик от конца до половины
+    for (int i = 0; i < max / 2; ++i) {
+        sum *= (*this)[cou1++] - (*this)[cou2--]; //Перемножение
+    }
+    return sum;
 }
 
 
