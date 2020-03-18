@@ -42,3 +42,9 @@ tree <T>::tree() {
     mRoot = nullptr;
     mSize = 0;
 }
+
+template <class T>
+tree <T>::tree(T data) {
+    mRoot = new branch(data);
+    mSize = 1;
+}
