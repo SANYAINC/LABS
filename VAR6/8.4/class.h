@@ -240,6 +240,7 @@ list <T> & list <T>::operator=(const list<T>& anotherList) {
     int oldSize = getSize();
     if (!newSize) {
         this->clear();
+        return *this;
     }
 
     if (oldSize < newSize) {
