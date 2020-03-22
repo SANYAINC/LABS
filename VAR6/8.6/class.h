@@ -16,9 +16,9 @@ class tree {
     branch* mRoot;
     int mSize;
 
-    void NLR(branch* curBranch, void(tree::*visit)(branch*));
-    void LRN(branch* curBranch, void(tree::*visit)(branch*));
-    void LNR(branch* curBranch, void(tree::*visit)(branch*));
+    void NLR(branch* curBranch, void(tree::*visit)(branch*)); //DO -> LEFT -> RIGHT
+    void LRN(branch* curBranch, void(tree::*visit)(branch*)); //LEFT -> RIGHT -> DO
+    void LNR(branch* curBranch, void(tree::*visit)(branch*)); //LEFT -> DO -> RIGHT
 
     void pushDataFrom(branch* curBranch);
     void removeNode(branch* curBranch);
@@ -29,7 +29,7 @@ class tree {
 
 public:
 
-    static T invalidData;
+    static T invalidData; //Для возврата методом find(ф) в случае ненахождения ф
 
     tree();
     tree(T data);
@@ -56,7 +56,7 @@ template <class T>tree <T>::branch::branch(T data, branch* leftPtr, branch* righ
     mRightPtr = rightPtr;
 }
 
-template <class T> T tree<T>::invalidData = static_cast<T>(false);
+template <class T> T tree<T>::invalidData = static_cast<T>(0);
 
 template <class T>tree <T>::tree() {
     mRoot = nullptr;
@@ -239,8 +239,7 @@ template <class T>void tree <T>::showLeaves() {
     std::cout << "\b\b]";
 }
 template <class T>void tree <T>::clear() {
-    void(tree::*destroyer)(branch*) = &removeNode;
-    LRN(mRoot, destroyer);
+    LRN(mRoot, &removeNode);
     mRoot = nullptr;
 }
 
