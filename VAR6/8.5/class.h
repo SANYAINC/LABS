@@ -22,18 +22,15 @@ public:
 
     T& operator[](int index) const;
 
-    int getProd();
+    int getProd()const;
     void pushBack(T data);
     void pushAt(int index, T data);
     void deleteAt(int index);
     int find(T data);
     void clear();
-    void print();
+    void print() const;
     int getSize() const;
 };
-
-
-
 
 
 template <class T>
@@ -256,7 +253,7 @@ list <T>::~list() {
 }
 
 template <class T>
-void list <T>::print() {
+void list <T>::print() const {
     std::cout << "[";
     if (mSize == 0) {
         std::cout << " ]";
@@ -293,7 +290,7 @@ int list <T>::find(T data) {
 }
 
 template <class T>
-int list <T>::getProd() {
+int list <T>::getProd() const{
     int max = mSize;
     int sum = 1;
     int cou1 = 0; //счетчик от нуля до половины
