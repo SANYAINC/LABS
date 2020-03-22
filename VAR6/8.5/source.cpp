@@ -9,14 +9,15 @@ int main() {
     //cin >> n;
     list <int> list1(n);
 
-    //Ввод чисел
+    //Ввод чисел (Для проверки - (5 7 8 11 9 1 5 7) = -56)
     for (int i = 0; i < n ; ++i) {
         cin >> list1[i];
     }
 
     list1.print();
     cout << endl;
-    cout << list1.getProd();
+    cout << list1.getProd() << endl;
 
+    system("pause");
     return 0;
 }
