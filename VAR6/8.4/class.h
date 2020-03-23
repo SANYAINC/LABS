@@ -206,7 +206,7 @@ void list <T>::deleteAt(int index) {
 
     int counter = 0;
     node* current = mHead;
-    if (!index) {
+    if (index == 0) {
         current = current->mNextPtr;
         delete mHead;
         mHead = current;
