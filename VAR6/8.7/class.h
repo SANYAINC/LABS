@@ -19,6 +19,7 @@ class graph {
     int mEdges;
 
     void DFS(list <int>& solution, int currentVertex);
+    int getIndexByID(int ID);
 public:
     graph();
     graph(int vertices);
@@ -32,8 +33,7 @@ public:
     void pushVertex(T data = 0);
     void removeVertex(int index);
     void show();
-    void showData();
-
+    int getSize();
     void showLongestPath();
     
     void clear();
@@ -82,7 +82,13 @@ void graph <T>::connect(int ID1, int ID2) {
 
 template <class T>
 void graph <T>::pushVertex(T data, int pointToAmount, int* pointToVector, int pointedByAmount, int* pointedByVector) {
-    vertex newVertex(mVertices, data);
+    int maxID = -1;
+    for (int k = 0; k < mAdjacencyList.getSize(); ++k) {
+        if (mAdjacencyList[k].mID > maxID) {
+            maxID = mAdjacencyList[k].mID;
+        }
+    }
+    vertex newVertex(maxID+1, data);
     for (int i = 0; i < pointToAmount; ++i) {
         newVertex.mPointTo.pushBack(pointToVector[i]);
         mEdges++;
@@ -115,16 +121,14 @@ void graph <T>::pushVertex(T data) {
         std::cin >> pointedByV[i];
     }
     pushVertex(data, pointToA, pointToV, pointedByA, pointedByV);
-    std::cout << "-----PUSHING COMPLETE-----" << std::endl;
+    std::cout << "---------PUSHING COMPLETE---------" << std::endl;
 }
 
 template <class T>
 void graph <T>::removeVertex(int index) {
-    int edgesCurVertex;
     for (int i = 0; i < mVertices; ++i) {
         if (i != index) {
-            edgesCurVertex = mAdjacencyList[i].mPointTo.getSize();
-            for (int j = 0; j < edgesCurVertex; ++j) {
+            for (int j = 0; j < mAdjacencyList[i].mPointTo.getSize(); ++j) {
                 if (mAdjacencyList[i].mPointTo[j] == index) {
                     mAdjacencyList[i].mPointTo.deleteAt(j);
                     mEdges--;
@@ -138,11 +142,16 @@ void graph <T>::removeVertex(int index) {
 
 template <class T>
 void graph <T>::show() {
-    int edgesWithCurVertex;
-
     std::cout << "Graph's adjacency list:" << std::endl;
+    if (mVertices == 0) {
+        std::cout << "\t//EMPTY//" << std::endl;
+        return;
+    }
+    int edgesWithCurVertex;
+    int curID;
     for (int i = 0; i < mVertices; ++i) {
-        std::cout << "\t" << i << " -> ";
+        curID = mAdjacencyList[i].mID;
+        std::cout << "\t" << curID << " -> ";
         edgesWithCurVertex = mAdjacencyList[i].mPointTo.getSize();
         for (int j = 0; j < edgesWithCurVertex; ++j) {
             std::cout << mAdjacencyList[i].mPointTo[j];
@@ -179,39 +188,21 @@ T& graph <T>::operator[](int index) {
 }
 
 template <class T>
-void graph <T>::showData() {
-    int edgesWithCurVertex;
-
-    std::cout << "Graph's adjacency list (with data):" << std::endl;
-    for (int i = 0; i < mVertices; ++i) {
-        std::cout << "\t" << i << "(" << mAdjacencyList[i].mData << ")"<< " -> ";
-        edgesWithCurVertex = mAdjacencyList[i].mPointTo.getSize();
-        for (int j = 0; j < edgesWithCurVertex; ++j) {
-            std::cout << mAdjacencyList[i].mPointTo[j];
-            if (j != edgesWithCurVertex - 1) {
-                std::cout << ", ";
-            }
-        }
-        std::cout << std::endl;
-    }
-}
-
-template <class T>
 void graph <T>::DFS(list <int>& solution, int currentVertex) {
     static list <int> visitedVertex;
 
-    if (visitedVertex.find(currentVertex) != -1) {
+    if (visitedVertex.find(mAdjacencyList[currentVertex].mID) != -1) {
         return;
     }
 
     for (int i = 0; i < mAdjacencyList[currentVertex].mPointTo.getSize(); ++i) {
-        if (visitedVertex.find(currentVertex) == -1) {
-            visitedVertex.pushBack(currentVertex);
+        if (visitedVertex.find(mAdjacencyList[currentVertex].mID) == -1) {
+            visitedVertex.pushBack(mAdjacencyList[currentVertex].mID);
         }
-        DFS(solution, mAdjacencyList[currentVertex].mPointTo[i]);
+        DFS(solution, getIndexByID(mAdjacencyList[currentVertex].mPointTo[i]));
     }
-    if (visitedVertex.find(currentVertex) == -1) {
-        visitedVertex.pushBack(currentVertex);
+    if (visitedVertex.find(mAdjacencyList[currentVertex].mID) == -1) {
+        visitedVertex.pushBack(mAdjacencyList[currentVertex].mID);
     }
     if (visitedVertex.getSize() > solution.getSize()) {
         solution = visitedVertex;
@@ -239,5 +230,20 @@ void graph <T>::showLongestPath() {
         }
     }
     std::cout << std::endl;
+}
+
+template <class T>
+int graph <T>::getSize() {
+    return mVertices;
+}
+
+template <class T>
+int graph<T>::getIndexByID(int ID) {
+    for (int i = 0; i < mVertices; ++i) {
+        if ((*this).mAdjacencyList[i].mID == ID) {
+            return i;
+        }
+    }
+    return -1;
 }
 

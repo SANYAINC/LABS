@@ -129,6 +129,7 @@ void list <T>::pushBack(T data) {
     node* current = mTail;
     current->mNextPtr = new node(data, nullptr, current);
     mTail = current->mNextPtr;
+    mSize++;
 }
 
 template <class T>
@@ -143,9 +144,9 @@ void list <T>::pushAt(int index, T data) {
         return;
     }
 
-    mSize++;
     node* current;
     if (index == 0) {
+        mSize++;
         current = mHead;
         mHead = new node(data, current);
         current->mPrevPtr = mHead;
@@ -155,7 +156,6 @@ void list <T>::pushAt(int index, T data) {
     //Поиск места вставки
     int counter;
     node* buffer;
-    mSize++;
     if (index < mSize / 2) {
         counter = 0;
         current = mHead;
@@ -176,6 +176,7 @@ void list <T>::pushAt(int index, T data) {
     buffer = current->mNextPtr;
     current->mNextPtr = new node(data, buffer, current);
     buffer->mPrevPtr = current->mNextPtr;
+    mSize++;
 }
 
 template <class T>
