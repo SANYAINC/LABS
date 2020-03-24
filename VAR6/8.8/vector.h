@@ -23,7 +23,8 @@ public:
     vector& resize(int newSize);
     vector& pushBack(T data);
     vector& pushAt(int pos, T data);
-    vector& deleteAt(int index);
+    vector& deleteAt(int pos);
+    vector& clear(int index);
     void print() const;
     int find(T data) const;
 };
@@ -146,6 +147,7 @@ vector<T>& vector <T>::resize(const int newSize) {
     delete [] mVector;
     mVector = newVector;
     mSize = newSize;
+    return *this;
 }
 
 template <class T>
@@ -176,5 +178,61 @@ vector<T>& vector <T>::pushAt(int pos, T data) {
     }
     delete [] mVector;
     mVector = newVector;
+    return *this;
+}
 
+template <class T>
+vector<T>& vector <T>::deleteAt(int pos) {
+    if (pos < 0 or pos >= mSize) {
+        raiseException(900, pos);
+    }
+    if (mSize == 1) {
+        mSize = 0;
+        mVector = nullptr;
+    }
+    T *newVector = new T[--mSize];
+    int index = 0;
+    for (; index < pos; ++index) {
+        newVector[index] = mVector[index];
+    }
+    ++index;
+    for (; index < mSize; ++index) {
+        newVector[index - 1] = mVector[index];
+    }
+    delete [] mVector;
+    mVector = newVector;
+    return *this;
+}
+
+template <class T>
+vector<T>& vector <T>::clear(int index) {
+    delete [] mVector;
+    mVector = nullptr;
+    mSize = 0;
+}
+
+template <class T>
+void vector <T>::print() const {
+    if (mSize == 0) {
+        std::cout << "[ ]";
+    } else {
+        std::cout << "[";
+        for (int i = 0; i < mSize; ++i) {
+            std::cout << mVector[i];
+            if (i != mSize -1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << "]";
+    }
+}
+
+template <class T>
+int vector <T>::find(T data) const {
+    for (int i = 0; i < mSize; ++i) {
+        if (mVector[i] == data) {
+            return i;
+        }
+    }
+    return -1;
 }
