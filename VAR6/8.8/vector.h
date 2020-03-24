@@ -87,3 +87,17 @@ T& vector <T>::operator[](const int index) const {
     validateIndex(index);
     return mVector[index];
 }
+
+template <class T>
+vector<T>& vector <T>::operator=(const vector& anotherVector) {
+    if (&anotherVector == this) {
+        return *this;
+    }
+    mSize = anotherVector.mSize;
+    delete [] mVector;
+    mVector = new T[mSize];
+    for (int i = 0; i < mSize; ++i) {
+        mVector[i] = anotherVector.mVector[i];
+    }
+    return *this;
+}
