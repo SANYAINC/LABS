@@ -6,9 +6,10 @@ class vector {
     T* mVector;
     int mSize;
 
-    bool validateIndex(int index) const;
+    void validateIndex(int index) const;
 
-    friend std::ostream& operator<<(std::ostream& out, const vector& vectorToOut);
+    template <class V>
+    friend std::ostream& operator<<(std::ostream& out, const vector<V>& vectorToOut);
 
 public:
     vector();
@@ -54,4 +55,35 @@ vector <T>::vector(const vector& anotherVector) {
 template <class T>
 vector <T>::~vector() {
     delete [] mVector;
+}
+
+template <class T>
+void vector <T>::validateIndex(const int index) const {
+    if (index < 0 or index >= mSize) {
+        std::cerr << "INDEX " << index << " IS OUT OF RANGE (0 - " << mSize - 1 << ")" << std::endl;
+        exit(404);
+    }
+}
+
+template <class T>
+std::ostream& operator<<(std::ostream& out, const vector<T>& vectorToOut) {
+    if (vectorToOut.mSize == 0) {
+        out << "[ ]";
+    } else {
+        out << "[";
+        for (int i = 0; i < vectorToOut.mSize; ++i) {
+            out << vectorToOut.mVector[i];
+            if (i != vectorToOut.mSize -1) {
+                out << ", ";
+            }
+        }
+        out << "]";
+    }
+    return out;
+}
+
+template <class T>
+T& vector <T>::operator[](const int index) const {
+    validateIndex(index);
+    return mVector[index];
 }
