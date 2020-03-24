@@ -22,7 +22,7 @@ public:
 
     vector& resize(int newSize);
     vector& pushBack(T data);
-    vector& pushAt(int index, T data);
+    vector& pushAt(int pos, T data);
     vector& deleteAt(int index);
     void print() const;
     int find(T data) const;
@@ -146,4 +146,35 @@ vector<T>& vector <T>::resize(const int newSize) {
     delete [] mVector;
     mVector = newVector;
     mSize = newSize;
+}
+
+template <class T>
+vector<T>& vector <T>::pushBack(T data) {
+    resize(mSize+1);
+    mVector[mSize-1] = data;
+    return *this;
+}
+
+template <class T>
+vector<T>& vector <T>::pushAt(int pos, T data) {
+    if (pos < 0 or pos > mSize) {
+        raiseException(900, pos);
+    }
+    if (pos == mSize) {
+        pushBack(data);
+        return *this;
+    }
+    T* newVector = new T[++mSize];
+    int index = 0;
+    for (; index < pos; ++index) {
+        newVector[index] = mVector[index];
+    }
+    newVector[pos] = data;
+    index++;
+    for (; index < mSize; ++index) {
+        newVector[index] = mVector[index - 1];
+    }
+    delete [] mVector;
+    mVector = newVector;
+
 }
