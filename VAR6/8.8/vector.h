@@ -26,3 +26,32 @@ public:
     void print() const;
     int find(T data) const;
 };
+
+template <class T>
+vector <T>::vector() {
+    mSize = 0;
+    mVector = nullptr;
+}
+
+template <class T>
+vector <T>::vector(int size, T filler) {
+    mSize = size;
+    mVector = new T[mSize];
+    for (int i = 0; i < mSize; ++i) {
+        mVector[i] = filler;
+    }
+}
+
+template <class T>
+vector <T>::vector(const vector& anotherVector) {
+    mSize = anotherVector.mSize;
+    mVector = new T[mSize];
+    for (int i = 0; i < mSize; ++i) {
+        mVector[i] = anotherVector.mVector[i];
+    }
+}
+
+template <class T>
+vector <T>::~vector() {
+    delete [] mVector;
+}
