@@ -6,7 +6,7 @@ class vector {
     T* mVector;
     int mSize;
 
-    void raise(int type, int value) const;
+    static void raise(const vector& v, int type, int value);
 
     template <class V>
     friend std::ostream& operator<<(std::ostream& out, const vector<V>& vectorToOut);
@@ -26,7 +26,7 @@ public:
     vector& deleteAt(int pos);
     vector& clear();
 
-    int getSize();
+    int getSize() const;
     void print() const;
     int find(T data) const;
 };
@@ -61,10 +61,10 @@ vector <T>::~vector() {
 }
 
 template <class T>
-void vector <T>::raise(const int type, const int value) const {
+void vector <T>::raise(const vector& v, int type, int value){
     switch (type) {
         case 900: {
-            std::cerr << "INDEX " << value << " IS OUT OF RANGE (0 - " << mSize - 1 << ")" << std::endl;
+            std::cerr << "INDEX " << value << " IS OUT OF RANGE (0 - " << v.getSize() - 1 << ")" << std::endl;
             exit(type);
         }
         case 901: {
@@ -98,8 +98,12 @@ std::ostream& operator<<(std::ostream& out, const vector<T>& vectorToOut) {
 
 template <class T>
 T& vector <T>::operator[](const int index) const {
-    if (index < 0 or index >= mSize) {
-        raise(900, index);
+    try {
+        if (index < 0 or index >= mSize) {
+            throw index;
+        }
+    } catch (int) {
+        raise(*this, 900, index);
     }
     return mVector[index];
 }
@@ -121,7 +125,7 @@ vector<T>& vector <T>::operator=(const vector& anotherVector) {
 template <class T>
 vector<T>& vector <T>::resize(const int newSize, T filler) {
     if (newSize < 0) {
-        raise(901, newSize);
+        raise(*this, 901, newSize);
     }
     if (newSize == mSize) {
         return *this;
@@ -156,7 +160,7 @@ vector<T>& vector <T>::pushBack(T data) {
 template <class T>
 vector<T>& vector <T>::pushAt(int pos, T data) {
     if (pos < 0 or pos > mSize) {
-        raise(900, pos);
+        raise(*this, 900, pos);
     }
     if (pos == mSize) {
         pushBack(data);
@@ -181,7 +185,7 @@ vector<T>& vector <T>::pushAt(int pos, T data) {
 template <class T>
 vector<T>& vector <T>::deleteAt(int pos) {
     if (pos < 0 or pos >= mSize) {
-        raise(900, pos);
+        raise(*this, 900, pos);
     }
     if (mSize == 1) {
         mSize = 0;
@@ -238,6 +242,6 @@ int vector <T>::find(T data) const {
 }
 
 template <class T>
-int vector <T>::getSize() {
+int vector <T>::getSize() const {
     return mSize;
 }
