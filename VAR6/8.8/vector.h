@@ -24,7 +24,9 @@ public:
     vector& pushBack(T data);
     vector& pushAt(int pos, T data);
     vector& deleteAt(int pos);
-    vector& clear(int index);
+    vector& clear();
+
+    int getSize();
     void print() const;
     int find(T data) const;
 };
@@ -233,4 +235,9 @@ int vector <T>::find(T data) const {
         }
     }
     return -1;
+}
+
+template <class T>
+int vector <T>::getSize() {
+    return mSize;
 }
