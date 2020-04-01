@@ -64,7 +64,7 @@ template <class T>
 void vector <T>::raise(const vector& v, int type, int value){
     switch (type) {
         case 900: {
-            std::cerr << "INDEX " << value << " IS OUT OF RANGE (0 - " << v.getSize() - 1 << ")" << std::endl;
+            std::cerr << "INDEX " << value << " IS OUT OF RANGE" << std::endl;
             exit(type);
         }
         case 901: {

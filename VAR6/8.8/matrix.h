@@ -1,65 +1,72 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <cmath>
 #include "vector.h"
 
-using namespace std;
+#define SPACING 12
 
 class matrix {
 
-    string name;
+    std::string mName;
+    static int sCounter;
 
     vector < vector<double> > mMatrix;
-    int rows;
-    int cols;
+    int mRows;
+    int mCols;
 
-    static int counter;
-
-
-    friend std::ostream& operator<<(std::ostream& out, matrix mx);
-    friend std::istream& operator>>(std::istream& in, matrix mx);
+    friend std::ostream& operator<<(std::ostream& out, const matrix& matrixToOut);
+    friend std::istream& operator>>(std::istream& in, matrix& matrixToIn);
 
 public:
     matrix();
-    matrix(int row, int col);
+    matrix(int rows, int cols);
     matrix(const matrix& anotherMatrix);
     ~matrix();
 
-    vector <double> operator[](int index);
+    vector <double>& operator[](int index);
 
     matrix operator+(double number);
     matrix operator-(double number);
     matrix operator*(double number);
     matrix operator/(double number);
-
     matrix operator+(const matrix& anotherMatrix);
     matrix operator-(const matrix& anotherMatrix);
     matrix operator*(const matrix& anotherMatrix);
 
-    matrix operator+=(const matrix& anotherMatrix);
-    matrix operator-=(const matrix& anotherMatrix);
-    matrix operator*=(const matrix& anotherMatrix);
+    matrix& operator=(const matrix& anotherMatrix);
+
+    matrix& operator+=(double number);
+    matrix& operator-=(double number);
+    matrix& operator*=(double number);
+    matrix& operator/=(double number);
+    matrix& operator+=(const matrix& anotherMatrix);
+    matrix& operator-=(const matrix& anotherMatrix);
+    matrix& operator*=(const matrix& anotherMatrix);
+
 
     bool operator==(const matrix& anotherMatrix);
-    bool operator>(const matrix& anotherMatrix);
-    bool operator<(const matrix& anotherMatrix);
-    bool operator>=(const matrix& anotherMatrix);
-    bool operator<=(const matrix& anotherMatrix);
+    bool operator!=(const matrix& anotherMatrix);
 
     bool isSquared();
     bool isDiagonal();
     bool isZero();
+    bool isNull();
     bool isIdentity();
     bool isSymmetrical();
     bool isUpperTriangle();
     bool isLowerTriangle();
+    bool isSameSizeWith(const matrix& anotherMatrix);
+    bool isCompatibleWith(const matrix& anotherMatrix);
 
-    matrix transpose();
-    matrix power(int power);
+    matrix getTransposed();
+    matrix getRaisedIn(int power);
+    void fillRandom();
+    void fillKeyboard();
+    void fillIdentity();
+    int getRows();
+    int getCols();
     void print();
-    void changeName(const char* newName);
-    void changeName(const string& newName);
-
 };
-
-int matrix::counter = 1;
