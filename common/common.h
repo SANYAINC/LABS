@@ -147,8 +147,6 @@ namespace containers {
 
     template <class T>
     class listSingleDir {
-        /*TODO Добавление в произвольное место
-               Удаление с произвольного места*/
         class node {
         public:
             T mData;
