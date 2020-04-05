@@ -5,7 +5,11 @@
 
 using namespace std;
 
-//Лучше контейнер list, т.к требуется вставка данных, а сложность вставки меньше в list
+//Вставка данных в произвольную позицию в список занимает всегда O(1), однако перебор элементов до этой позиции в худшем случае O(n)
+//Вставка данных в вектор, если нужно перевыделение памяти, занимает O(n), если нет - O(1)
+//Доступ у списка O(n), у вектора всегда O(1)
+
+//Из-за вставки все-таки выбрал бы list
 
 void insertAlphabetically(student& person, list<student>& database);
 void insertAlphabetically(student& person, vector<student>& database);
