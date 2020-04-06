@@ -15,9 +15,8 @@ void fill(list<char>& container, int amount);
 vector<char> getRepeatsFrom(vector<char>& L1, vector<char>& L2);
 list<char> getRepeatsFrom(list<char>& L1, list<char>& L2);
 
-//Сложность поиска повторяющихся элементов O(n^3), т.е требуется <= 2*n^3 обращений к элементу контейнера
-
-//Т.к сложность доступа у вектора всегда О(1), а у списка O(n), то очевидным выбором является vector
+//L1, L2, L проходятся последовательно, т.е произвольный доступ не дает выйгрыша.
+//Если учитытывать перевыделение памяти при добавлении элементов в результирующий вектор, то тут list даст преимущество за счет константой сложности добавления.
 
 int main() {
     srand(time(nullptr));
@@ -85,7 +84,7 @@ void fill(list<char>& container, int amount) {
 }
 vector<char> getRepeatsFrom(vector<char>& L1, vector<char>& L2) {
     vector<char> result;
-    //Дублирование кода позволяет избежать копирования вектора и выигрывает 2 * |L1.size() - L2.size()| обращений
+    //Дублирование кода позволяет избежать копирования вектора, что выигрывает 2 * |L1.size() - L2.size()| обращений
     if (L1.size() < L2.size()) {
         for (int i = 0; i < L1.size(); ++i) {
             for (int j = 0; j < L2.size(); ++j) {
@@ -107,7 +106,7 @@ vector<char> getRepeatsFrom(vector<char>& L1, vector<char>& L2) {
 }
 list<char> getRepeatsFrom(list<char>& L1, list<char>& L2) {
     list<char> result;
-    //Дублирование кода позволяет избежать копирования списка и выигрывает 2 * |L1.size() - L2.size()| обращений
+    //Дублирование кода позволяет избежать копирования списка, что выигрывает 2 * |L1.size() - L2.size()| обращений
     if (L1.size() < L2.size()) {
         for (list<char>::iterator elem1 = L1.begin(); elem1 != L1.end() ; ++elem1) {
             for (list<char>::iterator elem2 = L2.begin(); elem2 != L2.end() ; ++elem2) {

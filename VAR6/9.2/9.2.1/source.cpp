@@ -5,11 +5,9 @@
 
 using namespace std;
 
-//Вставка данных в произвольную позицию в список занимает всегда O(1), однако перебор элементов до этой позиции в худшем случае O(n)
-//Вставка данных в вектор, если нужно перевыделение памяти, занимает O(n), если нет - O(1)
-//Доступ у списка O(n), у вектора всегда O(1)
+//Требуется вставка и удаление данных. Эти операции имеют константную сложность в list
 
-//Из-за вставки все-таки выбрал бы list
+//List - лучший выбор
 
 void insertAlphabetically(student& person, list<student>& database);
 void insertAlphabetically(student& person, vector<student>& database);
@@ -70,20 +68,22 @@ void insertAlphabetically(student& person, list<student>& database) {
         return;
     }
 
-    list<student>::iterator elem = database.begin();
+    list<student>::iterator beg = database.begin();
+    list<student>::iterator end = database.end();
+    --end;
 
-    if ((database.end())->mSurname <= person.mSurname) {
+    if (end->mSurname <= person.mSurname) {
         database.push_back(person);
         return;
     }
-    if ((database.begin())->mSurname >= person.mSurname) {
+    if (beg->mSurname >= person.mSurname) {
         database.push_front(person);
         return;
     }
 
-    for (; elem != database.end(); ++elem) {
-        if (person.mSurname > elem++->mSurname and person.mSurname < elem--->mSurname) {
-            database.insert(++elem, person);
+    for (; beg != database.end(); ++beg) {
+        if (person.mSurname > beg++->mSurname and person.mSurname < beg--->mSurname) {
+            database.insert(++beg, person);
             return;
         }
     }
@@ -94,19 +94,22 @@ void insertAlphabetically(student& person, vector<student>& database) {
         return;
     }
 
-    vector<student>::iterator elem = database.begin();
-    if ((database.end() - 1)->mSurname <= person.mSurname) {
+    vector<student>::iterator beg = database.begin();
+    vector<student>::iterator end = database.end();
+    --end;
+
+    if (end->mSurname <= person.mSurname) {
         database.push_back(person);
         return;
     }
-    if ((database.begin())->mSurname >= person.mSurname) {
+    if (beg->mSurname >= person.mSurname) {
         database.insert(database.begin(), person);
         return;
     }
 
-    for (; elem != database.end() - 1; ++elem) {
-        if (person.mSurname > elem++->mSurname and person.mSurname < elem--->mSurname) {
-            database.insert(++elem, person);
+    for (; beg != database.end(); ++beg) {
+        if (person.mSurname > beg++->mSurname and person.mSurname < beg--->mSurname) {
+            database.insert(++beg, person);
             return;
         }
     }
