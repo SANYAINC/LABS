@@ -22,12 +22,12 @@ bool comp(char c, const char* str);
 int main() {
     map <string, properties> identifiers;
 
-    scanCPP("../VAR6/9.4/source.cpp", identifiers);
+    scanCPP("source.cpp", identifiers);
 
     ofstream f("out.txt");
     for (auto p = identifiers.begin(); p != identifiers.end(); ++p) {
         cout << "|" << p->first << "| met for " << p->second.mAmount << " times at: ";
-        f << "|" << p->first << "| met for " << p->second.mAmount << " times at: ";
+        f << "|" << p->first << "| met for " << p->second.mAmount << " times at lines: ";
         for (int i = 0; i < p->second.mLines.size(); ++i) {
             cout << p->second.mLines[i];
             f << p->second.mLines[i];
@@ -124,7 +124,7 @@ bool isKeyWord(string& word) {
     return  word == "using" or word == "namespace" or word == "int" or word == "void" or word == "const" or
             word == "char" or word == "bool" or word == "while" or word == "if" or word == "and" or word == "continue" or
             word == "else" or word == "return" or word == "switch" or word == "case" or word == "default" or word == "true" or
-            word == "false" or word == "for" or word == "struct";
+            word == "false" or word == "for" or word == "struct" or word == "break";
 }
 
 void scanCPP(const char* fileName, map <string, properties>& identifiers) {
