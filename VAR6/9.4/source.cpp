@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <vector>
 #include <map>
@@ -22,7 +23,7 @@ bool comp(char c, const char* str);
 int main() {
     map <string, properties> identifiers;
 
-    scanCPP("source.cpp", identifiers);
+    scanCPP("../VAR6/9.4/source.cpp", identifiers);
 
     ofstream f("out.txt");
     for (auto p = identifiers.begin(); p != identifiers.end(); ++p) {
@@ -40,7 +41,8 @@ int main() {
         f << endl;
     }
 
-
+    cout << endl << endl;
+    system("pause");
     return 0;
 }
 
@@ -85,10 +87,12 @@ vector <string> split(string& line) {
             wordIndex++;
         }
     }
-    for (auto i = result.begin(); i != result.end(); ++i) {
+    for (auto i = result.begin(); i != result.end();) {
         if (isKeyWord(*i) or ((*i)[0] >= 48 and (*i)[0] <= 57)) {
-            i = result.erase(i) - 1;
+            i = result.erase(i);
+            continue;
         }
+        ++i;
     }
     return result;
 }
@@ -124,7 +128,7 @@ bool isKeyWord(string& word) {
     return  word == "using" or word == "namespace" or word == "int" or word == "void" or word == "const" or
             word == "char" or word == "bool" or word == "while" or word == "if" or word == "and" or word == "continue" or
             word == "else" or word == "return" or word == "switch" or word == "case" or word == "default" or word == "true" or
-            word == "false" or word == "for" or word == "struct" or word == "break";
+            word == "false" or word == "for" or word == "struct" or word == "break" or word == "auto" or word== "or";
 }
 
 void scanCPP(const char* fileName, map <string, properties>& identifiers) {
