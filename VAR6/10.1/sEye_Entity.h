@@ -126,6 +126,7 @@ public:
             char sex, char isAdult, char hasGlasses, char hasBeard,
             const char* color,
             char hasLock);
+    cyclist(const human& person, const char* color, char hasLock);
 
     char getHelmet() const;
 
