@@ -3,8 +3,8 @@
 #include <iostream>
 
 entity::entity(short int xMin, short int xMax, short int yMin, short int yMax) {
-    validateRange(xMin, xMax, 'X');
-    validateRange(yMin, yMax, 'Y');
+    validate(xMin, xMax, 'X');
+    validate(yMin, yMax, 'Y');
 
     mXMin = xMin;
     mXMax = xMax;
@@ -12,7 +12,7 @@ entity::entity(short int xMin, short int xMax, short int yMin, short int yMax) {
     mYMax = yMax;
 }
 
-void entity::validateRange(short int min, short int max, char axis) {
+void entity::validate(short int min, short int max, char axis) {
     try {
         if (min >= max) {
             throw "MIN COORDINATE IS HIGHER THAN MAX";
@@ -43,13 +43,13 @@ short int entity::getYMax() const {
 }
 
 void entity::setXRange(short int xMin, short int xMax) {
-    validateRange(xMin, xMax, 'X');
+    validate(xMin, xMax, 'X');
     mXMin = xMin;
     mXMax = xMax;
 }
 
 void entity::setYRange(short int yMin, short int yMax) {
-    validateRange(yMin, yMax, 'Y');
+    validate(yMin, yMax, 'Y');
     mYMin = yMin;
     mYMax = yMax;
 }
