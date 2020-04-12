@@ -5,10 +5,10 @@
 human::human(short int xMin, short int xMax, short int yMin, short int yMax, char sex, char isAdult, char hasGlasses,
              char hasBeard) : entity(xMin, xMax, yMin, yMax) {
 
-    validateSex(sex);
-    validateParam(isAdult);
-    validateParam(hasGlasses);
-    validateParam(hasBeard);
+    validate(sex, 'S');
+    validate(isAdult, 'B');
+    validate(hasGlasses, 'B');
+    validate(hasBeard, 'B');
 
     mSex = sex;
     mIsAdult = isAdult;
@@ -16,25 +16,17 @@ human::human(short int xMin, short int xMax, short int yMin, short int yMax, cha
     mHasBeard = hasBeard;
 }
 
-void human::validateSex(char sex) {
+void human::validate(char param, char type) {
     try {
-        if (sex != 'M' and sex != 'F' and sex != 'U') {
-            throw sex;
-        }
-    } catch (char invalidSex) {
-        std::cerr << "INVALID SEX: " << invalidSex << std::endl;
-        exit(1002);
-    }
-}
-
-void human::validateParam(char param) {
-    try {
-        if (param != 'Y' and param != 'N' and param != 'U') {
+        if (type == 'S' and param != 'M' and param != 'F' and param != 'U') {
             throw param;
         }
-    } catch (char invalidParam) {
-        std::cerr << "INVALID PARAMETER VALUE. EXPECTED Y/N/U, RECEIVED " << param << std::endl;
-        exit(1003);
+        if (type == 'B' and param != 'Y' and param != 'N' and param != 'U') {
+            throw param;
+        }
+    } catch (char invalidParameter) {
+        std::cerr << "INVALID PARAMETER VALUE. EXPECTED Y/N/U OR M/F/U, RECEIVED " << invalidParameter << std::endl;
+        exit(1002);
     }
 }
 
@@ -55,22 +47,22 @@ char human::getBeard() const {
 }
 
 void human::setSex(char sex) {
-    validateSex(sex);
+    validate(sex, 'S');
     mSex = sex;
 }
 
 void human::setAge(char isAdult) {
-    validateParam(isAdult);
+    validate(isAdult, 'B');
     mIsAdult = isAdult;
 }
 
 void human::setGlasses(char hasGlasses) {
-    validateParam(hasGlasses);
+    validate(hasGlasses, 'B');
     mHasGlasses = hasGlasses;
 }
 
 void human::setBeard(char hasBeard) {
-    validateParam(hasBeard);
+    validate(hasBeard, 'B');
     mHasBeard = hasBeard;
 }
 
