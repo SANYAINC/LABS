@@ -40,10 +40,10 @@ public:
     char getGlasses() const;
     char getBeard() const;
 
-    void setSex(char sex);
-    void setAge(char isAdult);
-    void setGlasses(char hasGlasses);
-    void setBeard(char hasBeard);
+    bool setSex(char sex);
+    bool setAge(char isAdult);
+    bool setGlasses(char hasGlasses);
+    bool setBeard(char hasBeard);
 
     void print() const override;
 };
