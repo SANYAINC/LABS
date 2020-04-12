@@ -12,9 +12,10 @@ protected:
     short int mYMin;
     short int mYMax;
 
-    void validateRange(short int min, short int max, char axis);
-
     entity(short int xMin, short int xMax, short int yMin, short int yMax);
+
+private:
+    void validate(short int min, short int max, char axis);
 
 public:
     short int getXMin() const;
@@ -36,8 +37,8 @@ protected:
     char mHasGlasses;
     char mHasBeard;
 
-    void validateSex(char sex);
-    void validateParam(char param);
+private:
+    void validate(char param, char type);
 
 public:
     human(short int xMin, short int xMax, short int yMin, short int yMax,
