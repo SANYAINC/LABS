@@ -83,6 +83,10 @@ class item: public entity {
 protected:
     char* mName;
     char* mFirstAppearanceTime;
+
+private:
+    void validate(const char* string);
+
 public:
     item(short int xMin, short int xMax, short int yMin, short int yMax,
             const char* name, const char* timeWhenAppeared);
@@ -93,8 +97,8 @@ public:
     const char* getName() const;
     const char* getTime() const;
 
-    bool setName(const char* name);
-    bool setTime(const char* firstAppearanceTime);
+    void setName(const char* name);
+    void setTime(const char* firstAppearanceTime);
 
     void print() const override;
 };
