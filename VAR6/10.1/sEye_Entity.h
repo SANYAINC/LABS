@@ -116,3 +116,20 @@ public:
 
     bool setRegisterPlate(const char* registerPlate);
 };
+
+
+class cyclist: public human, public bike {
+protected:
+    char mHasHelmet;
+public:
+    cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
+            char sex, char isAdult, char hasGlasses, char hasBeard,
+            const char* color,
+            char hasLock);
+
+    char getHelmet() const;
+
+    bool setHelmet(char hasHelmet);
+
+    void print() const override;
+};
