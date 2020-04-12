@@ -26,7 +26,7 @@ public:
 };
 
 
-class human: public entity {
+class human: virtual public entity {
 protected:
     char mSex;
     char mIsAdult;
@@ -50,7 +50,7 @@ public:
 };
 
 
-class vehicle: public entity {
+class vehicle: virtual public entity {
 protected:
     char* mColor;
 public:
