@@ -68,11 +68,14 @@ protected:
     vehicle& operator=(const vehicle& anotherVehicle);
     ~vehicle();
 
+private:
+    void validate(const char* color);
+
 public:
 
     const char* getColor() const;
 
-    bool setColor(const char* color);
+    void setColor(const char* color);
 };
 
 
