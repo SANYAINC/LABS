@@ -33,7 +33,8 @@ protected:
     char mHasGlasses;
     char mHasBeard;
 public:
-    human(short int xMin, short int xMax, short int yMin, short int yMax);
+    human(short int xMin, short int xMax, short int yMin, short int yMax,
+            char sex, char isAdult, char hasGlasses, char hasBeard);
 
     char getSex() const;
     char getAge() const;
@@ -53,7 +54,8 @@ class vehicle: public entity {
 protected:
     char* mColor;
 public:
-    vehicle(const char* color);
+    vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
+            const char* color);
     vehicle(const vehicle& anotherVehicle);
     vehicle& operator=(const vehicle& anotherVehicle) const;
     ~vehicle();
@@ -69,7 +71,8 @@ protected:
     char* mName;
     char* mFirstAppearanceTime;
 public:
-    item(const char* name, const char* timeWhenAppeared);
+    item(short int xMin, short int xMax, short int yMin, short int yMax,
+            const char* name, const char* timeWhenAppeared);
     item(const item& anotherItem);
     item& operator=(const item& anotherItem) const;
     ~item();
