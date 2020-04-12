@@ -133,3 +133,23 @@ public:
 
     void print() const override;
 };
+
+
+class car: public motorTransport {
+protected:
+    char mBodyType;
+    bool mIsTaxi;
+public:
+    car(short int xMin, short int xMax, short int yMin, short int yMax,
+        const char* color,
+        const char* registerPlate,
+        char bodyType, bool isTaxi);
+
+    char getBodyType() const;
+    char getTaxi() const;
+
+    bool setBodyType(char bodyType);
+    bool setTaxi(bool isTaxi);
+
+    void print() const override;
+};
