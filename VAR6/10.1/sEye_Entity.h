@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAX_CHAR 25
+
 class entity {
 protected:
     short int mXMin;
@@ -44,4 +46,19 @@ public:
     void setBeard(char hasBeard);
 
     void print() const override;
+};
+
+
+class vehicle: public entity {
+protected:
+    char* mColor;
+public:
+    vehicle(const char* color);
+    vehicle(const vehicle& anotherVehicle);
+    vehicle& operator=(const vehicle& anotherVehicle) const;
+    ~vehicle();
+
+    const char* getColor() const;
+
+    bool setColor(const char* color);
 };
