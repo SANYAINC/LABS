@@ -4,7 +4,6 @@
 #define FRAME_HEIGHT 2160
 #define MAX_CHAR 25
 
-//1001 - Неверные координаты
 
 class entity {
 protected:
