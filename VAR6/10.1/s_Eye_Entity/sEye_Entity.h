@@ -35,6 +35,10 @@ protected:
     char mIsAdult;
     char mHasGlasses;
     char mHasBeard;
+
+    void validateSex(char sex);
+    void validateParam(char param);
+
 public:
     human(short int xMin, short int xMax, short int yMin, short int yMax,
             char sex, char isAdult, char hasGlasses, char hasBeard);
@@ -44,10 +48,10 @@ public:
     char getGlasses() const;
     char getBeard() const;
 
-    bool setSex(char sex);
-    bool setAge(char isAdult);
-    bool setGlasses(char hasGlasses);
-    bool setBeard(char hasBeard);
+    void setSex(char sex);
+    void setAge(char isAdult);
+    void setGlasses(char hasGlasses);
+    void setBeard(char hasBeard);
 
     void print() const override;
 };
