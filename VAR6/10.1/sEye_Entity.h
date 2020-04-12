@@ -62,3 +62,23 @@ public:
 
     bool setColor(const char* color);
 };
+
+
+class item: public entity {
+protected:
+    char* mName;
+    char* mFirstAppearanceTime;
+public:
+    item(const char* name, const char* timeWhenAppeared);
+    item(const item& anotherItem);
+    item& operator=(const item& anotherItem) const;
+    ~item();
+
+    const char* getName() const;
+    const char* getTime() const;
+
+    bool setName(const char* name);
+    bool setTime(const char* firstAppearanceTime);
+
+    void print() const override;
+};
