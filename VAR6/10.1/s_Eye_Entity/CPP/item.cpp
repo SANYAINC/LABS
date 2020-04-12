@@ -113,7 +113,7 @@ item::~item() {
 void item::validate(const char* string) {
     try {
         if (string[0] == 0) {
-            throw "STRING IS EMPTY";
+            throw "ITEM NAME OR APPEARANCE TIME IS EMPTY";
         }
     } catch (const char* errorMessage) {
         std::cerr << errorMessage << std::endl;
