@@ -15,10 +15,10 @@ public:
     short int getYMin() const;
     short int getYMax() const;
 
-    bool setXMin(short int xMin) const;
-    bool setXMax(short int xMax) const;
-    bool setYMin(short int yMin) const;
-    bool setYMax(short int yMax) const;
+    bool setXMin(short int xMin);
+    bool setXMax(short int xMax);
+    bool setYMin(short int yMin);
+    bool setYMax(short int yMax);
 
     virtual void print() const = 0;
 };
