@@ -57,7 +57,7 @@ public:
     vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
             const char* color);
     vehicle(const vehicle& anotherVehicle);
-    vehicle& operator=(const vehicle& anotherVehicle) const;
+    vehicle& operator=(const vehicle& anotherVehicle);
     ~vehicle();
 
     const char* getColor() const;
@@ -74,7 +74,7 @@ public:
     item(short int xMin, short int xMax, short int yMin, short int yMax,
             const char* name, const char* timeWhenAppeared);
     item(const item& anotherItem);
-    item& operator=(const item& anotherItem) const;
+    item& operator=(const item& anotherItem);
     ~item();
 
     const char* getName() const;
