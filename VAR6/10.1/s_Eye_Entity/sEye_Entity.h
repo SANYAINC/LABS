@@ -1,5 +1,7 @@
 #pragma once
 
+#define FRAME_WIDTH 3840
+#define FRAME_HEIGHT 2160
 #define MAX_CHAR 25
 
 class entity {
