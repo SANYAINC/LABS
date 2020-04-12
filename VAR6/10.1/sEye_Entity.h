@@ -87,6 +87,7 @@ public:
 };
 
 class bike: public vehicle {
+protected:
     char mHasLock;
 public:
     bike(short int xMin, short int xMax, short int yMin, short int yMax,
