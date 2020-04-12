@@ -55,12 +55,14 @@ public:
 class vehicle: virtual public entity {
 protected:
     char* mColor;
-public:
+
     vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
             const char* color);
     vehicle(const vehicle& anotherVehicle);
     vehicle& operator=(const vehicle& anotherVehicle);
     ~vehicle();
+
+public:
 
     const char* getColor() const;
 
@@ -106,13 +108,15 @@ public:
 class motorTransport: public vehicle {
 protected:
     char* registerPlate;
-public:
+
     motorTransport(short int xMin, short int xMax, short int yMin, short int yMax,
                    const char* color,
                    const char* registerPlate);
     motorTransport(const motorTransport& anotherMotorTransport);
     motorTransport& operator=(const motorTransport& anotherMotorTransport);
     ~motorTransport();
+
+public:
 
     const char* getRegisterPlate();
 
