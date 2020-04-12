@@ -100,3 +100,19 @@ public:
 
     void print() const override;
 };
+
+class motorTransport: public vehicle {
+protected:
+    char* registerPlate;
+public:
+    motorTransport(short int xMin, short int xMax, short int yMin, short int yMax,
+                   const char* color,
+                   const char* registerPlate);
+    motorTransport(const motorTransport& anotherMotorTransport);
+    motorTransport& operator=(const motorTransport& anotherMotorTransport);
+    ~motorTransport();
+
+    const char* getRegisterPlate();
+
+    bool setRegisterPlate(const char* registerPlate);
+};
