@@ -129,7 +129,7 @@ protected:
                    const char* color,
                    const char* registerPlate);
     motorTransport(const motorTransport& anotherMT);
-    motorTransport& operator=(const motorTransport& anotherMotorTransport);
+    motorTransport& operator=(const motorTransport& anotherMT);
     ~motorTransport();
 
 private:
