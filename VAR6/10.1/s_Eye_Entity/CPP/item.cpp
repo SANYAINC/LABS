@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 item::item(short int xMin, short int xMax, short int yMin, short int yMax,
             const char* name, const char* timeWhenAppeared) : entity(xMin, xMax, yMin, yMax) {
 

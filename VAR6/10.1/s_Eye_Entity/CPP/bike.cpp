@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 bike::bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* color, char hasLock)
           : vehicle(xMin, xMax, yMin, yMax, color), entity(xMin, xMax, yMin, yMax) {
 

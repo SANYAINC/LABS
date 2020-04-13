@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 car::car(short int xMin, short int xMax, short int yMin, short int yMax, const char* color, const char* registerPlate,
          char bodyType, char isTaxi) : motorTransport(xMin, xMax, yMin, yMax, color, registerPlate),
                                         entity(xMin, xMax, yMin, yMax) {

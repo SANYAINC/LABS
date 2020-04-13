@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 human::human(short int xMin, short int xMax, short int yMin, short int yMax, char sex, char isAdult, char hasGlasses,
              char hasBeard) : entity(xMin, xMax, yMin, yMax) {
 

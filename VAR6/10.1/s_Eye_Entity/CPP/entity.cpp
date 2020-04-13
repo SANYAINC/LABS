@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 entity::entity(short int xMin, short int xMax, short int yMin, short int yMax) {
     validate(xMin, xMax, 'X');
     validate(yMin, yMax, 'Y');
@@ -10,6 +8,11 @@ entity::entity(short int xMin, short int xMax, short int yMin, short int yMax) {
     mXMax = xMax;
     mYMin = yMin;
     mYMax = yMax;
+}
+
+std::ostream& operator<<(std::ostream& out, const entity& obj) {
+    obj.print();
+    return out;
 }
 
 void entity::validate(short int min, short int max, char axis) {

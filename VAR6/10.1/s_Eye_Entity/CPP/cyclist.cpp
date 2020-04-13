@@ -1,7 +1,5 @@
 #include "../sEye_Entity.h"
 
-#include <iostream>
-
 cyclist::cyclist(short int xMin, short int xMax, short int yMin, short int yMax, char sex, char isAdult,
                  char hasGlasses, char hasBeard, const char* color, char hasLock, char hasHelmet)
                  : human(xMin, xMax, yMin, yMax, sex, isAdult, hasGlasses, hasBeard),

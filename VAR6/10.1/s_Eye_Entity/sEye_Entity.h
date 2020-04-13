@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #define FRAME_WIDTH 3840
 #define FRAME_HEIGHT 2160
 #define MAX_CHAR 25
@@ -18,6 +20,9 @@ private:
     void validate(short int min, short int max, char axis);
 
 public:
+
+    friend std::ostream& operator<<(std::ostream& out, const entity& obj);
+
     short int getXMin() const;
     short int getXMax() const;
     short int getYMin() const;
