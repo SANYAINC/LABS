@@ -146,16 +146,18 @@ public:
 class cyclist: public human, public bike {
 protected:
     char mHasHelmet;
+
+private:
+    void validate(char param);
+
 public:
     cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
             char sex, char isAdult, char hasGlasses, char hasBeard,
-            const char* color,
-            char hasLock);
-    cyclist(const human& person, const char* color, char hasLock);
+            const char* color, char hasLock, char hasHelmet);
 
     char getHelmet() const;
 
-    bool setHelmet(char hasHelmet);
+    void setHelmet(char hasHelmet);
 
     void print() const override;
 };
