@@ -4,7 +4,7 @@
 
 motorTransport::motorTransport(short int xMin, short int xMax, short int yMin, short int yMax, const char* color,
                                const char* registerPlate)
-                               : vehicle(xMin, xMax, yMin, yMax, color), entity(xMin, xMax, yMin, yMax) {
+                               : vehicle(xMin, xMax, yMin, yMax, color) {
 
     validate(registerPlate);
 
