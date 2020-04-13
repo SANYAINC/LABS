@@ -64,10 +64,7 @@ item& item::operator=(const item& anotherItem) {
         return *this;
     }
 
-    mXMin = anotherItem.mXMin;
-    mXMax = anotherItem.mXMax;
-    mYMin = anotherItem.mYMin;
-    mYMax = anotherItem.mYMax;
+    entity::operator=(anotherItem);
 
     int anotherSize = 0;
     for (;anotherItem.mName[anotherSize++];);
