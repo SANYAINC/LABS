@@ -42,10 +42,7 @@ vehicle& vehicle::operator=(const vehicle& anotherVehicle) {
         return *this;
     }
 
-    mXMin = anotherVehicle.mXMin;
-    mXMax = anotherVehicle.mXMax;
-    mYMin = anotherVehicle.mYMin;
-    mYMax = anotherVehicle.mYMax;
+    entity::operator=(anotherVehicle);
 
     int anotherColorSize = 0;
     for (;anotherVehicle.mColor[anotherColorSize++];);
@@ -86,6 +83,8 @@ const char* vehicle::getColor() const {
 }
 
 void vehicle::setColor(const char* color) {
+    validate(color);
+
     int anotherColorSize = 0;
     for (;color[anotherColorSize++];);
     int currentColorSize = 0;
