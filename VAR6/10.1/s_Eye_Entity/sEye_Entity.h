@@ -106,14 +106,17 @@ public:
 class bike: public vehicle {
 protected:
     char mHasLock;
+
+private:
+    void validate(char param);
+
 public:
-    bike(short int xMin, short int xMax, short int yMin, short int yMax,
-            const char* color,
+    bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* color,
             char hasLock);
 
     char getLock() const;
 
-    bool setLock(char hasLock);
+    void setLock(char hasLock);
 
     void print() const override;
 };
