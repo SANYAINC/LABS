@@ -86,7 +86,7 @@ void motorTransport::setRegisterPlate(const char* registerPlate) {
     validate(registerPlate);
 
     int anotherPlateSize = 0;
-    for (registerPlate[anotherPlateSize++];);
+    for (;registerPlate[anotherPlateSize++];);
     int currentPlateSize = 0;
     for (;mRegisterPlate[currentPlateSize++];);
 
