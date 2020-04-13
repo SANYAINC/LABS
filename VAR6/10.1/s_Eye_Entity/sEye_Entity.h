@@ -166,18 +166,22 @@ public:
 class car: public motorTransport {
 protected:
     char mBodyType;
-    bool mIsTaxi;
+    char mIsTaxi;
+
+private:
+    void validate(char param, char type);
+
 public:
     car(short int xMin, short int xMax, short int yMin, short int yMax,
         const char* color,
         const char* registerPlate,
-        char bodyType, bool isTaxi);
+        char bodyType, char isTaxi);
 
     char getBodyType() const;
     char getTaxi() const;
 
-    bool setBodyType(char bodyType);
-    bool setTaxi(bool isTaxi);
+    void setBodyType(char bodyType);
+    void setTaxi(bool isTaxi);
 
     void print() const override;
 };
