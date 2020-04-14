@@ -14,12 +14,12 @@ protected:
     short int mYMin;
     short int mYMax;
 
-    entity(short int xMin, short int xMax, short int yMin, short int yMax);
-
 private:
     void validate(short int min, short int max, char axis);
 
 public:
+    entity(short int xMin, short int xMax, short int yMin, short int yMax);
+    virtual ~entity();
 
     friend std::ostream& operator<<(std::ostream& out, const entity& obj);
 
@@ -35,7 +35,7 @@ public:
 };
 
 
-class human: virtual public entity {
+class human : virtual public entity {
 protected:
     char mSex;
     char mIsAdult;
@@ -47,7 +47,8 @@ private:
 
 public:
     human(short int xMin, short int xMax, short int yMin, short int yMax,
-            char sex, char isAdult, char hasGlasses, char hasBeard);
+          char sex, char isAdult, char hasGlasses, char hasBeard);
+    ~human() override;
 
     char getSex() const;
     char getAge() const;
@@ -63,20 +64,19 @@ public:
 };
 
 
-class vehicle: virtual public entity {
+class vehicle : virtual public entity {
 protected:
     char* mColor;
-
-    vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
-            const char* color);
-    vehicle(const vehicle& anotherVehicle);
-    vehicle& operator=(const vehicle& anotherVehicle);
-    ~vehicle();
 
 private:
     void validate(const char* color);
 
 public:
+    vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
+            const char* color);
+    vehicle(const vehicle& anotherVehicle);
+    vehicle& operator=(const vehicle& anotherVehicle);
+    ~vehicle() override;
 
     const char* getColor() const;
 
@@ -84,7 +84,7 @@ public:
 };
 
 
-class item: public entity {
+class item : public entity {
 protected:
     char* mName;
     char* mFirstAppearanceTime;
@@ -94,10 +94,10 @@ private:
 
 public:
     item(short int xMin, short int xMax, short int yMin, short int yMax,
-            const char* name, const char* timeWhenAppeared);
+         const char* name, const char* timeWhenAppeared);
     item(const item& anotherItem);
     item& operator=(const item& anotherItem);
-    ~item();
+    ~item() override;
 
     const char* getName() const;
     const char* getTime() const;
@@ -108,7 +108,7 @@ public:
     void print() const override;
 };
 
-class bike: public vehicle {
+class bike : public vehicle {
 protected:
     char mHasLock;
 
@@ -117,7 +117,8 @@ private:
 
 public:
     bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* color,
-            char hasLock);
+         char hasLock);
+    ~bike() override;
 
     char getLock() const;
 
@@ -126,21 +127,21 @@ public:
     void print() const override;
 };
 
-class motorTransport: public vehicle {
+class motorTransport : public vehicle {
 protected:
     char* mRegisterPlate;
+
+private:
+    void validate(const char* registerPlate);
+
+public:
 
     motorTransport(short int xMin, short int xMax, short int yMin, short int yMax,
                    const char* color,
                    const char* registerPlate);
     motorTransport(const motorTransport& anotherMT);
     motorTransport& operator=(const motorTransport& anotherMT);
-    ~motorTransport();
-
-private:
-    void validate(const char* registerPlate);
-
-public:
+    ~motorTransport() override;
 
     const char* getRegisterPlate();
 
@@ -148,7 +149,7 @@ public:
 };
 
 
-class cyclist: public human, public bike {
+class cyclist : public human, public bike {
 protected:
     char mHasHelmet;
 
@@ -159,6 +160,7 @@ public:
     cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
             char sex, char isAdult, char hasGlasses, char hasBeard,
             const char* color, char hasLock, char hasHelmet);
+    ~cyclist() override;
 
     char getHelmet() const;
 
@@ -168,7 +170,7 @@ public:
 };
 
 
-class car: public motorTransport {
+class car : public motorTransport {
 protected:
     char mBodyType;
     char mIsTaxi;
@@ -181,6 +183,7 @@ public:
         const char* color,
         const char* registerPlate,
         char bodyType, char isTaxi);
+    ~car() override;
 
     char getBodyType() const;
     char getTaxi() const;
