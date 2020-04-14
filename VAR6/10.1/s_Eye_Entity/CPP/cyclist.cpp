@@ -11,6 +11,10 @@ cyclist::cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
     mHasHelmet = hasHelmet;
 }
 
+cyclist::~cyclist() {
+    std::cout << "CALLED CYCLIST" << std::endl;
+}
+
 void cyclist::validate(char param) {
     try {
         if (param != 'Y' and param != 'N' and param != 'U') {

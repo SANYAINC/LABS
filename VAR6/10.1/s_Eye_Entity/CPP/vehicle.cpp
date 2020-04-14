@@ -63,6 +63,7 @@ vehicle& vehicle::operator=(const vehicle& anotherVehicle) {
 
 vehicle::~vehicle() {
     delete [] mColor;
+    std::cout << "CALLED VEHICLE" << std::endl;
 }
 
 void vehicle::validate(const char* color) {

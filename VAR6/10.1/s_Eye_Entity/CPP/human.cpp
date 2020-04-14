@@ -14,6 +14,10 @@ human::human(short int xMin, short int xMax, short int yMin, short int yMax, cha
     mHasBeard = hasBeard;
 }
 
+human::~human() {
+    std::cout << "CALLED HUMAN" << std::endl;
+}
+
 void human::validate(char param, char type) {
     try {
         if (type == 'S' and param != 'M' and param != 'F' and param != 'U') {

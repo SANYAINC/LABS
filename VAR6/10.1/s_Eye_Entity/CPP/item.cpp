@@ -103,6 +103,7 @@ item& item::operator=(const item& anotherItem) {
 item::~item() {
     delete [] mName;
     delete [] mFirstAppearanceTime;
+    std::cout << "CALLED ITEM" << std::endl;
 }
 
 void item::validate(const char* string) {

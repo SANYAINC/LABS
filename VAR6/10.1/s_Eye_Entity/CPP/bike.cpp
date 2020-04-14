@@ -8,6 +8,10 @@ bike::bike(short int xMin, short int xMax, short int yMin, short int yMax, const
     mHasLock = hasLock;
 }
 
+bike::~bike() {
+    std::cout << "CALLED BIKE" << std::endl;
+}
+
 void bike::validate(char param) {
     try {
         if (param != 'Y' and param != 'N' and param != 'U') {
