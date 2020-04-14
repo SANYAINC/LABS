@@ -34,13 +34,15 @@ void bike::setLock(char hasLock) {
 }
 
 void bike::print() const {
-    std::cout << "{ " << "\"Obj\":" << std::endl;
-    std::cout << "\t\"Frame area\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
-    std::cout << "\t\"Vehicle\": {" << std::endl;
-    std::cout << "\t\t\"Color\": " << "\"" << mColor <<"\"," << std::endl;
-    std::cout << "\t\t\"Bike\": {" << std::endl;
-    std::cout << "\t\t\t\"HasLock\":" << "\"" << mHasLock <<"\"" << std::endl;
-    std::cout << "\t\t}" << std::endl;
-    std::cout << "\t}" << std::endl;
+    std::cout << "{" << std::endl ;
+    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
+    std::cout << "      \"Vehicle\": {" << std::endl;
+    std::cout << "         \"Color\": " << "\"" << mColor <<"\"," << std::endl;
+    std::cout << "         \"Bike\": {" << std::endl;
+    std::cout << "            \"HasLock\":" << "\"" << mHasLock <<"\"" << std::endl;
+    std::cout << "         }" << std::endl;
+    std::cout << "      }" << std::endl;
+    std::cout << "   }" << std::endl;
     std::cout << "}" << std::endl;
 }

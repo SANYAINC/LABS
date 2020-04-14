@@ -174,11 +174,13 @@ void item::setTime(const char* firstAppearanceTime) {
 }
 
 void item::print() const {
-    std::cout << "{ " << "\"Obj\":" << std::endl;
-    std::cout << "\t\"Frame area\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
-    std::cout << "\t\"Item\": {" << std::endl;
-    std::cout << "\t\t\"Name\": " << "\"" << mName <<"\"," << std::endl;
-    std::cout << "\t\t\"FirstAppearedTime\": " << "\"" << mFirstAppearanceTime <<"\"" << std::endl;
-    std::cout << "\t}" << std::endl;
+    std::cout << "{ " << std::endl;
+    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
+    std::cout << "      \"Item\": {" << std::endl;
+    std::cout << "         \"Name\": " << "\"" << mName <<"\"," << std::endl;
+    std::cout << "         \"FirstAppearedTime\": " << "\"" << mFirstAppearanceTime <<"\"" << std::endl;
+    std::cout << "      }" << std::endl;
+    std::cout << "   }" << std::endl;
     std::cout << "}" << std::endl;
 }

@@ -69,13 +69,15 @@ void human::setBeard(char hasBeard) {
 }
 
 void human::print() const {
-    std::cout << "{" << std::endl << "\"Obj\":" << std::endl;
-    std::cout << "\t\"Frame area\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
-    std::cout << "\t\"Person\": {" << std::endl;
-    std::cout << "\t\t\"Sex\": " << "\"" << mSex <<"\"," << std::endl;
-    std::cout << "\t\t\"IsAdult\": " << "\"" << mIsAdult <<"\"," << std::endl;
-    std::cout << "\t\t\"HasGlasses\": " << "\"" << mHasGlasses <<"\"," << std::endl;
-    std::cout << "\t\t\"HasBeard\": " << "\"" << mHasBeard <<"\"" << std::endl;
-    std::cout << "\t}" << std::endl;
+    std::cout << "{" << std::endl;
+    std::cout << "   \"Obj\":" << std::endl;
+    std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
+    std::cout << "      \"Person\": {" << std::endl;
+    std::cout << "         \"Sex\": " << "\"" << mSex <<"\"," << std::endl;
+    std::cout << "         \"IsAdult\": " << "\"" << mIsAdult <<"\"," << std::endl;
+    std::cout << "         \"HasGlasses\": " << "\"" << mHasGlasses <<"\"," << std::endl;
+    std::cout << "         \"HasBeard\": " << "\"" << mHasBeard <<"\"" << std::endl;
+    std::cout << "      }" << std::endl;
+    std::cout << "   }" << std::endl;
     std::cout << "}" << std::endl;
 }

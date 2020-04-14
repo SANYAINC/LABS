@@ -50,17 +50,19 @@ void car::setTaxi(bool isTaxi) {
 }
 
 void car::print() const {
-    std::cout << "{ " << "\"Obj\":" << std::endl;
-    std::cout << "\t\"Frame area\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
-    std::cout << "\t\"Vehicle\": {" << std::endl;
-    std::cout << "\t\t\"Color\": " << "\"" << mColor <<"\"," << std::endl;
-    std::cout << "\t\t\"MotorTransport\": {" << std::endl;
-    std::cout << "\t\t\t\"RegisterPlate\":" << "\"" << mRegisterPlate <<"\"," << std::endl;
-    std::cout << "\t\t\t\"Car\": {" << std::endl;
-    std::cout << "\t\t\t\t\"IsTaxi\": " << "\"" << mIsTaxi <<"\"," << std::endl;
-    std::cout << "\t\t\t\t\"BodyType\": " << "\"" << mBodyType <<"\"" << std::endl;
-    std::cout << "\t\t\t}" << std::endl;
-    std::cout << "\t\t}" << std::endl;
-    std::cout << "\t}" << std::endl;
+    std::cout << "{ " << std::endl;
+    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
+    std::cout << "      \"Vehicle\": {" << std::endl;
+    std::cout << "         \"Color\": " << "\"" << mColor <<"\"," << std::endl;
+    std::cout << "         \"MotorTransport\": {" << std::endl;
+    std::cout << "            \"RegisterPlate\":" << "\"" << mRegisterPlate <<"\"," << std::endl;
+    std::cout << "            \"Car\": {" << std::endl;
+    std::cout << "               \"IsTaxi\": " << "\"" << mIsTaxi <<"\"," << std::endl;
+    std::cout << "               \"BodyType\": " << "\"" << mBodyType <<"\"" << std::endl;
+    std::cout << "            }" << std::endl;
+    std::cout << "         }" << std::endl;
+    std::cout << "      }" << std::endl;
+    std::cout << "   }" << std::endl;
     std::cout << "}" << std::endl;
 }
