@@ -32,38 +32,38 @@ void human::validate(char param, char type) {
     }
 }
 
-char human::getSex() const {
+char human::getPersonSex() const {
     return mSex;
 }
 
-char human::getAge() const {
+char human::getPersonIsAdult() const {
     return mIsAdult;
 }
 
-char human::getGlasses() const {
+char human::getPersonHasGlasses() const {
     return mHasGlasses;
 }
 
-char human::getBeard() const {
+char human::getPersonHasBeard() const {
     return mHasBeard;
 }
 
-void human::setSex(char sex) {
+void human::setPersonSex(char sex) {
     validate(sex, 'S');
     mSex = sex;
 }
 
-void human::setAge(char isAdult) {
+void human::setPersonIsAdult(char isAdult) {
     validate(isAdult, 'B');
     mIsAdult = isAdult;
 }
 
-void human::setGlasses(char hasGlasses) {
+void human::setPersonHasGlasses(char hasGlasses) {
     validate(hasGlasses, 'B');
     mHasGlasses = hasGlasses;
 }
 
-void human::setBeard(char hasBeard) {
+void human::setPersonHasBeard(char hasBeard) {
     validate(hasBeard, 'B');
     mHasBeard = hasBeard;
 }

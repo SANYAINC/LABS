@@ -77,11 +77,11 @@ void motorTransport::validate(const char* registerPlate) {
     }
 }
 
-const char* motorTransport::getRegisterPlate() {
+const char* motorTransport::getMTRegisterPlate() {
     return mRegisterPlate;
 }
 
-void motorTransport::setRegisterPlate(const char* registerPlate) {
+void motorTransport::setMTRegisterPlate(const char* registerPlate) {
     validate(registerPlate);
 
     int anotherPlateSize = 0;

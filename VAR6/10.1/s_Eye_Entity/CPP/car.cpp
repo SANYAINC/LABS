@@ -29,21 +29,21 @@ void car::validate(char param, char type) {
     }
 }
 
-char car::getBodyType() const {
+char car::getCarBodyType() const {
     return mBodyType;
 }
 
-char car::getTaxi() const {
+char car::getCarIsTaxi() const {
     return mIsTaxi;
 }
 
-void car::setBodyType(char bodyType) {
+void car::setCarBodyType(char bodyType) {
     validate(bodyType, 'B');
 
     mBodyType = bodyType;
 }
 
-void car::setTaxi(bool isTaxi) {
+void car::setCarIsTaxi(bool isTaxi) {
     validate(isTaxi, 'T');
 
     mIsTaxi = isTaxi;

@@ -23,11 +23,11 @@ void bike::validate(char param) {
     }
 }
 
-char bike::getLock() const {
+char bike::getBikeLock() const {
     return mHasLock;
 }
 
-void bike::setLock(char hasLock) {
+void bike::setBikeLock(char hasLock) {
     validate(hasLock);
 
     mHasLock = hasLock;

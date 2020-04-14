@@ -26,11 +26,11 @@ void cyclist::validate(char param) {
     }
 }
 
-char cyclist::getHelmet() const {
+char cyclist::getCyclistHasHelmet() const {
     return mHasHelmet;
 }
 
-void cyclist::setHelmet(char hasHelmet) {
+void cyclist::setCyclistHasHelmet(char hasHelmet) {
     validate(hasHelmet);
 
     mHasHelmet = hasHelmet;

@@ -117,15 +117,15 @@ void item::validate(const char* string) {
     }
 }
 
-const char* item::getName() const {
+const char* item::getItemName() const {
     return mName;
 }
 
-const char* item::getTime() const {
+const char* item::getItemTime() const {
     return mFirstAppearanceTime;
 }
 
-void item::setName(const char* name) {
+void item::setItemName(const char* name) {
     validate(name);
 
     int anotherNameSize = 0;
@@ -149,7 +149,7 @@ void item::setName(const char* name) {
     mName[i] = 0;
 }
 
-void item::setTime(const char* firstAppearanceTime) {
+void item::setItemTime(const char* firstAppearanceTime) {
     validate(firstAppearanceTime);
 
     int anotherTimeSize = 0;

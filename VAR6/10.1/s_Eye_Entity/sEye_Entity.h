@@ -6,6 +6,9 @@
 #define FRAME_HEIGHT 2160
 #define MAX_CHAR 25
 
+//Sex: M/F/U
+//Bool: Y/N/U
+//BodyType: 0-10
 
 class entity {
 protected:
@@ -50,15 +53,15 @@ public:
           char sex, char isAdult, char hasGlasses, char hasBeard);
     ~human() override;
 
-    char getSex() const;
-    char getAge() const;
-    char getGlasses() const;
-    char getBeard() const;
+    char getPersonSex() const;
+    char getPersonIsAdult() const;
+    char getPersonHasGlasses() const;
+    char getPersonHasBeard() const;
 
-    void setSex(char sex);
-    void setAge(char isAdult);
-    void setGlasses(char hasGlasses);
-    void setBeard(char hasBeard);
+    void setPersonSex(char sex);
+    void setPersonIsAdult(char isAdult);
+    void setPersonHasGlasses(char hasGlasses);
+    void setPersonHasBeard(char hasBeard);
 
     void print() const override;
 };
@@ -78,9 +81,9 @@ public:
     vehicle& operator=(const vehicle& anotherVehicle);
     ~vehicle() override;
 
-    const char* getColor() const;
+    const char* getVehicleColor() const;
 
-    void setColor(const char* color);
+    void setVehicleColor(const char* color);
 };
 
 
@@ -99,11 +102,11 @@ public:
     item& operator=(const item& anotherItem);
     ~item() override;
 
-    const char* getName() const;
-    const char* getTime() const;
+    const char* getItemName() const;
+    const char* getItemTime() const;
 
-    void setName(const char* name);
-    void setTime(const char* firstAppearanceTime);
+    void setItemName(const char* name);
+    void setItemTime(const char* firstAppearanceTime);
 
     void print() const override;
 };
@@ -120,9 +123,9 @@ public:
          char hasLock);
     ~bike() override;
 
-    char getLock() const;
+    char getBikeLock() const;
 
-    void setLock(char hasLock);
+    void setBikeLock(char hasLock);
 
     void print() const override;
 };
@@ -143,9 +146,9 @@ public:
     motorTransport& operator=(const motorTransport& anotherMT);
     ~motorTransport() override;
 
-    const char* getRegisterPlate();
+    const char* getMTRegisterPlate();
 
-    void setRegisterPlate(const char* registerPlate);
+    void setMTRegisterPlate(const char* registerPlate);
 };
 
 
@@ -162,9 +165,9 @@ public:
             const char* color, char hasLock, char hasHelmet);
     ~cyclist() override;
 
-    char getHelmet() const;
+    char getCyclistHasHelmet() const;
 
-    void setHelmet(char hasHelmet);
+    void setCyclistHasHelmet(char hasHelmet);
 
     void print() const override;
 };
@@ -185,11 +188,11 @@ public:
         char bodyType, char isTaxi);
     ~car() override;
 
-    char getBodyType() const;
-    char getTaxi() const;
+    char getCarBodyType() const;
+    char getCarIsTaxi() const;
 
-    void setBodyType(char bodyType);
-    void setTaxi(bool isTaxi);
+    void setCarBodyType(char bodyType);
+    void setCarIsTaxi(bool isTaxi);
 
     void print() const override;
 };

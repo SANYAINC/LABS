@@ -77,11 +77,11 @@ void vehicle::validate(const char* color) {
     }
 }
 
-const char* vehicle::getColor() const {
+const char* vehicle::getVehicleColor() const {
     return mColor;
 }
 
-void vehicle::setColor(const char* color) {
+void vehicle::setVehicleColor(const char* color) {
     validate(color);
 
     int anotherColorSize = 0;
