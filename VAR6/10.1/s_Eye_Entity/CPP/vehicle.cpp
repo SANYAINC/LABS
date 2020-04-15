@@ -86,6 +86,7 @@ void vehicle::setVehicleColor(const char* color) {
 
     int anotherColorSize = 0;
     for (;color[anotherColorSize++];);
+    anotherColorSize = anotherColorSize < MAX_CHAR ? anotherColorSize : MAX_CHAR;
     int currentColorSize = 0;
     for (;mColor[currentColorSize++];);
 

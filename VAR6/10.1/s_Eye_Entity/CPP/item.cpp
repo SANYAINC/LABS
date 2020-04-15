@@ -130,9 +130,7 @@ void item::setItemName(const char* name) {
 
     int anotherNameSize = 0;
     for (;name[anotherNameSize++];);
-    if (anotherNameSize >= MAX_CHAR) {
-        anotherNameSize = MAX_CHAR;
-    }
+    anotherNameSize = anotherNameSize < MAX_CHAR ? anotherNameSize : MAX_CHAR;
 
     int currentNameSize = 0;
     for (;mName[currentNameSize++];);
@@ -154,9 +152,7 @@ void item::setItemTime(const char* firstAppearanceTime) {
 
     int anotherTimeSize = 0;
     for (;firstAppearanceTime[anotherTimeSize++];);
-    if (anotherTimeSize >= MAX_CHAR) {
-        anotherTimeSize = MAX_CHAR;
-    }
+    anotherTimeSize = anotherTimeSize < MAX_CHAR ? anotherTimeSize : MAX_CHAR;
 
     int currentTimeSize = 0;
     for (;mFirstAppearanceTime[currentTimeSize++];);

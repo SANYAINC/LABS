@@ -86,6 +86,7 @@ void motorTransport::setMTRegisterPlate(const char* registerPlate) {
 
     int anotherPlateSize = 0;
     for (;registerPlate[anotherPlateSize++];);
+    anotherPlateSize = anotherPlateSize < MAX_CHAR ? anotherPlateSize : MAX_CHAR;
     int currentPlateSize = 0;
     for (;mRegisterPlate[currentPlateSize++];);
 
