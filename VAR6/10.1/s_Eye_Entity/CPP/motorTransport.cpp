@@ -14,7 +14,7 @@ motorTransport::motorTransport(short int xMin, short int xMax, short int yMin, s
 
     int i = 0;
     while (i < newSize - 1) {
-        mRegisterPlate[i] = color[i];
+        mRegisterPlate[i] = registerPlate[i];
         ++i;
     }
     mRegisterPlate[i] = 0;
