@@ -40,7 +40,7 @@ motorTransport& motorTransport::operator=(const motorTransport& anotherMT) {
         return *this;
     }
 
-    entity::operator=(anotherMT);
+    vehicle::operator=(anotherMT);
 
     int anotherPlateSize = 0;
     for (;anotherMT.mRegisterPlate[anotherPlateSize++];);
