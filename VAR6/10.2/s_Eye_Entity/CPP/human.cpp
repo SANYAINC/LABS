@@ -15,7 +15,7 @@ human::human(short int xMin, short int xMax, short int yMin, short int yMax, cha
 }
 
 human::~human() {
-    std::cout << "CALLED HUMAN" << std::endl;
+    //std::cout << "CALLED HUMAN" << std::endl;
 }
 
 void human::validate(char param, char type) {

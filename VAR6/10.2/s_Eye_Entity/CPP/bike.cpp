@@ -9,7 +9,7 @@ bike::bike(short int xMin, short int xMax, short int yMin, short int yMax, const
 }
 
 bike::~bike() {
-    std::cout << "CALLED BIKE" << std::endl;
+    //std::cout << "CALLED BIKE" << std::endl;
 }
 
 void bike::validate(char param) {

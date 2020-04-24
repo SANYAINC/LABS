@@ -12,7 +12,7 @@ car::car(short int xMin, short int xMax, short int yMin, short int yMax, const c
 }
 
 car::~car() {
-    std::cout << "CALLED CAR" << std::endl;
+    //std::cout << "CALLED CAR" << std::endl;
 }
 
 void car::validate(char param, char type) {

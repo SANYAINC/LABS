@@ -11,7 +11,7 @@ entity::entity(short int xMin, short int xMax, short int yMin, short int yMax) {
 }
 
 entity::~entity() {
-    std::cout << "CALLED ENTITY" << std::endl;
+    //std::cout << "CALLED ENTITY" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const entity& obj) {

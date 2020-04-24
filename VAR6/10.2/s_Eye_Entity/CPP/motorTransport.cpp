@@ -63,7 +63,7 @@ motorTransport& motorTransport::operator=(const motorTransport& anotherMT) {
 
 motorTransport::~motorTransport() {
     delete [] mRegisterPlate;
-    std::cout << "CALLED MT" << std::endl;
+    //std::cout << "CALLED MT" << std::endl;
 }
 
 void motorTransport::validate(const char* registerPlate) {

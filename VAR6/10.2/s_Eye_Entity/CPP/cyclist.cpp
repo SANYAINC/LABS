@@ -12,7 +12,7 @@ cyclist::cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
 }
 
 cyclist::~cyclist() {
-    std::cout << "CALLED CYCLIST" << std::endl;
+    //std::cout << "CALLED CYCLIST" << std::endl;
 }
 
 void cyclist::validate(char param) {
