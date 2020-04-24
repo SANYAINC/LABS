@@ -76,7 +76,7 @@ private:
 
 public:
     vehicle(short int xMin, short int xMax, short int yMin, short int yMax,
-            const char* color);
+            const char* vehicleColor);
     vehicle(const vehicle& anotherVehicle);
     vehicle& operator=(const vehicle& anotherVehicle);
     ~vehicle() override;
@@ -97,7 +97,7 @@ private:
 
 public:
     item(short int xMin, short int xMax, short int yMin, short int yMax,
-         const char* name, const char* timeWhenAppeared);
+         const char* itemName, const char* timeWhenAppeared);
     item(const item& anotherItem);
     item& operator=(const item& anotherItem);
     ~item() override;
@@ -119,8 +119,8 @@ private:
     void validate(char param);
 
 public:
-    bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* color,
-         char hasLock);
+    bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* vehicleColor,
+         char bikeHasLock);
     ~bike() override;
 
     char getBikeLock() const;
@@ -140,7 +140,7 @@ private:
 public:
 
     motorTransport(short int xMin, short int xMax, short int yMin, short int yMax,
-                   const char* color,
+                   const char* VehicleColor,
                    const char* registerPlate);
     motorTransport(const motorTransport& anotherMT);
     motorTransport& operator=(const motorTransport& anotherMT);
@@ -162,7 +162,7 @@ private:
 public:
     cyclist(short int xMin, short int xMax, short int yMin, short int yMax,
             char sex, char isAdult, char hasGlasses, char hasBeard,
-            const char* color, char hasLock, char hasHelmet);
+            const char* vehicleColor, char bikeHasLock, char cyclistHasHelmet);
     ~cyclist() override;
 
     char getCyclistHasHelmet() const;
@@ -183,9 +183,9 @@ private:
 
 public:
     car(short int xMin, short int xMax, short int yMin, short int yMax,
-        const char* color,
+        const char* vehicleColor,
         const char* registerPlate,
-        char bodyType, char isTaxi);
+        char carBodyType, char isTaxi);
     ~car() override;
 
     char getCarBodyType() const;
