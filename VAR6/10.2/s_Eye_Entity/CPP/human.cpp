@@ -70,7 +70,8 @@ void human::setPersonHasBeard(char hasBeard) {
 
 void human::print() const {
     std::cout << "{" << std::endl;
-    std::cout << "   \"Obj\":" << std::endl;
+    std::cout << "   \"Object\": \"Human\", " << std::endl;
+    std::cout << "   \"Properties\": {" << std::endl;
     std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
     std::cout << "      \"Person\": {" << std::endl;
     std::cout << "         \"Sex\": " << "\"" << mSex <<"\"," << std::endl;

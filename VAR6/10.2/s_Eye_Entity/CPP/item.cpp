@@ -171,7 +171,8 @@ void item::setItemTime(const char* firstAppearanceTime) {
 
 void item::print() const {
     std::cout << "{ " << std::endl;
-    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "   \"Object\": \"Item\", " << std::endl;
+    std::cout << "   \"Properties\": {" << std::endl;
     std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
     std::cout << "      \"Item\": {" << std::endl;
     std::cout << "         \"Name\": " << "\"" << mName <<"\"," << std::endl;

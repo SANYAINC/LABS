@@ -38,7 +38,8 @@ void cyclist::setCyclistHasHelmet(char hasHelmet) {
 
 void cyclist::print() const {
     std::cout << "{ " << std::endl;
-    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "   \"Object\": \"Cyclist\", " << std::endl;
+    std::cout << "   \"Properties\": {" << std::endl;
     std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
     std::cout << "      \"Vehicle\": {" << std::endl;
     std::cout << "         \"Color\": " << "\"" << mColor <<"\"," << std::endl;

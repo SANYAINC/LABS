@@ -51,7 +51,8 @@ void car::setCarIsTaxi(bool isTaxi) {
 
 void car::print() const {
     std::cout << "{ " << std::endl;
-    std::cout << "   \"Obj\": {" << std::endl;
+    std::cout << "   \"Object\": \"Car\", " << std::endl;
+    std::cout << "   \"Properties\": {" << std::endl;
     std::cout << "      \"FrameArea\": [[" << mXMin << ", " << mYMax << "], [" << mXMax << ", " << mYMin << "]]," << std::endl;
     std::cout << "      \"Vehicle\": {" << std::endl;
     std::cout << "         \"Color\": " << "\"" << mColor <<"\"," << std::endl;
