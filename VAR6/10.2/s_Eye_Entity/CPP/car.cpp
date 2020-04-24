@@ -1,12 +1,12 @@
 #include "../sEye_Entity.h"
 
-car::car(short int xMin, short int xMax, short int yMin, short int yMax, const char* color, const char* registerPlate,
-         char bodyType, char isTaxi) : motorTransport(xMin, xMax, yMin, yMax, color, registerPlate),
-                                        entity(xMin, xMax, yMin, yMax) {
-    validate(bodyType, 'B');
+car::car(short int xMin, short int xMax, short int yMin, short int yMax, const char* vehicleColor, const char* registerPlate,
+         char carBodyType, char isTaxi) : motorTransport(xMin, xMax, yMin, yMax, vehicleColor, registerPlate),
+                                          entity(xMin, xMax, yMin, yMax) {
+    validate(carBodyType, 'B');
     validate(isTaxi, 'T');
 
-    mBodyType = bodyType;
+    mBodyType = carBodyType;
     mIsTaxi = isTaxi;
 
 }

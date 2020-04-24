@@ -1,19 +1,19 @@
 #include "../sEye_Entity.h"
 
-vehicle::vehicle(short int xMin, short int xMax, short int yMin, short int yMax, const char* color)
+vehicle::vehicle(short int xMin, short int xMax, short int yMin, short int yMax, const char* vehicleColor)
                 : entity(xMin, xMax, yMin, yMax) {
 
-    validate(color);
+    validate(vehicleColor);
 
     int colorSize = 0;
-    for (; color[colorSize++];);
+    for (; vehicleColor[colorSize++];);
     int newSize = colorSize < MAX_CHAR ? colorSize : MAX_CHAR;
 
     mColor = new char[newSize];
 
     int i = 0;
     while (i < newSize - 1) {
-        mColor[i] = color[i];
+        mColor[i] = vehicleColor[i];
         ++i;
     }
     mColor[i] = 0;

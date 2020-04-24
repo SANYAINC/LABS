@@ -1,14 +1,14 @@
 #include "../sEye_Entity.h"
 
 cyclist::cyclist(short int xMin, short int xMax, short int yMin, short int yMax, char sex, char isAdult,
-                 char hasGlasses, char hasBeard, const char* color, char hasLock, char hasHelmet)
+                 char hasGlasses, char hasBeard, const char* vehicleColor, char bikeHasLock, char cyclistHasHelmet)
                  : human(xMin, xMax, yMin, yMax, sex, isAdult, hasGlasses, hasBeard),
-                   bike(xMin, xMax, yMin, yMax, color, hasLock),
+                   bike(xMin, xMax, yMin, yMax, vehicleColor, bikeHasLock),
                    entity(xMin, xMax, yMin, yMax) {
 
-    validate(hasHelmet);
+    validate(cyclistHasHelmet);
 
-    mHasHelmet = hasHelmet;
+    mHasHelmet = cyclistHasHelmet;
 }
 
 cyclist::~cyclist() {

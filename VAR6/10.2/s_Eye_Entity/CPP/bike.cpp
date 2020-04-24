@@ -1,11 +1,11 @@
 #include "../sEye_Entity.h"
 
-bike::bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* color, char hasLock)
-          : vehicle(xMin, xMax, yMin, yMax, color), entity(xMin, xMax, yMin, yMax) {
+bike::bike(short int xMin, short int xMax, short int yMin, short int yMax, const char* vehicleColor, char bikeHasLock)
+          : vehicle(xMin, xMax, yMin, yMax, vehicleColor), entity(xMin, xMax, yMin, yMax) {
 
-    validate(hasLock);
+    validate(bikeHasLock);
 
-    mHasLock = hasLock;
+    mHasLock = bikeHasLock;
 }
 
 bike::~bike() {

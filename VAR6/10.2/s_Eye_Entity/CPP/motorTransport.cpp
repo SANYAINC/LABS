@@ -1,8 +1,8 @@
 #include "../sEye_Entity.h"
 
-motorTransport::motorTransport(short int xMin, short int xMax, short int yMin, short int yMax, const char* color,
+motorTransport::motorTransport(short int xMin, short int xMax, short int yMin, short int yMax, const char* VehicleColor,
                                const char* registerPlate)
-                               : vehicle(xMin, xMax, yMin, yMax, color) {
+                               : vehicle(xMin, xMax, yMin, yMax, VehicleColor) {
 
     validate(registerPlate);
 

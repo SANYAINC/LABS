@@ -1,13 +1,13 @@
 #include "../sEye_Entity.h"
 
 item::item(short int xMin, short int xMax, short int yMin, short int yMax,
-            const char* name, const char* timeWhenAppeared) : entity(xMin, xMax, yMin, yMax) {
+           const char* itemName, const char* timeWhenAppeared) : entity(xMin, xMax, yMin, yMax) {
 
-    validate(name);
+    validate(itemName);
     validate(timeWhenAppeared);
 
     int nameSize = 0;
-    for (;name[nameSize++];);
+    for (; itemName[nameSize++];);
     int timeSize = 0;
     for (;timeWhenAppeared[timeSize++];);
 
@@ -19,7 +19,7 @@ item::item(short int xMin, short int xMax, short int yMin, short int yMax,
 
     int i = 0;
     for (; i < newNameSize - 1; ++i) {
-        mName[i] = name[i];
+        mName[i] = itemName[i];
     }
     mName[i] = 0;
 
