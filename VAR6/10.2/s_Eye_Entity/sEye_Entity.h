@@ -146,7 +146,7 @@ public:
     motorTransport& operator=(const motorTransport& anotherMT);
     ~motorTransport() override;
 
-    const char* getMTRegisterPlate();
+    const char* getMTRegisterPlate() const;
 
     void setMTRegisterPlate(const char* registerPlate);
 };

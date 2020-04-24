@@ -77,7 +77,7 @@ void motorTransport::validate(const char* registerPlate) {
     }
 }
 
-const char* motorTransport::getMTRegisterPlate() {
+const char* motorTransport::getMTRegisterPlate() const {
     return mRegisterPlate;
 }
 
