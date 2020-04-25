@@ -1,31 +1,40 @@
 #pragma once
-
 #include "sEye_Entity.h"
+#define SIZE_INIT 2
+
 
 class entityVector {
-protected:
     entity** mVector;
+    int mCapacity;
     int mSize;
+
+    void resize(int newSize);
+
+    void identifyAndPushObject(entity** vector, entity* object, int index);
 
 public:
     entityVector();
     entityVector(int size);
     entityVector(const entityVector& anotherVector);
     entityVector(entityVector&& anotherVector);
-    virtual ~entityVector();
+    ~entityVector();
 
     entityVector& operator=(const entityVector& anotherVector);
     entityVector& operator=(entityVector&& anotherVector);
 
-    void resize(int size);
+    entity* operator[](int position);
 
-    void pushBack(const entity& object);
+    void pushBack(entity& object);
 
-    void pushAt(int index, entity& obj);
+    void pushAt(int index, entity& object);
 
-    void removeAt(int index);
+    void removeAt(int position);
 
-    void print();
+    int getSize() const;
+
+    int getCapacity() const;
+
+    void print() const;
 
     void clear();
 };
