@@ -1,4 +1,4 @@
-#include "../s_Eye_Entity_Vector.h"
+#include "../sEye_Entity_Vector.h"
 #include <iostream>
 
 entityVector::entityVector() {
