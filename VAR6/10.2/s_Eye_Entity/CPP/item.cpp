@@ -179,5 +179,5 @@ void item::print() const {
     std::cout << "         \"FirstAppearedTime\": " << "\"" << mFirstAppearanceTime <<"\"" << std::endl;
     std::cout << "      }" << std::endl;
     std::cout << "   }" << std::endl;
-    std::cout << "}" << std::endl;
+    std::cout << "}";
 }

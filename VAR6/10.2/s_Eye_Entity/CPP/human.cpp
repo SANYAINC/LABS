@@ -80,5 +80,5 @@ void human::print() const {
     std::cout << "         \"HasBeard\": " << "\"" << mHasBeard <<"\"" << std::endl;
     std::cout << "      }" << std::endl;
     std::cout << "   }" << std::endl;
-    std::cout << "}" << std::endl;
+    std::cout << "}";
 }
