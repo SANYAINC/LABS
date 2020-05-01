@@ -10,7 +10,7 @@ class entityVector {
 
     void resize(int newSize);
 
-    void identifyAndPushObject(entity** vector, entity* object, int index);
+    void identifyAndPush(entity** vector, entity* object, int index);
 
 public:
     entityVector();
