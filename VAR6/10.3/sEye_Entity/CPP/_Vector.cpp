@@ -17,22 +17,22 @@ entityVector::entityVector() {
     }
 }
 
-entityVector::entityVector(const int size) {
-    if (size < 0) {
-        std::cerr << "INVALID SIZE: " << size << std::endl;
+entityVector::entityVector(const int capacity) {
+    if (capacity < 0) {
+        std::cerr << "INVALID SIZE: " << capacity << std::endl;
         exit(1007);
     }
 
-    if (size == 0) {
+    if (capacity == 0) {
         mVector = nullptr;
         mCapacity = 0;
         mSize = 0;
     } else {
-        mVector = new entity*[size];
-        for (int i = 0; i < size; ++i) {
+        mVector = new entity*[capacity];
+        for (int i = 0; i < capacity; ++i) {
             mVector[i] = nullptr;
         }
-        mCapacity = size;
+        mCapacity = capacity;
         mSize = 0;
     }
 }
@@ -45,17 +45,16 @@ entityVector::entityVector(const entityVector& anotherVector) {
         mCapacity = 0;
         mSize = 0;
     } else {
-        mVector = new entity* [newCapacity];
+        mVector = new entity*[newCapacity];
         mCapacity = newCapacity;
         mSize = anotherVector.mSize;
-        for (int i = mSize; i < mCapacity; ++i) {
-            mVector[i] = nullptr;
-        }
-
         for (int i = 0; i < mSize; ++i) {
             entity* buffer = anotherVector.mVector[i];
 
             identifyAndPush(mVector, buffer, i);
+        }
+        for (int i = mSize; i < mCapacity; ++i) {
+            mVector[i] = nullptr;
         }
 
     }
@@ -70,16 +69,18 @@ entityVector::entityVector(entityVector&& anotherVector) {
 }
 
 entityVector::~entityVector() {
-    save();
-    for (int i = 0; i < mCapacity; ++i) {
+    if (!save()) {
+        std::cerr << "CAN'T SAVE" << std::endl;
+    }
+    for (int i = 0; i < mSize; ++i) {
         delete mVector[i];
     }
     delete[] mVector;
 }
 
-void entityVector::resize(const int newSize) {
-    entity** newVector = new entity*[newSize];
-    mCapacity = newSize;
+void entityVector::resize(const int newCapacity) {
+    entity** newVector = new entity*[newCapacity];
+    mCapacity = newCapacity;
 
     for (int i = 0; i < mCapacity; ++i) {
         if (i < mSize) {
@@ -123,28 +124,25 @@ entityVector& entityVector::operator=(const entityVector& anotherVector) {
         return *this;
     }
 
-    if (mCapacity < anotherVector.mCapacity) {
-        for (int i = 0; i < mCapacity; ++i) {
-            delete mVector[i];
-        }
-        delete[] mVector;
-
-        mVector = new entity* [anotherVector.mCapacity];
-        mCapacity = anotherVector.mCapacity;
-        for (int i = mSize; i < mCapacity; ++i) {
-            mVector[i] = nullptr;
-        }
-    } else {
-        for (int i = 0; i < mSize; ++i) {
-            delete mVector[i];
-        }
+    for (int i = 0; i < mSize; ++i) {
+        delete mVector[i];
+        mVector[i] = nullptr;
     }
 
     mSize = anotherVector.mSize;
 
+    if (mCapacity < anotherVector.mCapacity) {
+        mCapacity = anotherVector.mCapacity;
+        entity** newVector = new entity*[mCapacity];
+        for (int i = mSize; i < mCapacity; ++i) {
+            newVector[i] = nullptr;
+        }
+        mVector = newVector;
+    }
+
+
     for (int i = 0; i < mSize; ++i) {
         entity* buffer = anotherVector.mVector[i];
-
         identifyAndPush(mVector, buffer, i);
     }
 
@@ -156,7 +154,9 @@ entityVector& entityVector::operator=(entityVector&& anotherVector) {
         return *this;
     }
 
-    clear();
+    for (int i = 0; i < mSize; ++i) {
+        delete [] mVector[i];
+    }
     delete [] mVector;
 
     mVector = anotherVector.mVector;
@@ -164,6 +164,8 @@ entityVector& entityVector::operator=(entityVector&& anotherVector) {
     mSize = anotherVector.mSize;
 
     anotherVector.mVector = nullptr;
+    mCapacity = 0;
+    mSize = 0;
 
     return *this;
 }
@@ -181,49 +183,43 @@ void entityVector::pushBack(entity& object) {
     if (mSize == mCapacity) {
         resize(mCapacity * 2);
     }
-
-    entity* buffer = &object;
-
-    identifyAndPush(mVector, buffer, mSize++);
+    identifyAndPush(mVector, &object, mSize++);
 }
 
-void entityVector::pushAt(const int index, entity& object) {
-    if (index < 0 or index > mSize) {
-        std::cerr << "INVALID INDEX: " << index << std::endl;
+void entityVector::pushAt(const int position, entity& object) {
+    if (position < 0 or position > mSize) {
+        std::cerr << "INVALID INDEX: " << position << std::endl;
         exit(1008);
     }
 
-    if (index == mSize) {
+    if (position == mSize) {
         pushBack(object);
         return;
     }
 
-    mCapacity = mSize == mCapacity ? mCapacity * 2 : mCapacity;
-    entity** newVector = new entity*[mCapacity];
-
-    mSize++;
-
-    entity* buffer = &object;
-
-    identifyAndPush(newVector, buffer, index);
-
-    int i = 0;
-    int j = 0;
-    for (; i < mSize;) {
-        if (i != index) {
-            newVector[i] = mVector[j];
-            mVector[j] = nullptr;
-            ++i;
-            ++j;
-        } else {
-            ++i;
+    if (mSize == mCapacity) {
+        mCapacity *= 2;
+        entity** newVector = new entity*[mCapacity];
+        for (int i = 0; i < mCapacity; ++i) {
+            if (i < position) {
+                newVector[i] = mVector[i];
+            }
+            if (i > position and i < mSize + 1) {
+                newVector[i] = mVector[i - 1];
+            }
+            if (i >= mSize + 1) {
+                newVector[i] = nullptr;
+            }
+        }
+        delete [] mVector;
+        mVector = newVector;
+    } else {
+        for (int i = mSize - 1; i >= position; --i) {
+            mVector[i + 1] = mVector[i];
         }
     }
-
-    delete [] mVector;
-
-    mVector = newVector;
-
+    mSize++;
+    identifyAndPush(mVector, &object, position);
 }
 
 void entityVector::removeAt(const int position) {
@@ -232,18 +228,13 @@ void entityVector::removeAt(const int position) {
         exit(1008);
     }
 
-    if (mSize == 0) {
-        return;
-    }
     delete mVector[position];
 
-    int i = position;
-    for (; i + 1 != mCapacity; ++i) {
-        mVector[i] = mVector[i + 1];
+    for (int i = position + 1; i < mSize; ++i) {
+        mVector[i - 1] = mVector[i];
     }
-    mVector[i] = nullptr;
+    mVector[mSize-1] = nullptr;
     mSize--;
-
 }
 
 int entityVector::getSize() const {
@@ -252,21 +243,6 @@ int entityVector::getSize() const {
 
 int entityVector::getCapacity() const {
     return mCapacity;
-}
-
-void entityVector::print() const {
-    if (mSize) {
-        std::cout << "[";
-        for (int i = 0; i < mSize; ++i) {
-            mVector[i]->print();
-            if (i != mSize - 1) {
-                std::cout << ", ";
-            }
-        }
-        std::cout << "]" << std::endl;
-    } else {
-        std::cout << "[ ]" << std::endl;
-    }
 }
 
 void entityVector::clear() {
@@ -280,7 +256,6 @@ void entityVector::clear() {
 bool entityVector::save() {
     std::ofstream fileO(PATH_TO_DATA, std::ios::binary);
     if (!fileO.is_open()) {
-        std::cerr << "CAN'T SAVE DATA" << std::endl;
         return false;
     }
     for (int i = 0; i < mSize; ++i) {
@@ -387,7 +362,7 @@ bool entityVector::load() {
 void entityVector::identifyAndSave(std::ofstream& fileO, entity* object) {
     char type = object->type();
 
-    fileO.write(reinterpret_cast<char*>(&type), sizeof(char));
+    writeChar(fileO, type);
 
     writeShort(fileO, object->getXMin());
     writeShort(fileO, object->getXMax());

@@ -9,7 +9,7 @@ class entityVector {
     int mCapacity;
     int mSize;
 
-    void resize(int newSize);
+    void resize(int newCapacity);
 
     void identifyAndPush(entity** vector, entity* object, int index);
     void identifyAndSave(std::ofstream& fileO, entity* object);
@@ -27,7 +27,7 @@ class entityVector {
 
 public:
     entityVector();
-    entityVector(int size);
+    entityVector(int capacity);
     entityVector(const entityVector& anotherVector);
     entityVector(entityVector&& anotherVector);
     ~entityVector();
@@ -39,15 +39,13 @@ public:
 
     void pushBack(entity& object);
 
-    void pushAt(int index, entity& object);
+    void pushAt(int position, entity& object);
 
     void removeAt(int position);
 
     int getSize() const;
 
     int getCapacity() const;
-
-    void print() const;
 
     void clear();
 };
