@@ -11,7 +11,7 @@ char randSex();
 const char* randColor();
 const char* randItemName();
 const char* randRegisterPlate();
-const char* randTime();
+const char* randItemTime();
 char randBodyType();
 
 int main() {
@@ -176,7 +176,7 @@ const char* randItemName() {
     }
     return "";
 }
-const char* randTime() {
+const char* randItemTime() {
     int type = rand()%10;
     switch (type) {
         case 0: {

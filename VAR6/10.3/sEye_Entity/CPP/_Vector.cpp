@@ -1,7 +1,7 @@
 #include "../sEye_Entity_Vector.h"
 #include <iostream>
 
-#define PATH_TO_DATA "../VAR6/10.3/data.bin"
+#define PATH_TO_STORAGE "../VAR6/10.3/data.bin"
 
 
 entityVector::entityVector() {
@@ -254,7 +254,7 @@ void entityVector::clear() {
 }
 
 bool entityVector::save() {
-    std::ofstream fileO(PATH_TO_DATA, std::ios::binary);
+    std::ofstream fileO(PATH_TO_STORAGE, std::ios::binary);
     if (!fileO.is_open()) {
         return false;
     }
@@ -266,7 +266,7 @@ bool entityVector::save() {
 }
 
 bool entityVector::load() {
-    std::ifstream fileI(PATH_TO_DATA, std::ios::binary);
+    std::ifstream fileI(PATH_TO_STORAGE, std::ios::binary);
     if (!fileI.is_open()) {
         return false;
     }
