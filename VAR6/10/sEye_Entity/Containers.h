@@ -3,7 +3,7 @@
 #include "Entities.h"
 
 #define VECTOR_SIZE_INIT 2
-#define VECTOR_PATH_TO_STORAGE "../VAR6/10.4/vector.bin"
+#define VECTOR_PATH_TO_STORAGE "../VAR6/10/vector.bin"
 
 class container {
 public:
